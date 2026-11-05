@@ -3,7 +3,7 @@
 ```
 Mode: system-and-mockups
 Revision: 1
-Approval: pending (2026-11-05, pending user review)
+Approval: approved (2026-11-05, by user)
 ```
 
 > **Provisional.** Los colores, la tipografía, el logo y el nombre son propuestas
@@ -232,7 +232,7 @@ columna y no debe haber scroll horizontal. En este documento
 
 ## 7. Aprobación
 
-`Approval: pending (2026-11-05, pending user review)`
+`Approval: approved (2026-11-05, by user)`
 
 Para aprobar, el usuario debe revisar `components.html` y los previews y decir
 explícitamente que la fundación sirve. Recién entonces:
