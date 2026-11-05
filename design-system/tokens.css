@@ -1,0 +1,184 @@
+/*
+ * Oloroso Pit — Design tokens
+ * Revision: 1 · Approval: pending (2026-11-05)
+ *
+ * PROVISIONAL. Every color below is a proposal, not an approved brand fact.
+ * Replace values here (single source of truth) and bump README.md Revision.
+ * See README.md > "How to replace" for the exact procedure.
+ *
+ * No remote fonts, no external assets, no build step required.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---------------------------------------------------------------------
+   * Color · brand (PROVISIONAL — TBD)
+   * Direction: "vidrio ahumado" — deep pine glass instead of the usual
+   * black-and-gold perfume cliché, on a warm mineral paper.
+   * ------------------------------------------------------------------ */
+  --color-primary-900: #14291f;
+  --color-primary-700: #1e3b31; /* brand / primary action */
+  --color-primary-600: #2a4e41;
+  --color-primary-100: #e4ebe6;
+  --color-primary-050: #f1f5f2;
+
+  /* Accent: muted copper. Used ONLY for offers and editorial emphasis. */
+  --color-accent-700: #8a4a2c;
+  --color-accent-600: #a05c3b;
+  --color-accent-100: #f3e4da;
+
+  /* ---------------------------------------------------------------------
+   * Color · neutrals (warm mineral, deliberately NOT the old beige/brown)
+   * ------------------------------------------------------------------ */
+  --color-paper: #f6f5f0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #efeee7;
+  --color-ink: #1b211e; /* off-black, never #000 */
+  --color-ink-soft: #4b554f;
+  --color-ink-muted: #626c65;
+  --color-line: #dedcd3;
+  --color-line-strong: #c4c2b7;
+  --color-overlay: rgba(20, 41, 31, 0.42);
+
+  /* ---------------------------------------------------------------------
+   * Color · semantic states
+   * "Encargo" is NOT an error: it is a valid, normal way to buy.
+   * ------------------------------------------------------------------ */
+  --color-stock: #2c6a4c;
+  --color-stock-soft: #e6efe9;
+  --color-order: #7b6636;
+  --color-order-soft: #f4efe1;
+  --color-offer: var(--color-accent-700);
+  --color-offer-soft: var(--color-accent-100);
+  --color-danger: #a33b33;
+  --color-danger-soft: #f7e7e5;
+  --color-success: var(--color-stock);
+  --color-success-soft: var(--color-stock-soft);
+  --color-focus: #3e7e63;
+  --color-focus-on-dark: #cfe3d7;
+
+  /* ---------------------------------------------------------------------
+   * Typography · local stacks only (no Google Fonts, no paid fonts)
+   * Display serif for editorial catalog surfaces; sans for UI and admin.
+   * ------------------------------------------------------------------ */
+  --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino,
+    Georgia, "Times New Roman", serif;
+  --font-sans: ui-sans-serif, "Segoe UI Variable Text", "Segoe UI", system-ui,
+    -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+
+  --text-2xs: 0.6875rem; /* 11px — eyebrows, legal */
+  --text-xs: 0.75rem; /* 12px — tags, helper */
+  --text-sm: 0.875rem; /* 14px — UI, meta */
+  --text-base: 1rem; /* 16px — body */
+  --text-lg: 1.125rem; /* 18px — lead / card name */
+  --text-xl: 1.375rem; /* 22px */
+  --text-2xl: 1.75rem; /* 28px */
+  --text-3xl: 2.25rem; /* 36px */
+  --text-4xl: 3rem; /* 48px */
+  --text-display: clamp(2.25rem, 1.4rem + 3.2vw, 3.75rem);
+
+  --leading-none: 1;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.1em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --measure: 65ch;
+  --measure-tight: 46ch;
+
+  /* ---------------------------------------------------------------------
+   * Spacing · 4px base
+   * ------------------------------------------------------------------ */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.5rem; /* 24 */
+  --space-6: 2rem; /* 32 */
+  --space-7: 3rem; /* 48 */
+  --space-8: 4rem; /* 64 */
+  --space-9: 6rem; /* 96 */
+
+  --container-max: 1240px;
+  --container-pad: clamp(1rem, 4vw, 3rem);
+
+  /* ---------------------------------------------------------------------
+   * Radii · restrained; pill only for chips and counters
+   * ------------------------------------------------------------------ */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* ---------------------------------------------------------------------
+   * Elevation · tinted with the brand green, no glow
+   * ------------------------------------------------------------------ */
+  --shadow-xs: 0 1px 2px rgba(27, 33, 30, 0.05);
+  --shadow-sm: 0 1px 3px rgba(27, 33, 30, 0.06),
+    0 1px 2px rgba(27, 33, 30, 0.04);
+  --shadow-md: 0 10px 24px -14px rgba(20, 41, 31, 0.28);
+  --shadow-lg: 0 26px 50px -28px rgba(20, 41, 31, 0.34);
+  --shadow-press: inset 0 1px 2px rgba(20, 41, 31, 0.18);
+
+  /* ---------------------------------------------------------------------
+   * Motion · custom curves, short durations (UI stays under 250ms)
+   * ------------------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+
+  --motion-lift: -2px;
+  --motion-press: 0.98;
+
+  /* ---------------------------------------------------------------------
+   * Layers · only for real system layers
+   * ------------------------------------------------------------------ */
+  --z-header: 40;
+  --z-drawer: 60;
+  --z-modal: 70;
+  --z-toast: 80;
+}
+
+/* ---------------------------------------------------------------------
+ * Reduced motion: remove movement, keep short color/opacity feedback.
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-lift: 0px;
+    --motion-press: 1;
+    --duration-fast: 80ms;
+    --duration-base: 80ms;
+    --duration-slow: 80ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: color, background-color, border-color, opacity,
+      box-shadow !important;
+    transition-duration: 80ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "version": 4,
+  "step": "visual-design",
+  "owner": "active-orchestrator",
+  "discovery": {
+    "created_by": "discovery-research",
+    "sources": [
+      "https://pedix.app/jftperfumes",
+      "https://www.vesper.com.ar/",
+      "https://www.parfumerie.com.ar/",
+      "https://www.perfumeriasrouge.com/",
+      "https://www.juleriaque.com.ar/"
+    ],
+    "competitors": [
+      { "name": "JFT Perfumes", "notes_file": "discovery/sources/jft-perfumes.md" },
+      { "name": "Vesper Perfumes", "notes_file": "discovery/sources/vesper-perfumes.md" },
+      { "name": "Parfumerie", "notes_file": "discovery/sources/parfumerie.md" },
+      { "name": "Perfumerías Rouge", "notes_file": "discovery/sources/perfumerias-rouge.md" },
+      { "name": "Juleriaque", "notes_file": "discovery/sources/juleriaque.md" }
+    ],
+    "notas": "JFT y Vesper del pedido inicial; Juleriaque mencionada por el cliente; Parfumerie y Rouge provistas manualmente por el desarrollador durante el ajuste (no búsqueda autónoma). Web search no disponible en la sesión. Juleriaque no evidenciada por el agente (SPA) pero verificada manualmente por el desarrollador en navegador.",
+    "problema": "Oloroso Pit vende perfumes importados, en su gran mayoría por encargo y con muy poco stock propio, a través de Instagram y WhatsApp. Su catálogo hoy es una planilla (hojas Árabes, Diseñador y Nicho, organizada por marca), que sí tiene precios y marca 'No disponible', pero no cuentan con un catálogo web propio que incluya precios, disponibilidad y herramientas de asesoramiento.",
+    "usuarios": [
+      "Compradores de perfumes (usuarios finales)",
+      "Los dos dueños del emprendimiento (administradores)"
+    ],
+    "casos_de_uso": [
+      "Cliente: ver el catálogo por línea y marca, filtrar por acordes y género, armar un pedido (carrito) con una o más unidades de cada perfume y enviarlo por WhatsApp, ya sea como compra o como encargo.",
+      "Administrador: iniciar sesión; agregar perfumes nuevos; editar precios, imágenes, stock, acordes, género y frases de cada perfume; asignar una frase a varios perfumes a la vez; cambiar el número de WhatsApp que recibe los pedidos."
+    ],
+    "funcionalidades_necesarias": [
+      "Catálogo con nombre, marca, línea, género, precio e imagen. Navegación por línea y marca; las líneas sin productos no se muestran. [Acordado]",
+      "Lanzamiento solo con la línea Árabes. Diseñador y Nicho se agregan cuando tengan productos. [Acordado, a confirmar]",
+      "Clasificación de los perfumes en masculino, femenino y unisex, con filtro por género. [Acordado]",
+      "Todos los perfumes muestran su precio, haya stock o no. [Acordado]",
+      "Indicador de stock: 'En stock' / 'Sin stock, por encargo'. [Acordado]",
+      "Carrito que genera un mensaje de WhatsApp con los perfumes elegidos y sus cantidades; si no hay stock, el mensaje es de encargo. [Acordado]",
+      "Los pedidos llegan al WhatsApp de Emi. Los administradores pueden cambiar el número de destino desde su cuenta. [Número de Emi: Acordado; cambio desde el panel: Propuesto]",
+      "Se pueden agregar al carrito una o más unidades del mismo perfume. [Acordado]",
+      "Decants de 5 ml ($8.000) y 10 ml ($15.000), que se agregan al carrito como cualquier otro producto, en cantidades mayores a uno. Forma de mostrarlos (integrados en la ficha del perfume, sección aparte o ambas) por definir. [Acordado en concepto]",
+      "Cada perfume tiene una o más presentaciones (frasco sellado, decants) con precio y stock propios. Los precios se cargan como datos, no escritos en el código. [Propuesto]",
+      "Panel de administración con login simple (usuario y contraseña) para editar precios, imágenes y stock. [Acordado]",
+      "Alta de perfumes nuevos desde el panel; marcas, acordes y frases se pueden crear desde la misma pantalla. [Propuesto, respuesta ya enviada a los dueños]",
+      "Filtro por acordes: muestra todos los acordes que tienen los perfumes cargados, y se actualiza si se agregan nuevos. [Acordado]",
+      "Frases 'ideal para...' (ej. 'para citas o salir de noche'): las crean los dueños, se asignan a varios perfumes a la vez, y cada perfume puede tener hasta 3. [Acordado]",
+      "Sección de ofertas. [Acordado en concepto, detalle por validar]"
+    ],
+    "funcionalidades_opcionales": [
+      "Cuestionario de asesoramiento (reutiliza acordes, género y frases). [Propuesto]",
+      "Ficha detallada con notas y barras de acordes, estilo post de Instagram. [Propuesto]",
+      "Combos y promociones tipo 3x2. [Propuesto]",
+      "Importación inicial desde la copia de la planilla actual. [Propuesto]"
+    ],
+    "reglas_de_negocio": [
+      "Sin stock, el pedido se clasifica como 'encargo' y el precio se sigue mostrando. [Acordado]",
+      "Los precios de la planilla corresponden al perfume completo sellado. [Acordado]",
+      "Un mismo perfume puede pedirse en cantidad mayor a uno; el mensaje de WhatsApp indica la cantidad. [Acordado]",
+      "Cada perfume tiene como máximo 3 frases 'ideal para...'. [Acordado]",
+      "Cada perfume tiene un género: masculino, femenino o unisex. [Acordado]",
+      "Un carrito con ítems mixtos separa 'compra' y 'encargo' en el mensaje. [Propuesto]",
+      "Un carrito vacío no genera mensaje. [Propuesto]",
+      "El stock y el precio se manejan por presentación. [Propuesto]",
+      "Los perfumes nuevos se cargan por defecto como 'sin stock' hasta que un administrador lo cambie. [Propuesto]",
+      "Los acordes, las frases y las marcas son datos editables desde el panel, sin tocar el código. [Acordado]",
+      "Los acordes de un perfume pueden ser varios (la planilla actual combina, por ejemplo, 'amaderado especiado'). Se unifican términos equivalentes (ej. afrutado/frutal). [Propuesto]",
+      "El número de WhatsApp de destino solo lo pueden cambiar los administradores y debe tener un formato válido (código de país y solo dígitos). [Propuesto]"
+    ],
+    "integraciones": [
+      "WhatsApp (wa.me) para el envío de pedidos.",
+      "Dominio propio (ya disponible).",
+      "Restricción estricta: sin pasarela de pagos ni transacciones online."
+    ],
+    "restricciones": [
+      "Sin presupuesto: solo infraestructura gratuita.",
+      "Preferencia tentativa de stack: frontend estático con Supabase (plan gratuito) para base de datos y login. A confirmar en la knowledge-base.",
+      "La fuente de datos es la base de datos propia; la planilla actual se importa una sola vez y deja de usarse. [Propuesto]",
+      "No se almacenan datos de clientes.",
+      "No se pide ni se guarda acceso a la cuenta de OneDrive o Drive de los dueños; se trabaja con una copia descargada.",
+      "Equipo de desarrollo con recursos de hardware limitados.",
+      "Diseño: los colores de la planilla actual (beige y marrón) se van a cambiar. Colores nuevos sin definir; se define al empezar el frontend. [Acordado]"
+    ],
+    "riesgos": [
+      "Panel de administración vulnerable si la autenticación es débil. Una cuenta vulnerada podría cambiar precios o desviar los pedidos cambiando el número de WhatsApp.",
+      "Cambios de alcance durante el desarrollo.",
+      "Fotografías de baja calidad o protegidas por derechos de autor.",
+      "Datos de la planilla inconsistentes (nombres, precios, familias olfativas) que requieren limpieza.",
+      "Que la planilla y la base de datos convivan y queden con información distinta."
+    ],
+    "preguntas_abiertas": [
+      "Decants: si van integrados en la ficha, en sección aparte o ambas.",
+      "Ofertas: precio anterior tachado, con fecha de vencimiento o sin ella; si aplican a decants.",
+      "Login del admin: usuario genérico o email personal.",
+      "Fotos: si usan las de la planilla, si tienen mejor calidad o van a sacar nuevas, y quién las sube.",
+      "Plazos habituales de los encargos y si se informan en la página (se resuelve más adelante).",
+      "Colores y referencias de estilo (se resuelve al empezar el frontend).",
+      "Aprobación de la lista unificada de acordes (tarea del desarrollador al importar la planilla)."
+    ]
+  },
+  "kb": {
+    "created_by": "kb-creator",
+    "source": "ingest",
+    "discovery": {
+      "problem": "Oloroso Pit vende perfumes importados, en su gran mayoría por encargo y con muy poco stock propio, a través de Instagram y WhatsApp. Su catálogo hoy es una planilla (hojas Árabes, Diseñador y Nicho, organizada por marca), que sí tiene precios y marca 'No disponible', pero no cuentan con un catálogo web propio que incluya precios, disponibilidad y herramientas de asesoramiento.",
+      "system_type": "web_app",
+      "domain": "ecommerce",
+      "scale": "public_multi_user",
+      "stack": [
+        "Frontend estático (tentativo)",
+        "Supabase (plan gratuito, tentativo)"
+      ],
+      "needs_infra": true
+    },
+    "files": [
+      "knowledge-base/README.md",
+      "knowledge-base/01_vision_y_objetivos.md",
+      "knowledge-base/02_descripcion_general.md",
+      "knowledge-base/03_actores_y_roles.md",
+      "knowledge-base/04_modelo_de_datos.md",
+      "knowledge-base/05_reglas_de_negocio.md",
+      "knowledge-base/06_funcionalidades.md",
+      "knowledge-base/07_flujos_principales.md",
+      "knowledge-base/08_arquitectura_propuesta.md",
+      "knowledge-base/09_decisiones_y_supuestos.md",
+      "knowledge-base/10_preguntas_abiertas.md"
+    ]
+  }
+}

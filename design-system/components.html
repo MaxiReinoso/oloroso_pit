@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-brand-title>Oloroso Pit — Catálogo</title>
+<meta name="description" content="Referencia visual provisional del catálogo Oloroso Pit. Revisión 1, aprobación pendiente.">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* =========================================================================
+     Page shell — this file is a reference sheet, not a final screen.
+     All visual values come from tokens.css.
+     ========================================================================= */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  img { display: block; max-width: 100%; height: auto; }
+  svg { display: block; }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: -100px;
+    z-index: var(--z-toast);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary-700);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: top var(--duration-fast) var(--ease-out);
+  }
+  .skip-link:focus { top: var(--space-4); }
+
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  /* =========================================================================
+     Document header
+     ========================================================================= */
+  .doc-header {
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-surface);
+  }
+
+  .doc-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+  }
+
+  .doc-logo { height: 58px; width: auto; }
+
+  .doc-title { display: flex; flex-direction: column; gap: var(--space-1); }
+  .doc-title h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+  }
+  .doc-title p { margin: 0; color: var(--color-ink-muted); font-size: var(--text-sm); }
+
+  .doc-meta {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    max-width: 340px;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-order);
+    background: var(--color-order-soft);
+    color: var(--color-order);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  .status-pill::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .doc-meta p { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); line-height: var(--leading-snug); }
+
+  .notice {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding: var(--space-3) var(--space-4);
+    border: 1px dashed var(--color-line-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-paper);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+  .notice strong { color: var(--color-ink); font-weight: var(--weight-semibold); }
+  .notice svg { flex: none; margin-top: 2px; color: var(--color-ink-muted); }
+
+  /* Index */
+  .doc-index { border-bottom: 1px solid var(--color-line); background: var(--color-surface); }
+  .doc-index ul {
+    display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5);
+    margin: 0; padding-block: var(--space-3); padding-inline: 0;
+    list-style: none;
+    font-size: var(--text-xs);
+  }
+  .doc-index a {
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-weight: var(--weight-medium);
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+  .doc-index a:hover { color: var(--color-primary-700); }
+
+  /* =========================================================================
+     Specimen sections
+     ========================================================================= */
+  .spec {
+    padding-block: clamp(var(--space-6), 5vw, var(--space-8));
+    border-bottom: 1px solid var(--color-line);
+    scroll-margin-top: var(--space-6);
+  }
+
+  .spec-head {
+    display: grid;
+    gap: var(--space-2) var(--space-5);
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: var(--space-5);
+    max-width: 760px;
+  }
+  .spec-head h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+  .spec-head p { margin: 0; color: var(--color-ink-soft); font-size: var(--text-sm); line-height: var(--leading-relaxed); max-width: var(--measure); }
+  .spec-head code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-surface-alt);
+    padding: 1px 5px;
+    border-radius: var(--radius-xs);
+  }
+
+  .canvas {
+    padding: clamp(var(--space-3), 3vw, var(--space-6));
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    background: var(--color-paper);
+  }
+
+  .canvas--plain {
+    background: var(--color-paper);
+  }
+
+  .note {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    line-height: var(--leading-relaxed);
+  }
+  .note strong { color: var(--color-ink-soft); font-weight: var(--weight-semibold); }
+
+  /* =========================================================================
+     Foundations · color, type, radius, elevation, spacing
+     ========================================================================= */
+  .swatches {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .swatch {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  .swatch__color { height: 64px; border-bottom: 1px solid var(--color-line); }
+  .swatch__meta { padding: var(--space-2) var(--space-3) var(--space-3); }
+  .swatch__name { display: block; font-size: var(--text-xs); font-weight: var(--weight-semibold); }
+  .swatch__value { display: block; font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-ink-muted); }
+  .swatch__use { display: block; margin-top: var(--space-1); font-size: var(--text-2xs); color: var(--color-ink-muted); }
+
+  .type-rows { display: grid; gap: var(--space-4); }
+  .type-row {
+    display: grid;
+    gap: var(--space-1) var(--space-4);
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .type-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .type-row__label { font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-ink-muted); }
+  .type-display { font-family: var(--font-display); font-size: var(--text-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); }
+  .type-h2 { font-family: var(--font-display); font-size: var(--text-3xl); line-height: var(--leading-tight); }
+  .type-h3 { font-family: var(--font-display); font-size: var(--text-xl); line-height: var(--leading-snug); }
+  .type-body { font-size: var(--text-base); color: var(--color-ink-soft); line-height: var(--leading-relaxed); max-width: var(--measure); }
+  .type-ui { font-size: var(--text-sm); font-weight: var(--weight-medium); }
+  .type-caps { font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--weight-semibold); color: var(--color-ink-muted); }
+
+  .shape-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .shape-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .shape-card p { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); }
+  .shape-card__chip {
+    height: 56px;
+    background: var(--color-primary-050);
+    border: 1px solid var(--color-primary-100);
+  }
+  .radius-sm { border-radius: var(--radius-sm); }
+  .radius-md { border-radius: var(--radius-md); }
+  .radius-lg { border-radius: var(--radius-lg); }
+  .shadow-sm { box-shadow: var(--shadow-sm); border-color: transparent; }
+  .shadow-md { box-shadow: var(--shadow-md); border-color: transparent; }
+  .shadow-lg { box-shadow: var(--shadow-lg); border-color: transparent; }
+
+  .spacing-scale { display: grid; gap: var(--space-2); }
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--color-ink-muted);
+  }
+  .spacing-row span:last-child {
+    height: 10px;
+    border-radius: 2px;
+    background: var(--color-primary-600);
+    opacity: 0.35;
+  }
+
+  /* =========================================================================
+     Site header (catalog)
+     ========================================================================= */
+  .site-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+  .site-brand { display: flex; align-items: center; gap: var(--space-2); text-decoration: none; flex: none; }
+  .site-brand img { height: 38px; width: auto; }
+  .provisional-chip {
+    padding: 3px 8px;
+    border: 1px dashed rgba(160, 92, 59, 0.55);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent-100);
+    font-size: 9px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-accent-700);
+    white-space: nowrap;
+  }
+  .site-nav { display: flex; gap: var(--space-1); }
+  .site-nav a {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+  }
+  .site-nav a[aria-current="page"] { color: var(--color-ink); font-weight: var(--weight-semibold); }
+  .site-nav a:hover { background: var(--color-surface-alt); color: var(--color-ink); }
+
+  .site-tools { display: flex; align-items: center; gap: var(--space-2); margin-left: auto; }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 40px;
+    padding-inline: var(--space-3);
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-muted);
+    transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+  }
+  .search:focus-within {
+    border-color: var(--color-focus);
+    box-shadow: 0 0 0 3px rgba(62, 126, 99, 0.16);
+  }
+  .search input {
+    width: 170px;
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: var(--text-sm);
+    outline: none;
+  }
+  .search input::placeholder { color: var(--color-ink-muted); }
+
+  .icon-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-out);
+  }
+  .icon-btn:active { transform: scale(var(--motion-press)); }
+  .cart-count {
+    position: absolute;
+    top: -6px; right: -6px;
+    min-width: 18px; height: 18px;
+    display: grid; place-items: center;
+    padding-inline: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary-700);
+    color: #fff;
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+  }
+  .menu-btn { display: none; }
+
+  /* =========================================================================
+     Buttons
+     ========================================================================= */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-700);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-out);
+  }
+  .btn svg { flex: none; }
+  .btn:active { transform: scale(var(--motion-press)); }
+  .btn:focus-visible { outline-color: var(--color-focus-on-dark); outline-offset: 2px; }
+
+  .btn--secondary {
+    background: transparent;
+    border-color: var(--color-line-strong);
+    color: var(--color-primary-700);
+  }
+  .btn--secondary:focus-visible { outline-color: var(--color-focus); }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-ink-soft);
+  }
+  .btn--ghost:focus-visible { outline-color: var(--color-focus); }
+
+  .btn--danger {
+    background: transparent;
+    border-color: var(--color-line);
+    color: var(--color-danger);
+  }
+  .btn--danger:focus-visible { outline-color: var(--color-danger); }
+
+  .btn--block { width: 100%; }
+  .btn--sm { min-height: 36px; padding-inline: var(--space-3); font-size: var(--text-xs); }
+  .btn--lg { min-height: 52px; padding-inline: var(--space-5); font-size: var(--text-base); }
+
+  .btn[disabled], .btn[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .btn[disabled]:active { transform: none; }
+
+  .btn__spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 700ms linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { background: var(--color-primary-900); }
+    .btn--secondary:hover { background: var(--color-primary-050); border-color: var(--color-primary-600); }
+    .btn--ghost:hover { background: var(--color-surface-alt); color: var(--color-ink); }
+    .btn--danger:hover { background: var(--color-danger-soft); border-color: rgba(163, 59, 51, 0.4); }
+    .icon-btn:hover { background: var(--color-surface-alt); }
+    .doc-index a:hover { color: var(--color-primary-700); }
+  }
+
+  .btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+
+  /* =========================================================================
+     Tags, badges, stock
+     ========================================================================= */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 9px;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .tag--offer { background: var(--color-offer-soft); color: var(--color-offer); border: 1px solid rgba(160, 92, 59, 0.28); }
+  .tag--info { background: var(--color-primary-050); color: var(--color-primary-700); border: 1px solid var(--color-primary-100); }
+  .tag--neutral { background: var(--color-surface-alt); color: var(--color-ink-soft); border: 1px solid var(--color-line); }
+
+  .stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.01em;
+  }
+  .stock::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex: none;
+  }
+  .stock--in { color: var(--color-stock); }
+  .stock--order { color: var(--color-order); }
+
+  .badge-soft {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-medium);
+    background: var(--color-surface-alt);
+    color: var(--color-ink-soft);
+  }
+
+  /* =========================================================================
+     Chips / filters
+     ========================================================================= */
+  .filter-bar { display: flex; flex-direction: column; gap: var(--space-3); }
+  .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .filter-label {
+    min-width: 70px;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 0 13px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-ink-soft);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+  }
+  .chip:active { transform: scale(0.98); }
+  .chip[aria-pressed="true"] {
+    background: var(--color-primary-700);
+    border-color: var(--color-primary-700);
+    color: #fff;
+  }
+  .chip[aria-pressed="true"]:focus-visible { outline-color: var(--color-focus); }
+  .chip__count { font-size: var(--text-2xs); opacity: 0.68; font-variant-numeric: tabular-nums; }
+  .chip--offer { border-color: rgba(160, 92, 59, 0.4); color: var(--color-offer); }
+  .chip--offer[aria-pressed="true"] { background: var(--color-offer); border-color: var(--color-offer); color: #fff; }
+
+  .results-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-line);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+  .link-quiet {
+    color: var(--color-primary-700);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  /* =========================================================================
+     Product card
+     ========================================================================= */
+  .product-grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-standard);
+  }
+  .product-media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(160deg, #f1f0e9 0%, #e7e6dc 100%);
+    display: grid;
+    place-items: center;
+    padding: var(--space-3);
+  }
+  .product-media img { width: 86%; height: 86%; object-fit: contain; }
+  .product-media .tag { position: absolute; top: var(--space-3); left: var(--space-3); }
+
+  .product-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+  }
+  .product-brand {
+    margin: 0;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .product-name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+  .product-meta { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); }
+
+  .product-price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .price-now {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-was {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    text-decoration: line-through;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-note { font-size: var(--text-2xs); color: var(--color-ink-muted); }
+
+  .product-foot {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-2);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .product-card:hover {
+      transform: translateY(var(--motion-lift));
+      border-color: var(--color-line-strong);
+      box-shadow: var(--shadow-md);
+    }
+    .product-card:hover .product-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  }
+
+  /* =========================================================================
+     Product sheet (ficha)
+     ========================================================================= */
+  .sheet {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(var(--space-4), 4vw, var(--space-6));
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-3), 3vw, var(--space-5));
+  }
+  .sheet__media {
+    position: relative;
+    border-radius: var(--radius-md);
+    background: linear-gradient(160deg, #f1f0e9 0%, #e7e6dc 100%);
+    overflow: hidden;
+    min-height: 420px;
+  }
+  .sheet__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .sheet__media .tag { position: absolute; top: var(--space-3); left: var(--space-3); z-index: 1; }
+
+  .sheet__body { display: flex; flex-direction: column; gap: var(--space-3); }
+  .sheet__brand { margin: 0; font-size: var(--text-2xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-ink-muted); }
+  .sheet__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+  .sheet__meta { margin: 0; font-size: var(--text-sm); color: var(--color-ink-soft); }
+  .sheet__desc { margin: var(--space-1) 0 0; color: var(--color-ink-soft); font-size: var(--text-sm); line-height: var(--leading-relaxed); max-width: var(--measure-tight); }
+
+  .sheet__price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    padding-block: var(--space-2);
+  }
+  .sheet__price .price-now { font-size: var(--text-2xl); }
+
+  .phrase-list { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .phrase {
+    padding: 5px 11px;
+    border: 1px solid var(--color-primary-100);
+    background: var(--color-primary-050);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+    color: var(--color-primary-700);
+  }
+  .term {
+    padding: 4px 10px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+    color: var(--color-ink-soft);
+  }
+
+  fieldset { border: 0; margin: 0; padding: 0; }
+  .presentation-list { display: grid; gap: var(--space-2); }
+  .presentation {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
+  }
+  .presentation:hover { border-color: var(--color-line-strong); }
+  .presentation input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .radio-dot {
+    width: 18px; height: 18px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: border-color var(--duration-fast) var(--ease-standard);
+  }
+  .radio-dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: transparent; transition: background-color var(--duration-fast) var(--ease-standard); }
+  .presentation:has(input:checked) { border-color: var(--color-primary-600); background: var(--color-primary-050); }
+  .presentation:has(input:checked) .radio-dot { border-color: var(--color-primary-700); }
+  .presentation:has(input:checked) .radio-dot::after { background: var(--color-primary-700); }
+  .presentation:has(input:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  .presentation__label { display: block; font-size: var(--text-sm); font-weight: var(--weight-medium); }
+  .presentation__meta { display: block; font-size: var(--text-xs); color: var(--color-ink-muted); }
+  .presentation__price { font-size: var(--text-sm); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; text-align: right; }
+
+  .buy-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: stretch; margin-top: var(--space-2); }
+  .buy-row .btn { min-height: 48px; flex: 1 1 200px; }
+
+  .qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+  .qty button {
+    width: 38px; height: 46px;
+    display: grid; place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+  .qty button:hover { background: var(--color-surface-alt); }
+  .qty output {
+    min-width: 40px;
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .microcopy {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    line-height: var(--leading-snug);
+  }
+  .microcopy svg { flex: none; margin-top: 2px; }
+
+  /* =========================================================================
+     Cart
+     ========================================================================= */
+  .cart-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+    gap: clamp(var(--space-4), 4vw, var(--space-6));
+    align-items: start;
+  }
+
+  .order-stack {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+
+  .order-preview {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+  }
+  .order-preview h4 {
+    margin: var(--space-2) 0 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    max-width: 18ch;
+  }
+  .order-preview__bubble {
+    margin: var(--space-4) 0 0;
+    padding: var(--space-4);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-md) var(--radius-lg) var(--radius-lg) var(--radius-md);
+    background: var(--color-primary-050);
+    color: var(--color-ink-soft);
+    font-size: var(--text-xs);
+    line-height: var(--leading-relaxed);
+  }
+  .order-preview__bubble strong { color: var(--color-ink); font-weight: var(--weight-semibold); }
+  .order-preview__meta {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    line-height: var(--leading-snug);
+  }
+  .order-preview__meta svg { flex: none; margin-top: 2px; }
+
+  .order-rules {
+    margin-top: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-5);
+  }
+  .order-rules ul {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .order-rules li {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    line-height: var(--leading-snug);
+  }
+  .order-rules svg { flex: none; margin-top: 2px; color: var(--color-stock); }
+
+  .cart {
+    width: 100%;
+    max-width: 460px;
+    margin-left: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+  }
+  .cart__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+  .cart__head h3 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-regular); }
+  .cart__head span { font-size: var(--text-xs); color: var(--color-ink-muted); }
+
+  .cart-group { margin-top: var(--space-4); }
+  .cart-group__label {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
+    margin: 0 0 var(--space-2);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-line);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+  .cart-group__label--in { color: var(--color-stock); }
+  .cart-group__label--order { color: var(--color-order); }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .cart-item:last-child { border-bottom: 0; }
+  .cart-thumb {
+    width: 52px; height: 62px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(160deg, #f1f0e9 0%, #e7e6dc 100%);
+    display: grid; place-items: center;
+    padding: 4px;
+  }
+  .cart-thumb img { width: 100%; height: 100%; object-fit: contain; }
+  .cart-item__name { margin: 0; font-size: var(--text-sm); font-weight: var(--weight-medium); line-height: var(--leading-snug); }
+  .cart-item__meta { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); }
+  .cart-item__ctrl { display: flex; align-items: center; gap: var(--space-2); margin-top: 6px; }
+  .qty--sm button { width: 26px; height: 26px; }
+  .qty--sm output { min-width: 24px; font-size: 12px; }
+  .remove-btn {
+    border: 0; background: none; padding: 0;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .cart-item__price { font-size: var(--text-sm); font-weight: var(--weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cart-item__price small { display: block; font-size: 10px; font-weight: var(--weight-regular); color: var(--color-ink-muted); text-align: right; }
+
+  .cart-subtotal {
+    display: flex; justify-content: space-between; gap: var(--space-3);
+    padding-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .cart-subtotal strong { color: var(--color-ink-soft); font-weight: var(--weight-medium); }
+
+  .cart-total {
+    display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3);
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-ink);
+  }
+  .cart-total span { font-size: var(--text-sm); font-weight: var(--weight-medium); }
+  .cart-total strong { font-size: var(--text-2xl); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+  .cart .btn--block { margin-top: var(--space-4); }
+
+  /* =========================================================================
+     Forms
+     ========================================================================= */
+  .form-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+  .field label, .label { font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-ink); }
+  .field__help { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); }
+  .field__error { display: flex; gap: 6px; align-items: flex-start; margin: 0; font-size: var(--text-xs); color: var(--color-danger); }
+  .field__error svg { flex: none; margin-top: 1px; }
+
+  .input, .select, .textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+  }
+  .input::placeholder, .textarea::placeholder { color: var(--color-ink-muted); }
+  .input:focus, .select:focus, .textarea:focus {
+    outline: none;
+    border-color: var(--color-focus);
+    box-shadow: 0 0 0 3px rgba(62, 126, 99, 0.16);
+  }
+  .input[aria-invalid="true"] { border-color: var(--color-danger); }
+  .input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(163, 59, 51, 0.14); }
+  .input:disabled { background: var(--color-surface-alt); color: var(--color-ink-muted); cursor: not-allowed; }
+  .textarea { min-height: 104px; resize: vertical; }
+
+  .select-wrap { position: relative; }
+  .select { appearance: none; padding-right: 36px; cursor: pointer; }
+  .select-wrap svg { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-ink-muted); }
+
+  .check { display: flex; gap: var(--space-2); align-items: flex-start; cursor: pointer; }
+  .check input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--color-primary-700); flex: none; }
+  .check span { font-size: var(--text-sm); color: var(--color-ink-soft); line-height: var(--leading-snug); }
+
+  .switch { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; }
+  .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .switch__track {
+    position: relative;
+    width: 40px; height: 23px;
+    border-radius: var(--radius-pill);
+    background: var(--color-line-strong);
+    transition: background-color var(--duration-base) var(--ease-standard);
+    flex: none;
+  }
+  .switch__track::after {
+    content: "";
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: var(--shadow-xs);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .switch input:checked + .switch__track { background: var(--color-primary-700); }
+  .switch input:checked + .switch__track::after { transform: translateX(17px); }
+  .switch input:focus-visible + .switch__track { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  .switch__text { font-size: var(--text-sm); color: var(--color-ink-soft); }
+
+  /* =========================================================================
+     Alerts
+     ========================================================================= */
+  .alert {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+  .alert svg { flex: none; margin-top: 2px; }
+  .alert p { margin: 0; }
+  .alert strong { display: block; font-weight: var(--weight-semibold); margin-bottom: 2px; }
+  .alert--success { background: var(--color-success-soft); border-color: rgba(44, 106, 76, 0.24); color: var(--color-stock); }
+  .alert--danger { background: var(--color-danger-soft); border-color: rgba(163, 59, 51, 0.24); color: var(--color-danger); }
+  .alert--info { background: var(--color-primary-050); border-color: var(--color-primary-100); color: var(--color-primary-700); }
+
+  /* =========================================================================
+     Admin login
+     ========================================================================= */
+  .login-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+    gap: clamp(var(--space-5), 5vw, var(--space-8));
+    align-items: center;
+    padding-block: var(--space-4);
+  }
+  .login-aside h4 {
+    margin: var(--space-2) 0 0;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    max-width: 20ch;
+  }
+  .login-aside > p {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    line-height: var(--leading-relaxed);
+    max-width: 42ch;
+  }
+  .login-aside__list {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 0;
+    padding-left: 1.1rem;
+    max-width: 46ch;
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    line-height: var(--leading-relaxed);
+  }
+  .login-aside__list li::marker { color: var(--color-accent-600); }
+
+  .login {
+    width: 100%;
+    max-width: 400px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-4), 5vw, var(--space-6));
+    box-shadow: var(--shadow-sm);
+  }
+  .login__mark {
+    width: 42px; height: 42px;
+    display: grid; place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-700);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-4);
+  }
+  .login h3 { margin: 0; font-size: var(--text-lg); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-tight); }
+  .login__sub { margin: 4px 0 var(--space-5); font-size: var(--text-sm); color: var(--color-ink-muted); }
+  .login form { display: grid; gap: var(--space-4); }
+  .login .btn { width: 100%; margin-top: var(--space-1); }
+  .login__foot { margin: var(--space-4) 0 0; padding-top: var(--space-4); border-top: 1px solid var(--color-line); font-size: var(--text-xs); color: var(--color-ink-muted); line-height: var(--leading-relaxed); }
+
+  /* =========================================================================
+     States
+     ========================================================================= */
+  .state-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); align-items: start; }
+
+  .state-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .state-card > h4 {
+    margin: 0;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .skeleton-card { display: flex; flex-direction: column; gap: var(--space-3); }
+  .skeleton {
+    border-radius: var(--radius-sm);
+    background: linear-gradient(90deg, var(--color-surface-alt) 25%, #f8f7f2 37%, var(--color-surface-alt) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s var(--ease-standard) infinite;
+  }
+  .skeleton--media { aspect-ratio: 4 / 5; border-radius: var(--radius-md); }
+  .skeleton--line { height: 9px; }
+  .skeleton--line-short { width: 45%; }
+  .skeleton--line-mid { width: 72%; }
+  @keyframes shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: 0 0; }
+  }
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px dashed var(--color-line-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-paper);
+  }
+  .empty__icon {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--color-surface-alt);
+    color: var(--color-ink-muted);
+  }
+  .empty h5 { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); font-weight: var(--weight-regular); }
+  .empty p { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); line-height: var(--leading-snug); }
+
+  /* =========================================================================
+     Responsive
+     ========================================================================= */
+  @media (min-width: 720px) {
+    .spec-head { grid-template-columns: 200px minmax(0, 1fr); }
+    .type-row { grid-template-columns: 160px minmax(0, 1fr); align-items: baseline; }
+  }
+
+  @media (max-width: 860px) {
+    .doc-meta { margin-left: 0; width: 100%; max-width: none; }
+    .site-nav, .search { display: none; }
+    .menu-btn { display: inline-flex; }
+    .site-tools { gap: var(--space-2); }
+    .sheet { grid-template-columns: 1fr; }
+    .sheet__media { min-height: 0; aspect-ratio: 4 / 5; }
+    .cart-layout { grid-template-columns: 1fr; }
+    .cart { margin-inline: auto; }
+    .login-stage { grid-template-columns: 1fr; gap: var(--space-5); }
+    .login-aside h4 { font-size: var(--text-xl); }
+    .login { margin-inline: auto; }
+  }
+
+  @media (max-width: 520px) {
+    .doc-logo { height: 46px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .site-brand img { height: 30px; }
+    .provisional-chip { display: none; }
+    .spec { padding-block: var(--space-6); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-card:hover { transform: none; }
+    .chip:active, .btn:active, .icon-btn:active { transform: none; }
+    .skeleton { animation: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="doc-header">
+  <div class="container">
+    <div class="doc-header__inner">
+      <img class="doc-logo" src="assets/logo.svg" alt="Oloroso Pit, logotipo provisional" width="320" height="88">
+      <div class="doc-title">
+        <p class="eyebrow">Sistema visual · fundación</p>
+        <h1>Catálogo <span data-brand-name>Oloroso Pit</span></h1>
+        <p>Referencia de componentes para catálogo público y panel de administración.</p>
+      </div>
+      <div class="doc-meta">
+        <span class="status-pill">Revisión 1 · aprobación pendiente</span>
+        <p>Colores, tipografía y logo son <strong>provisionales (TBD)</strong>. No representan una identidad aprobada.</p>
+      </div>
+    </div>
+    <div class="notice" style="margin-bottom: var(--space-4);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Provisional.</strong> Todo valor visual sale de <code>tokens.css</code>; el nombre, de <code>brand.js</code>; el logo, de <code>assets/logo.svg</code>. Reemplazar esos tres puntos actualiza todas las maquetas.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="doc-index" aria-label="Índice del documento">
+  <div class="container">
+    <ul>
+      <li><a href="#fundamentos">Fundamentos</a></li>
+      <li><a href="#navegacion">Navegación</a></li>
+      <li><a href="#tarjetas">Tarjetas de producto</a></li>
+      <li><a href="#filtros">Filtros</a></li>
+      <li><a href="#ficha">Ficha de producto</a></li>
+      <li><a href="#carrito">Carrito</a></li>
+      <li><a href="#controles">Botones y etiquetas</a></li>
+      <li><a href="#formularios">Formularios</a></li>
+      <li><a href="#admin">Admin</a></li>
+      <li><a href="#estados">Estados</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main" class="container">
+
+  <!-- =====================================================================
+       01 · Fundamentos
+       ===================================================================== -->
+  <section class="spec" id="fundamentos" aria-labelledby="fundamentos-title">
+    <div class="spec-head">
+      <p class="eyebrow">01 · Fundamentos</p>
+      <div>
+        <h2 id="fundamentos-title">Color, tipografía y forma</h2>
+        <p>La propuesta se aleja del beige y marrón de la planilla actual. Base mineral cálida, verde pino profundo como color de marca y cobre reservado para ofertas. Sin degradados llamativos, sin negro puro y sin tipografías remotas.</p>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <p class="type-caps" style="margin-top:0">Paleta provisional</p>
+      <div class="swatches" style="margin-top: var(--space-3);">
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-paper);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Papel</span><span class="swatch__value">#F6F5F0</span><span class="swatch__use">Fondo del catálogo</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-surface);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Superficie</span><span class="swatch__value">#FFFFFF</span><span class="swatch__use">Tarjetas y paneles</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-ink);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Tinta</span><span class="swatch__value">#1B211E</span><span class="swatch__use">Texto principal</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-primary-700);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Verde pino</span><span class="swatch__value">#1E3B31</span><span class="swatch__use">Marca y acción primaria</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-primary-100);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Verde velo</span><span class="swatch__value">#E4EBE6</span><span class="swatch__use">Selección y frases</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-accent-600);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Cobre</span><span class="swatch__value">#A05C3B</span><span class="swatch__use">Solo ofertas</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-stock);"></div>
+          <div class="swatch__meta"><span class="swatch__name">En stock</span><span class="swatch__value">#2C6A4C</span><span class="swatch__use">Estado disponible</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-order);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Encargo</span><span class="swatch__value">#7B6636</span><span class="swatch__use">Sin stock, no es error</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-danger);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Alerta</span><span class="swatch__value">#A33B33</span><span class="swatch__use">Errores de formulario</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-surface-alt);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Arena</span><span class="swatch__value">#EFEEE7</span><span class="swatch__use">Fondos secundarios</span></div>
+        </div>
+      </div>
+
+      <div style="height: 1px; background: var(--color-line); margin-block: var(--space-5);"></div>
+
+      <p class="type-caps" style="margin-top:0">Tipografía local</p>
+      <div class="type-rows" style="margin-top: var(--space-3);">
+        <div class="type-row">
+          <span class="type-row__label">display · serif</span>
+          <span class="type-display">Perfume importado</span>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h2 · 36px serif</span>
+          <span class="type-h2">Árabes, diseñador y nicho</span>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h3 · 22px serif</span>
+          <span class="type-h3">Khamrah · Lattafa</span>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">body · 16px sans</span>
+          <span class="type-body">Ámbar dulce con canela, dátiles y praliné. Un aroma envolvente para noches frías. El precio y la disponibilidad se muestran siempre, incluso si el perfume es por encargo.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">ui · 14px sans</span>
+          <span class="type-ui">Filtrar por acordes · 12 resultados</span>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">caps · 11px</span>
+          <span class="type-caps">Lattafa · Árabes · Unisex</span>
+        </div>
+      </div>
+
+      <div style="height: 1px; background: var(--color-line); margin-block: var(--space-5);"></div>
+
+      <div class="shape-grid">
+        <div class="shape-card">
+          <div class="shape-card__chip radius-sm"></div>
+          <p><strong>Radio sm · 6px</strong><br>Botones, campos, chips internos.</p>
+        </div>
+        <div class="shape-card">
+          <div class="shape-card__chip radius-md"></div>
+          <p><strong>Radio md · 10px</strong><br>Paneles, alertas, presentaciones.</p>
+        </div>
+        <div class="shape-card">
+          <div class="shape-card__chip radius-lg"></div>
+          <p><strong>Radio lg · 16px</strong><br>Tarjetas de producto y ficha.</p>
+        </div>
+        <div class="shape-card">
+          <div class="shape-card__chip radius-sm shadow-md"></div>
+          <p><strong>Sombra teñida</strong><br>Elevación con verde, nunca gris puro.</p>
+        </div>
+      </div>
+
+      <div style="height: 1px; background: var(--color-line); margin-block: var(--space-5);"></div>
+
+      <p class="type-caps" style="margin-top:0">Escala de espaciado · 4 px</p>
+      <div class="spacing-scale" style="margin-top: var(--space-3);">
+        <div class="spacing-row"><span>space-1 · 4</span><span style="width: 4px;"></span></div>
+        <div class="spacing-row"><span>space-2 · 8</span><span style="width: 8px;"></span></div>
+        <div class="spacing-row"><span>space-3 · 12</span><span style="width: 12px;"></span></div>
+        <div class="spacing-row"><span>space-4 · 16</span><span style="width: 16px;"></span></div>
+        <div class="spacing-row"><span>space-5 · 24</span><span style="width: 24px;"></span></div>
+        <div class="spacing-row"><span>space-6 · 32</span><span style="width: 32px;"></span></div>
+        <div class="spacing-row"><span>space-7 · 48</span><span style="width: 48px;"></span></div>
+        <div class="spacing-row"><span>space-8 · 64</span><span style="width: 64px;"></span></div>
+      </div>
+      <p class="note"><strong>Movimiento:</strong> 120–240 ms, curvas <code>--ease-out</code> y <code>--ease-in-out</code>. Los botones se hunden con <code>scale(0.98)</code>. Con <code>prefers-reduced-motion</code> se elimina todo desplazamiento y quedan transiciones de color de 80 ms.</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       02 · Navegación
+       ===================================================================== -->
+  <section class="spec" id="navegacion" aria-labelledby="navegacion-title">
+    <div class="spec-head">
+      <p class="eyebrow">02 · Navegación</p>
+      <div>
+        <h2 id="navegacion-title">Cabecera del catálogo</h2>
+        <p>Simple y predecible: marca, líneas activas, buscador y carrito. Las líneas sin productos no se muestran; en el lanzamiento solo aparece Árabes.</p>
+      </div>
+    </div>
+
+    <div class="canvas canvas--plain">
+      <header class="site-header">
+        <a class="site-brand" href="#navegacion" aria-label="Ir al inicio del catálogo">
+          <img src="assets/logo.svg" alt="Oloroso Pit, logotipo provisional" width="320" height="88">
+          <span class="provisional-chip">Logo provisional</span>
+        </a>
+        <nav class="site-nav" aria-label="Catálogo">
+          <a href="#navegacion" aria-current="page">Catálogo</a>
+          <a href="#navegacion">Árabes</a>
+          <a href="#navegacion">Ofertas</a>
+        </nav>
+        <div class="site-tools">
+          <label class="search">
+            <span class="visually-hidden">Buscar perfume o marca</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+            <input type="search" placeholder="Buscar perfume o marca">
+          </label>
+          <button class="icon-btn menu-btn" type="button" aria-label="Abrir menú">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <button class="icon-btn" type="button" aria-label="Carrito: 4 unidades">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 8h12l-1 11H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span class="cart-count" aria-hidden="true">4</span>
+          </button>
+        </div>
+      </header>
+      <p class="note"><strong>Móvil:</strong> se ocultan navegación y buscador; quedan la marca, el menú y el carrito. El buscador (US-010) es una propuesta: si no entra en v1, se retira sin tocar el resto de la cabecera.</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       03 · Tarjetas de producto
+       ===================================================================== -->
+  <section class="spec" id="tarjetas" aria-labelledby="tarjetas-title">
+    <div class="spec-head">
+      <p class="eyebrow">03 · Catálogo</p>
+      <div>
+        <h2 id="tarjetas-title">Tarjetas de producto</h2>
+        <p>Tres estados reales del negocio. El precio se muestra siempre, también sin stock: un perfume por encargo sigue siendo vendible. "Sin stock" no se trata como error ni se muestra deshabilitado.</p>
+      </div>
+    </div>
+
+    <div class="canvas canvas--plain">
+      <div class="product-grid">
+
+        <!-- En stock + oferta -->
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/product-placeholder.svg" alt="Imagen de referencia no disponible" width="400" height="500">
+            <span class="tag tag--offer">Oferta</span>
+          </div>
+          <div class="product-body">
+            <p class="product-brand">Lattafa</p>
+            <h3 class="product-name">Khamrah</h3>
+            <p class="product-meta">Árabes · Unisex · Eau de Parfum</p>
+            <p class="product-price">
+              <span class="price-now">$52.400</span>
+              <span class="price-was">$61.900</span>
+            </p>
+            <div class="product-foot">
+              <span class="stock stock--in">En stock</span>
+              <span class="price-note">Frasco 100 ml</span>
+            </div>
+            <a class="btn btn--secondary btn--block" href="#ficha" style="margin-top: var(--space-3);">Ver ficha</a>
+          </div>
+        </article>
+
+        <!-- Sin stock / encargo -->
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/product-placeholder.svg" alt="Imagen de referencia no disponible" width="400" height="500">
+          </div>
+          <div class="product-body">
+            <p class="product-brand">Armaf</p>
+            <h3 class="product-name">Club de Nuit Intense</h3>
+            <p class="product-meta">Árabes · Masculino · Eau de Parfum</p>
+            <p class="product-price">
+              <span class="price-now">$47.900</span>
+            </p>
+            <div class="product-foot">
+              <span class="stock stock--order">Sin stock · por encargo</span>
+              <span class="price-note">Frasco 100 ml</span>
+            </div>
+            <a class="btn btn--secondary btn--block" href="#ficha" style="margin-top: var(--space-3);">Ver ficha</a>
+          </div>
+        </article>
+
+        <!-- En stock + decants -->
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/product-placeholder.svg" alt="Imagen de referencia no disponible" width="400" height="500">
+            <span class="tag tag--info">Decants 5 y 10 ml</span>
+          </div>
+          <div class="product-body">
+            <p class="product-brand">Lattafa</p>
+            <h3 class="product-name">Asad</h3>
+            <p class="product-meta">Árabes · Masculino · Eau de Parfum</p>
+            <p class="product-price">
+              <span class="price-now">$38.900</span>
+            </p>
+            <div class="product-foot">
+              <span class="stock stock--in">En stock</span>
+              <span class="price-note">Frasco 100 ml</span>
+            </div>
+            <a class="btn btn--secondary btn--block" href="#ficha" style="margin-top: var(--space-3);">Ver ficha</a>
+          </div>
+        </article>
+
+        <!-- En stock -->
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/product-placeholder.svg" alt="Imagen de referencia no disponible" width="400" height="500">
+          </div>
+          <div class="product-body">
+            <p class="product-brand">Lattafa</p>
+            <h3 class="product-name">Yara</h3>
+            <p class="product-meta">Árabes · Femenino · Eau de Parfum</p>
+            <p class="product-price">
+              <span class="price-now">$41.200</span>
+            </p>
+            <div class="product-foot">
+              <span class="stock stock--in">En stock</span>
+              <span class="price-note">Frasco 100 ml</span>
+            </div>
+            <a class="btn btn--secondary btn--block" href="#ficha" style="margin-top: var(--space-3);">Ver ficha</a>
+          </div>
+        </article>
+
+      </div>
+      <p class="note"><strong>Decisión de diseño:</strong> la tarjeta no agrega al carrito directamente. Lleva a la ficha porque el precio y el stock dependen de la presentación (frasco o decant). <strong>Pendiente (TBD):</strong> cómo se muestra el porcentaje o el vencimiento de la oferta; acá solo se rotula "Oferta".</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       04 · Filtros
+       ===================================================================== -->
+  <section class="spec" id="filtros" aria-labelledby="filtros-title">
+    <div class="spec-head">
+      <p class="eyebrow">04 · Descubrimiento</p>
+      <div>
+        <h2 id="filtros-title">Filtros y acordes</h2>
+        <p>Filtros visibles, combinables y limpiables en un clic. Los chips de acordes se generan desde los datos; un acorde sin perfumes publicados no aparece. Varios acordes suman resultados (OR), según la semántica a confirmar.</p>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="filter-bar">
+        <div class="filter-group">
+          <span class="filter-label" id="filtro-linea">Línea</span>
+          <button class="chip" type="button" aria-pressed="true" aria-describedby="filtro-linea">Árabes <span class="chip__count">38</span></button>
+          <button class="chip" type="button" aria-pressed="false">Diseñador <span class="chip__count">0</span></button>
+          <button class="chip" type="button" aria-pressed="false">Nicho <span class="chip__count">0</span></button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label" id="filtro-genero">Género</span>
+          <button class="chip" type="button" aria-pressed="false">Masculino</button>
+          <button class="chip" type="button" aria-pressed="false">Femenino</button>
+          <button class="chip" type="button" aria-pressed="true">Unisex</button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label" id="filtro-acordes">Acordes</span>
+          <button class="chip" type="button" aria-pressed="true">Amaderado <span class="chip__count">14</span></button>
+          <button class="chip" type="button" aria-pressed="false">Dulce <span class="chip__count">11</span></button>
+          <button class="chip" type="button" aria-pressed="false">Especiado <span class="chip__count">9</span></button>
+          <button class="chip" type="button" aria-pressed="false">Ámbar <span class="chip__count">7</span></button>
+          <button class="chip" type="button" aria-pressed="false">Cuero <span class="chip__count">3</span></button>
+          <button class="chip chip--offer" type="button" aria-pressed="false">En oferta <span class="chip__count">6</span></button>
+        </div>
+
+        <div class="results-bar">
+          <span>38 perfumes · 2 filtros activos</span>
+          <div style="display: flex; gap: var(--space-4); align-items: center;">
+            <button class="link-quiet" type="button">Limpiar filtros</button>
+            <label class="visually-hidden" for="orden">Ordenar resultados</label>
+            <select class="input" id="orden" style="min-height: 36px; padding-block: 6px; width: auto; font-size: var(--text-xs);">
+              <option>Destacados</option>
+              <option>Menor precio</option>
+              <option>Mayor precio</option>
+              <option>Nombre A–Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <p class="note">Los contadores son parte del dato, no decoración: si un filtro devuelve 0, no se muestra. El orden de resultados todavía no está definido en el brief. <strong>(TBD)</strong></p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       05 · Ficha
+       ===================================================================== -->
+  <section class="spec" id="ficha" aria-labelledby="ficha-title">
+    <div class="spec-head">
+      <p class="eyebrow">05 · Producto</p>
+      <div>
+        <h2 id="ficha-title">Ficha de producto</h2>
+        <p>La presentación manda: cambiar de frasco a decant actualiza precio y stock sin recargar. Las frases "ideal para…" son el diferencial de asesoramiento y se leen como texto, no como etiquetas técnicas.</p>
+      </div>
+    </div>
+
+    <div class="canvas canvas--plain">
+      <article class="sheet">
+        <div class="sheet__media">
+          <img src="assets/product-placeholder.svg" alt="Imagen de referencia no disponible" width="400" height="500">
+          <span class="tag tag--offer">Oferta</span>
+        </div>
+
+        <div class="sheet__body">
+          <p class="sheet__brand">Lattafa · Árabes</p>
+          <h3 class="sheet__title">Khamrah</h3>
+          <p class="sheet__meta">Unisex · Eau de Parfum · 100 ml</p>
+
+          <div class="sheet__price">
+            <span class="price-now">$52.400</span>
+            <span class="price-was">$61.900</span>
+            <span class="stock stock--in">En stock</span>
+          </div>
+
+          <p class="sheet__desc">Ámbar dulce con canela, dátiles y praliné. Un aroma envolvente para noches frías.</p>
+
+          <div>
+            <p class="type-caps" style="margin-bottom: var(--space-2);">Acordes</p>
+            <ul class="phrase-list" style="list-style: none; padding: 0; margin: 0;">
+              <li class="term">Dulce</li>
+              <li class="term">Especiado</li>
+              <li class="term">Ámbar</li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="type-caps" style="margin-bottom: var(--space-2);">Ideal para</p>
+            <ul class="phrase-list">
+              <li class="phrase">Citas o salir de noche</li>
+              <li class="phrase">Regalar</li>
+              <li class="phrase">Invierno</li>
+            </ul>
+          </div>
+
+          <fieldset style="margin-top: var(--space-2);">
+            <legend class="type-caps" style="margin-bottom: var(--space-2); padding: 0;">Elegí la presentación</legend>
+            <div class="presentation-list">
+              <label class="presentation">
+                <input type="radio" name="presentacion" value="100" checked>
+                <span class="radio-dot" aria-hidden="true"></span>
+                <span>
+                  <span class="presentation__label">Frasco sellado · 100 ml</span>
+                  <span class="presentation__meta">En stock · se envía ahora</span>
+                </span>
+                <span class="presentation__price">$52.400</span>
+              </label>
+
+              <label class="presentation">
+                <input type="radio" name="presentacion" value="5">
+                <span class="radio-dot" aria-hidden="true"></span>
+                <span>
+                  <span class="presentation__label">Decant · 5 ml</span>
+                  <span class="presentation__meta">En stock</span>
+                </span>
+                <span class="presentation__price">$8.000</span>
+              </label>
+
+              <label class="presentation">
+                <input type="radio" name="presentacion" value="10">
+                <span class="radio-dot" aria-hidden="true"></span>
+                <span>
+                  <span class="presentation__label">Decant · 10 ml</span>
+                  <span class="presentation__meta">Sin stock · por encargo</span>
+                </span>
+                <span class="presentation__price">$15.000</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="buy-row">
+            <div class="qty" role="group" aria-label="Cantidad">
+              <button type="button" aria-label="Quitar una unidad">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg>
+              </button>
+              <output aria-live="polite">1</output>
+              <button type="button" aria-label="Agregar una unidad">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+            <button class="btn" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 8h12l-1 11H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+              Agregar al pedido
+            </button>
+          </div>
+
+          <p class="microcopy">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+            El pedido se envía por WhatsApp. No se paga en el sitio ni se guardan tus datos.
+          </p>
+        </div>
+      </article>
+      <p class="note"><strong>Semántica:</strong> los decants no son una sección aparte ni un producto distinto: son presentaciones del mismo perfume, con precio y stock propios. Si se decide mostrarlos como producto separado, se reutiliza la misma tarjeta sin cambiar tokens.</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       06 · Carrito
+       ===================================================================== -->
+  <section class="spec" id="carrito" aria-labelledby="carrito-title">
+    <div class="spec-head">
+      <p class="eyebrow">06 · Pedido</p>
+      <div>
+        <h2 id="carrito-title">Carrito y cierre por WhatsApp</h2>
+        <p>Compra y encargo se muestran separados porque tienen tiempos distintos. El único cierre es el mensaje de WhatsApp: no hay checkout ni datos personales.</p>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="cart-layout">
+        <div class="order-stack">
+        <div class="order-preview">
+          <p class="eyebrow">Vista del mensaje</p>
+          <h4>Lo que llega al WhatsApp</h4>
+          <div class="order-preview__bubble">
+            Hola! Quiero hacer este pedido:<br><br>
+            <strong>COMPRA (en stock)</strong><br>
+            1x Khamrah — Lattafa — Frasco 100 ml — $52.400<br>
+            2x Asad — Lattafa — Decant 5 ml — $8.000 c/u<br><br>
+            <strong>ENCARGO (sin stock)</strong><br>
+            1x Club de Nuit Intense — Armaf — Frasco 100 ml — $47.900<br><br>
+            <strong>Total: $116.300</strong>
+          </div>
+          <p class="order-preview__meta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+            Se abre con el número configurado. No incluye nombre, teléfono ni dirección.
+          </p>
+        </div>
+
+        <div class="order-rules">
+          <p class="type-caps" style="margin: 0;">Qué garantiza el mensaje</p>
+          <ul>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+              Separa compra y encargo para que los tiempos queden claros desde el primer mensaje.
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+              Incluye presentación, cantidad y precio de cada ítem, con tildes y saltos de línea correctos.
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+              No viaja ningún dato personal: el pedido se cierra en la conversación de WhatsApp.
+            </li>
+          </ul>
+        </div>
+        </div>
+
+        <div class="cart" role="region" aria-labelledby="carrito-title">
+        <div class="cart__head">
+          <h3>Tu pedido</h3>
+          <span>3 productos · 4 unidades</span>
+        </div>
+
+        <div class="cart-group">
+          <p class="cart-group__label cart-group__label--in">
+            <span>Compra · en stock</span>
+            <span>2 productos</span>
+          </p>
+
+          <div class="cart-item">
+            <div class="cart-thumb"><img src="assets/product-placeholder.svg" alt="" width="400" height="500"></div>
+            <div>
+              <p class="cart-item__name">Khamrah · Lattafa</p>
+              <p class="cart-item__meta">Frasco sellado · 100 ml</p>
+              <div class="cart-item__ctrl">
+                <div class="qty qty--sm" role="group" aria-label="Cantidad de Khamrah">
+                  <button type="button" aria-label="Quitar una unidad">−</button>
+                  <output>1</output>
+                  <button type="button" aria-label="Agregar una unidad">+</button>
+                </div>
+                <button class="remove-btn" type="button">Quitar</button>
+              </div>
+            </div>
+            <span class="cart-item__price">$52.400</span>
+          </div>
+
+          <div class="cart-item">
+            <div class="cart-thumb"><img src="assets/product-placeholder.svg" alt="" width="400" height="500"></div>
+            <div>
+              <p class="cart-item__name">Asad · Lattafa</p>
+              <p class="cart-item__meta">Decant · 5 ml</p>
+              <div class="cart-item__ctrl">
+                <div class="qty qty--sm" role="group" aria-label="Cantidad de Asad">
+                  <button type="button" aria-label="Quitar una unidad">−</button>
+                  <output>2</output>
+                  <button type="button" aria-label="Agregar una unidad">+</button>
+                </div>
+                <button class="remove-btn" type="button">Quitar</button>
+              </div>
+            </div>
+            <span class="cart-item__price">$16.000<small>$8.000 c/u</small></span>
+          </div>
+
+          <div class="cart-subtotal">
+            <span>Subtotal compra</span>
+            <strong>$68.400</strong>
+          </div>
+        </div>
+
+        <div class="cart-group">
+          <p class="cart-group__label cart-group__label--order">
+            <span>Encargo · sin stock</span>
+            <span>1 producto</span>
+          </p>
+
+          <div class="cart-item">
+            <div class="cart-thumb"><img src="assets/product-placeholder.svg" alt="" width="400" height="500"></div>
+            <div>
+              <p class="cart-item__name">Club de Nuit Intense · Armaf</p>
+              <p class="cart-item__meta">Frasco sellado · 100 ml</p>
+              <div class="cart-item__ctrl">
+                <div class="qty qty--sm" role="group" aria-label="Cantidad de Club de Nuit Intense">
+                  <button type="button" aria-label="Quitar una unidad">−</button>
+                  <output>1</output>
+                  <button type="button" aria-label="Agregar una unidad">+</button>
+                </div>
+                <button class="remove-btn" type="button">Quitar</button>
+              </div>
+            </div>
+            <span class="cart-item__price">$47.900</span>
+          </div>
+
+          <div class="cart-subtotal">
+            <span>Subtotal encargo</span>
+            <strong>$47.900</strong>
+          </div>
+        </div>
+
+        <div class="cart-total">
+          <span>Total</span>
+          <strong>$116.300</strong>
+        </div>
+
+        <button class="btn btn--block" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L3.5 20.5l1.6-4.6A8.4 8.4 0 1 1 20.5 11.6Z"/><path d="M8.8 9.2c.2-.5.5-.5.8-.5h.6c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.2-.2.3 0 .6.4.7 1.4 1.7 2.1 2 .3.1.4 0 .6-.1l.6-.6c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.4.5v.6c0 .6-.4 1.1-1 1.3-.5.2-1.2.2-2.9-.5-2-.8-3.6-2.5-4.4-4.4-.6-1.5-.3-2.3-.1-2.7Z"/></svg>
+          Enviar pedido por WhatsApp
+        </button>
+        <p class="microcopy" style="justify-content: center; text-align: center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="6" width="16" height="13" rx="2"/><path d="M4 11h16"/></svg>
+          No se paga en el sitio. No guardamos tus datos.
+        </p>
+      </div>
+      </div>
+
+      <p class="note"><strong>Mensaje generado:</strong> el texto separa "COMPRA (en stock)" y "ENCARGO (sin stock)", incluye presentación, cantidad y precio por ítem, y se codifica con <code>encodeURIComponent</code>. Con el carrito vacío el botón queda deshabilitado. El verde pino se mantiene para el CTA: el deep link no necesita el verde oficial de WhatsApp.</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       07 · Controles
+       ===================================================================== -->
+  <section class="spec" id="controles" aria-labelledby="controles-title">
+    <div class="spec-head">
+      <p class="eyebrow">07 · Controles</p>
+      <div>
+        <h2 id="controles-title">Botones, etiquetas y stock</h2>
+        <p>Un solo color de acción. Los estados de stock usan color y texto: nunca solo color. Los botones responden al presionar y respetan <code>prefers-reduced-motion</code>.</p>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="btn-row" style="margin-bottom: var(--space-4);">
+        <button class="btn" type="button">Acción primaria</button>
+        <button class="btn btn--secondary" type="button">Acción secundaria</button>
+        <button class="btn btn--ghost" type="button">Acción terciaria</button>
+        <button class="btn btn--danger" type="button">Eliminar</button>
+        <button class="btn" type="button" disabled>Deshabilitado</button>
+      </div>
+
+      <div class="btn-row" style="margin-bottom: var(--space-4);">
+        <button class="btn btn--sm" type="button">Pequeño</button>
+        <button class="btn" type="button">Mediano</button>
+        <button class="btn btn--lg" type="button">Grande</button>
+        <button class="btn" type="button" aria-busy="true" aria-live="polite">
+          <span class="btn__spinner" aria-hidden="true"></span>
+          Guardando…
+        </button>
+        <button class="btn btn--secondary" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          Con ícono
+        </button>
+      </div>
+
+      <div class="btn-row" style="margin-bottom: var(--space-5);">
+        <span class="tag tag--offer">Oferta</span>
+        <span class="tag tag--info">Decants disponibles</span>
+        <span class="tag tag--neutral">Nuevo</span>
+        <span class="stock stock--in">En stock</span>
+        <span class="stock stock--order">Sin stock · por encargo</span>
+        <span class="badge-soft">Árabes</span>
+      </div>
+
+      <div class="alert alert--info">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <p><strong>Sin stock no es un error.</strong> Un perfume por encargo conserva precio, ficha y botón de pedido. El estado se comunica con texto, no solo con color.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       08 · Formularios
+       ===================================================================== -->
+  <section class="spec" id="formularios" aria-labelledby="formularios-title">
+    <div class="spec-head">
+      <p class="eyebrow">08 · Administración</p>
+      <div>
+        <h2 id="formularios-title">Campos y formularios</h2>
+        <p>Etiqueta arriba, ayuda debajo, error junto al campo. En el panel manda la claridad: tipografía sans, densidad media y confirmaciones explícitas. Los dueños cargan datos sin tocar código.</p>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="form-grid">
+        <div class="field">
+          <label for="campo-nombre">Nombre del perfume</label>
+          <input class="input" id="campo-nombre" type="text" value="Khamrah" autocomplete="off">
+          <p class="field__help">Como aparece en el catálogo, sin la marca.</p>
+        </div>
+
+        <div class="field">
+          <label for="campo-precio">Precio del frasco (ARS)</label>
+          <input class="input" id="campo-precio" type="text" inputmode="numeric" value="-1200" aria-invalid="true" aria-describedby="error-precio">
+          <p class="field__error" id="error-precio">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            El precio no puede ser negativo.
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="campo-genero">Género</label>
+          <div class="select-wrap">
+            <select class="select" id="campo-genero">
+              <option>Unisex</option>
+              <option>Masculino</option>
+              <option>Femenino</option>
+            </select>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="campo-whatsapp">WhatsApp que recibe los pedidos</label>
+          <input class="input" id="campo-whatsapp" type="tel" inputmode="numeric" value="5491123456789" aria-describedby="ayuda-whatsapp">
+          <p class="field__help" id="ayuda-whatsapp">Solo dígitos con código de país. Sin +, espacios ni guiones.</p>
+        </div>
+
+        <div class="field" style="grid-column: 1 / -1;">
+          <label for="campo-desc">Descripción</label>
+          <textarea class="textarea" id="campo-desc" aria-describedby="ayuda-desc">Ámbar dulce con canela, dátiles y praliné. Un aroma envolvente para noches frías.</textarea>
+          <p class="field__help" id="ayuda-desc">Una o dos frases. No repetir el nombre ni el precio.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: center; margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--color-line);">
+        <label class="check">
+          <input type="checkbox" checked>
+          <span>Mostrar en la sección de ofertas</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" checked role="switch" aria-checked="true">
+          <span class="switch__track" aria-hidden="true"></span>
+          <span class="switch__text">Publicado en el catálogo</span>
+        </label>
+        <div class="field" style="min-width: 220px;">
+          <label for="campo-deshabilitado">Campo deshabilitado</label>
+          <input class="input" id="campo-deshabilitado" type="text" value="Dato de solo lectura" disabled>
+        </div>
+      </div>
+
+      <div class="alert alert--success" style="margin-top: var(--space-4);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+        <p><strong>Cambios guardados.</strong> El catálogo público ya muestra el precio nuevo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       09 · Admin
+       ===================================================================== -->
+  <section class="spec" id="admin" aria-labelledby="admin-title">
+    <div class="spec-head">
+      <p class="eyebrow">09 · Acceso</p>
+      <div>
+        <h2 id="admin-title">Login del panel</h2>
+        <p>Superficie sobria, sin lenguaje de marketing. El error es genérico a propósito: no revela si el correo existe. Sin sesión, cualquier ruta del panel redirige acá.</p>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="login-stage">
+        <div class="login-aside">
+          <p class="eyebrow">Panel de administración</p>
+          <h4>El catálogo se edita acá, no en la planilla.</h4>
+          <p>Precios, presentaciones, stock, fotos y el WhatsApp que recibe los pedidos. Los cambios se ven en el catálogo sin volver a publicar el sitio.</p>
+          <ul class="login-aside__list">
+            <li>Cambiar el número de WhatsApp desvía todos los pedidos: verificalo antes de guardar.</li>
+            <li>El error de login es genérico a propósito: no revela si el correo existe.</li>
+            <li>Solo hay dos cuentas. No se comparten credenciales.</li>
+          </ul>
+        </div>
+
+        <div class="login">
+          <div class="login__mark" aria-hidden="true">OP</div>
+          <h3>Panel de administración</h3>
+          <p class="login__sub">Acceso solo para los dueños de <span data-brand-name>Oloroso Pit</span>.</p>
+
+          <form action="#" method="post">
+            <div class="field">
+              <label for="admin-email">Correo</label>
+              <input class="input" id="admin-email" type="email" autocomplete="username" placeholder="tu@correo.com" value="emi@olorosopit.com">
+            </div>
+
+            <div class="field">
+              <label for="admin-pass">Contraseña</label>
+              <input class="input" id="admin-pass" type="password" autocomplete="current-password" value="••••••••" aria-invalid="true" aria-describedby="admin-error">
+              <p class="field__error" id="admin-error">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+                No pudimos iniciar sesión. Revisá los datos e intentá de nuevo.
+              </p>
+            </div>
+
+            <button class="btn" type="submit">Entrar al panel</button>
+          </form>
+
+          <p class="login__foot">Si olvidaste la contraseña, consultá con el desarrollador: en v1 no hay recuperación automática. <strong>(TBD)</strong></p>
+        </div>
+      </div>
+      <p class="note"><strong>Nota técnica:</strong> Supabase Auth usa correo + contraseña. Si los dueños prefieren un usuario genérico, se resuelve con un correo interno fijo; la interfaz no cambia.</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       10 · Estados
+       ===================================================================== -->
+  <section class="spec" id="estados" aria-labelledby="estados-title">
+    <div class="spec-head">
+      <p class="eyebrow">10 · Estados</p>
+      <div>
+        <h2 id="estados-title">Carga, vacío y error</h2>
+        <p>Ninguna pantalla queda en blanco. Los esqueletos respetan el tamaño real de la tarjeta; los estados vacíos explican cómo seguir y ofrecen una salida concreta.</p>
+      </div>
+    </div>
+
+    <div class="state-grid">
+
+      <div class="state-card">
+        <h4>Cargando catálogo</h4>
+        <div class="skeleton-card" aria-hidden="true">
+          <div class="skeleton skeleton--media"></div>
+          <div class="skeleton skeleton--line skeleton--line-short"></div>
+          <div class="skeleton skeleton--line skeleton--line-mid"></div>
+          <div class="skeleton skeleton--line" style="width: 35%;"></div>
+        </div>
+        <p class="visually-hidden" role="status">Cargando catálogo</p>
+      </div>
+
+      <div class="state-card">
+        <h4>Carrito vacío</h4>
+        <div class="empty">
+          <div class="empty__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 8h12l-1 11H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          </div>
+          <h5>Tu pedido está vacío</h5>
+          <p>Agregá un perfume y armá el mensaje para WhatsApp. No hace falta crear una cuenta.</p>
+          <a class="btn btn--sm" href="#tarjetas">Ver catálogo</a>
+        </div>
+      </div>
+
+      <div class="state-card">
+        <h4>Sin resultados</h4>
+        <div class="empty">
+          <div class="empty__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+          </div>
+          <h5>No encontramos ese perfume</h5>
+          <p>Probá con otra marca o quitá los filtros de acordes.</p>
+          <button class="btn btn--secondary btn--sm" type="button">Limpiar filtros</button>
+        </div>
+      </div>
+
+      <div class="state-card">
+        <h4>Alerta de error</h4>
+        <div class="alert alert--danger">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          <p><strong>No pudimos guardar.</strong> Revisá los campos marcados y volvé a intentar.</p>
+        </div>
+        <div class="alert alert--info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <p>Los pedidos se envían al WhatsApp configurado. Si cambia, verificalo antes de guardar.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer style="padding-block: var(--space-6) var(--space-8);">
+  <div class="container" style="display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); justify-content: space-between; align-items: baseline;">
+    <p class="eyebrow" style="margin: 0;">Oloroso Pit · Sistema visual provisional · Revisión 1</p>
+    <p style="margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted);">
+      Fuente: <span style="font-family: var(--font-mono);">knowledge-base/01, 02, 03, 06</span> · Aprobación pendiente de los dueños.
+    </p>
+  </div>
+</footer>
+
+<script src="brand.js"></script>
+</body>
+</html>
