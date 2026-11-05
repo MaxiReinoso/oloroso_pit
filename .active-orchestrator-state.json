@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "step": "discovery",
+  "step": "kb",
   "owner": "active-orchestrator",
   "discovery": {
     "created_by": "discovery-research",
@@ -94,6 +94,34 @@
       "Plazos habituales de los encargos y si se informan en la página (se resuelve más adelante).",
       "Colores y referencias de estilo (se resuelve al empezar el frontend).",
       "Aprobación de la lista unificada de acordes (tarea del desarrollador al importar la planilla)."
+    ]
+  },
+  "kb": {
+    "created_by": "kb-creator",
+    "source": "ingest",
+    "discovery": {
+      "problem": "Oloroso Pit vende perfumes importados, en su gran mayoría por encargo y con muy poco stock propio, a través de Instagram y WhatsApp. Su catálogo hoy es una planilla (hojas Árabes, Diseñador y Nicho, organizada por marca), que sí tiene precios y marca 'No disponible', pero no cuentan con un catálogo web propio que incluya precios, disponibilidad y herramientas de asesoramiento.",
+      "system_type": "web_app",
+      "domain": "ecommerce",
+      "scale": "public_multi_user",
+      "stack": [
+        "Frontend estático (tentativo)",
+        "Supabase (plan gratuito, tentativo)"
+      ],
+      "needs_infra": true
+    },
+    "files": [
+      "knowledge-base/README.md",
+      "knowledge-base/01_vision_y_objetivos.md",
+      "knowledge-base/02_descripcion_general.md",
+      "knowledge-base/03_actores_y_roles.md",
+      "knowledge-base/04_modelo_de_datos.md",
+      "knowledge-base/05_reglas_de_negocio.md",
+      "knowledge-base/06_funcionalidades.md",
+      "knowledge-base/07_flujos_principales.md",
+      "knowledge-base/08_arquitectura_propuesta.md",
+      "knowledge-base/09_decisiones_y_supuestos.md",
+      "knowledge-base/10_preguntas_abiertas.md"
     ]
   }
 }
