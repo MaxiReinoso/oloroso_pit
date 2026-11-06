@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "visual-design",
+  "step": "roadmap",
   "owner": "active-orchestrator",
   "discovery": {
     "created_by": "discovery-research",
@@ -12,11 +12,26 @@
       "https://www.juleriaque.com.ar/"
     ],
     "competitors": [
-      { "name": "JFT Perfumes", "notes_file": "discovery/sources/jft-perfumes.md" },
-      { "name": "Vesper Perfumes", "notes_file": "discovery/sources/vesper-perfumes.md" },
-      { "name": "Parfumerie", "notes_file": "discovery/sources/parfumerie.md" },
-      { "name": "Perfumerías Rouge", "notes_file": "discovery/sources/perfumerias-rouge.md" },
-      { "name": "Juleriaque", "notes_file": "discovery/sources/juleriaque.md" }
+      {
+        "name": "JFT Perfumes",
+        "notes_file": "discovery/sources/jft-perfumes.md"
+      },
+      {
+        "name": "Vesper Perfumes",
+        "notes_file": "discovery/sources/vesper-perfumes.md"
+      },
+      {
+        "name": "Parfumerie",
+        "notes_file": "discovery/sources/parfumerie.md"
+      },
+      {
+        "name": "Perfumerías Rouge",
+        "notes_file": "discovery/sources/perfumerias-rouge.md"
+      },
+      {
+        "name": "Juleriaque",
+        "notes_file": "discovery/sources/juleriaque.md"
+      }
     ],
     "notas": "JFT y Vesper del pedido inicial; Juleriaque mencionada por el cliente; Parfumerie y Rouge provistas manualmente por el desarrollador durante el ajuste (no búsqueda autónoma). Web search no disponible en la sesión. Juleriaque no evidenciada por el agente (SPA) pero verificada manualmente por el desarrollador en navegador.",
     "problema": "Oloroso Pit vende perfumes importados, en su gran mayoría por encargo y con muy poco stock propio, a través de Instagram y WhatsApp. Su catálogo hoy es una planilla (hojas Árabes, Diseñador y Nicho, organizada por marca), que sí tiene precios y marca 'No disponible', pero no cuentan con un catálogo web propio que incluya precios, disponibilidad y herramientas de asesoramiento.",
@@ -130,5 +145,9 @@
     "status": "approved",
     "revision": 1,
     "path": "design-system/README.md"
+  },
+  "roadmap": {
+    "created_by": "roadmap-generator",
+    "changes_file": "CHANGES.md"
   }
 }
