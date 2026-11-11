@@ -2,13 +2,14 @@
 
 ```
 Mode: system-and-mockups
-Revision: 1
-Approval: approved (2026-11-05, by user)
+Revision: 2
+Approval: pending (2026-11-11)
 ```
 
-> **Provisional.** Los colores, la tipografía, el logo y el nombre son propuestas
-> pendientes de aprobación. Nada de este directorio debe presentarse a los
-> dueños como identidad final.
+> **Identidad confirmada, logo todavía no.** Los clientes confirmaron la
+> identidad visual el 2026-11-11 (decisión **D-07**): paleta morado/naranja,
+> tipografía redondeada y estilo pop urbano. El **logo real sigue siendo un
+> placeholder** rotulado como tal: no existe un archivo de marca aprobado.
 
 Este documento es la fuente de verdad de la fundación visual. Los mockups de
 cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión.
@@ -24,11 +25,10 @@ cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión
    revisa con el usuario.
 3. La implementación no empieza hasta que ese mockup esté aprobado.
 
-La política aplica al catálogo público y al panel. El gate de mockups por cambio
-lo ejecuta la skill `design-mockups`; esta fundación no crea pantallas finales.
-
-**Estado:** pendiente. La aprobación la otorga el usuario tras revisar
-`components.html` y los previews. Hasta entonces, `Approval: pending`.
+**Estado:** `Revision: 2` pendiente de aprobación. La revisión 1 (verde pino +
+cobre + serif) fue aprobada el 2026-11-05 y **quedó reemplazada** por la
+identidad oficial. La aprobación de la revisión 2 la otorga el usuario tras
+revisar `components.html`, `mockups/c-01-shell/` y los previews.
 
 ---
 
@@ -41,12 +41,14 @@ lo ejecuta la skill `design-mockups`; esta fundación no crea pantallas finales.
 | `brand.js` | Constante única del nombre + binding `[data-brand-name]`. |
 | `tokens.css` | Variables de color, tipografía, espaciado, radios, sombras, foco y movimiento. |
 | `components.html` | Referencia visual: cabecera, tarjetas, filtros, ficha, carrito, controles, formularios, login y estados. |
-| `assets/logo.svg` | Logo **placeholder** rotulado como provisional. |
+| `assets/logo.svg` | Logo **placeholder** rotulado como provisional, ya en la paleta nueva. |
 | `assets/product-placeholder.svg` | Placeholder 4:5 para perfumes sin foto. |
 | `previews/` | Capturas 390×844 y 1440×900 + instrucciones de re-render. |
+| `mockups/c-01-shell/` | Mockup del shell de C-01 con esta revisión (gate de aprobación). |
 
-Sin dependencias, sin build, sin fuentes remotas, sin Figma, sin cuentas pagas.
-Se abre con doble clic en cualquier navegador moderno.
+Sin build, sin Figma y sin cuentas pagas. **Sí hay dos fuentes de Google
+Fonts** (DynaPuff y Nunito), decisión aceptada con la identidad oficial; en
+producción se auto-hospedan (ver §8.4). Sin JS salvo `brand.js`.
 
 ---
 
@@ -79,28 +81,37 @@ Fuente: `knowledge-base/03_actores_y_roles.md`,
 |---|---|
 | Sin pasarela de pagos | Un único CTA de cierre: "Enviar pedido por WhatsApp". Nada de formularios de tarjeta. |
 | No se guardan datos de clientes | El carrito es local; no hay "mi cuenta", login de comprador ni checkout. |
-| Infraestructura gratuita, hardware limitado | Solo CSS/SVG locales, sin fuentes remotas ni librerías pesadas. |
+| Infraestructura gratuita, hardware limitado | CSS/SVG locales, sin librerías pesadas; las dos fuentes se auto-hospedan en producción. |
 | Stock escaso, venta por encargo | "Sin stock" no es un error ni deshabilita la compra. |
 | Precio siempre visible | El precio es el elemento de mayor jerarquía en la tarjeta. |
-| Colores actuales (beige/marrón) se cambian | Paleta nueva propuesta, marcada como provisional. |
+| Identidad oficial confirmada (D-07) | Paleta y tipografía ya no son propuesta: mandan sobre el brief anterior. |
+| Logo real inexistente | El placeholder se rotula como provisional en todo contexto visible. |
 
 Fuente: `docs/discovery/brief-clientes.md`,
-`knowledge-base/06_funcionalidades.md`.
+`knowledge-base/06_funcionalidades.md`, confirmación de identidad del 2026-11-11.
 
 ### Dirección visual
 
-**"Vidrio ahumado":** papel mineral cálido, verde pino profundo y cobre escaso.
-Editorial y sobrio, sin el atajo oro + negro. La tipografía display es una serif
-del sistema (Georgia/Palatino); la interfaz usa la sans del sistema. No se
-descarga ninguna fuente.
+**"Pop urbano".** Morado profundo, naranja vibrante y tipografía redondeada con
+extrusión sólida. La referencia es una gráfica de Instagram de barrio bien
+hecha: alegre, directa, sin solemnidad de joyería.
 
-Decisiones de producto reflejadas en la interfaz:
+| Atributo | Sí | No |
+|---|---|---|
+| Temperamento | Pop, vibrante, urbano, cercano | Sobrio, editorial, minimalista frío |
+| Color | Morado `#30004b`, naranja `#febd59`, naranja claro `#ffdeab`, blanco puro | Beige/marrón de la planilla, pasteles desaturados, oro + negro |
+| Tipografía | DynaPuff para display; Nunito para cuerpo y UI | Serif, Molenila, sans geométricas finas de 300 |
+| Forma | Radios grandes, sombras duras sin difuminado, bordes definidos | Sombras difusas, glassmorphism, degradados suaves |
+| Títulos | Naranja con extrusión morada, tamaño grande | Extrusión en párrafos, precios o textos pequeños |
+| Densidad | Aireada en catálogo; clara y directa en panel | Bloques apilados sin jerarquía |
+
+Reglas de producto reflejadas en la interfaz:
 
 - La tarjeta **no** agrega al carrito: lleva a la ficha, porque precio y stock
   dependen de la presentación (frasco o decant).
 - Compra y encargo se separan en el carrito y en el mensaje de WhatsApp.
 - Los estados llevan texto además de color.
-- El panel es sans, denso y directo; el catálogo es serif y aireado.
+- El panel usa la misma identidad, con menos decoración y más contraste.
 
 ---
 
@@ -109,52 +120,84 @@ Decisiones de producto reflejadas en la interfaz:
 Todo valor visual sale de `tokens.css`. No hay colores ni tamaños hardcodeados
 en componentes, salvo valores geométricos de layout.
 
-### Color
+### 4.1 Color
 
 | Token | Hex | Uso |
 |---|---|---|
-| `--color-paper` | `#F6F5F0` | Fondo del catálogo |
+| `--color-primary-700` | `#30004b` | **Marca** y acción primaria |
+| `--color-accent-600` | `#febd59` | **CTA, ofertas y énfasis** |
+| `--color-accent-100` / `--color-paper` | `#ffdeab` | **Fondo general** y secciones secundarias |
 | `--color-surface` | `#FFFFFF` | Tarjetas, paneles, ficha |
-| `--color-surface-alt` | `#EFEEE7` | Fondos secundarios |
-| `--color-ink` | `#1B211E` | Texto principal (nunca `#000`) |
-| `--color-ink-soft` | `#4B554F` | Texto secundario |
-| `--color-ink-muted` | `#626C65` | Metadatos y ayudas |
-| `--color-line` | `#DEDCD3` | Bordes de 1 px |
-| `--color-primary-700` | `#1E3B31` | Marca y acción primaria |
-| `--color-primary-100` | `#E4EBE6` | Selección, frases, fondos suaves |
-| `--color-accent-600` | `#A05C3B` | Solo ofertas / énfasis |
-| `--color-stock` | `#2C6A4C` | "En stock" |
-| `--color-order` | `#7B6636` | "Sin stock · por encargo" |
-| `--color-danger` | `#A33B33` | Errores reales |
-| `--color-focus` | `#3E7E63` | Anillo de foco |
+| `--color-surface-alt` | `#FFF2DD` | Secciones muy claras |
+| `--color-band` | `#30004B` | Franjas de marca (barra superior, pie) |
+| `--color-ink` | `#30004B` | Texto principal |
+| `--color-ink-soft` | `#5D2A6E` | Texto secundario |
+| `--color-ink-muted` | `#7A4A8A` | Metadatos y ayudas |
+| `--color-line` | `#E9D5EF` | Bordes de 1 px |
+| `--color-stock` | `#0F6B3F` | "En stock" |
+| `--color-order` | `#8A5200` | "Sin stock · por encargo" |
+| `--color-offer` | `#30004B` | Texto sobre la etiqueta de oferta |
+| `--color-offer-soft` | `#FEBD59` | Fondo de la etiqueta de oferta |
+| `--color-danger` | `#B3261E` | Errores reales |
+| `--color-focus` | `#30004B` | Anillo de foco en fondos claros |
 
-### Tipografía
+### 4.2 Contraste — reglas duras
+
+Medido con WCAG 2.1 sobre los pares reales:
+
+| Par | Ratio | Veredicto |
+|---|---|---|
+| Tinta `#30004B` sobre blanco | **17.11:1** | AAA |
+| Tinta sobre naranja claro `#FFDEAB` | **13.27:1** | AAA |
+| Naranja `#FEBD59` sobre morado | **10.30:1** | AAA |
+| Morado sobre naranja `#FEBD59` | **10.30:1** | AAA |
+| Texto suave `#5D2A6E` sobre naranja claro | **8.06:1** | AAA |
+| Texto atenuado `#7A4A8A` sobre naranja claro | **5.13:1** | AA |
+| Blanco sobre naranja `#FEBD59` | **1.66:1** | **prohibido** |
+
+Consecuencias obligatorias:
+
+1. **Nunca texto blanco sobre naranja vibrante.** Todo relleno naranja lleva
+   texto morado (`--color-offer` / `--color-primary-700`).
+2. **Las tarjetas son blancas.** El naranja claro va de fondo general o en
+   secciones secundarias.
+3. **El título extruido es decorativo, no cuerpo de texto.** El relleno naranja
+   sobre blanco mide 1.66:1: solo se usa en titulares grandes (≥ 28 px). Sobre
+   fondos claros siempre lleva `-webkit-text-stroke: var(--title-stroke-lg)` con
+   `paint-order: stroke fill`, para que el contorno morado sostenga la forma.
+   Precios, descripciones y navegación van siempre en morado.
+
+### 4.3 Tipografía
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--font-display` | `ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif` | Nombres de perfume, títulos del catálogo |
-| `--font-sans` | `ui-sans-serif, "Segoe UI Variable Text", "Segoe UI", system-ui, …` | Interfaz, cuerpo, panel |
+| `--font-display` | `"DynaPuff", ui-rounded, "Segoe UI Rounded", "Trebuchet MS", system-ui, sans-serif` | Nombres de perfume, h1/h2, cifras destacadas |
+| `--font-sans` | `"Nunito", ui-sans-serif, "Segoe UI Variable Text", "Segoe UI", system-ui, …` | Interfaz, cuerpo, panel, precios |
 | `--font-mono` | `ui-monospace, "Cascadia Mono", Consolas, …` | Valores técnicos y números de referencia |
-| `--text-display` | `clamp(2.25rem, 1.4rem + 3.2vw, 3.75rem)` | Portada |
+| `--text-display` | `clamp(2.5rem, 1.35rem + 4vw, 4.25rem)` | Portada |
 | `--text-2xs` … `--text-4xl` | `0.6875rem` … `3rem` | Escala completa |
-| `--measure` | `65ch` | Ancho de lectura |
+| `--title-fill` | `#FEBD59` | Relleno de titulares extruidos |
+| `--title-extrude` | `2px 2px 0 #30004B, 4px 4px 0 #30004B` | Extrusión estándar |
+| `--title-extrude-lg` | `3px 3px 0 …, 6px 6px 0 …` | Portada (H1) |
+| `--title-stroke` | `1px #30004B` | Contorno de seguridad sobre fondos claros |
+| `--title-stroke-lg` | `2px #30004B` | Contorno de titulares grandes (≥ 48 px) |
 
-### Espaciado, forma y movimiento
+Pesos: DynaPuff en 600–700 para titulares; Nunito 400/500/600/700 para UI.
+Nunca 300 (se pierde legibilidad en pantallas de gama baja).
+
+### 4.4 Espaciado, forma y movimiento
 
 - Espaciado: escala de 4 px (`--space-1` = 4 px … `--space-9` = 96 px).
-- Radios: `4` / `6` / `10` / `16` / `24` / `pill`.
-- Sombras: teñidas de verde (`rgba(20, 41, 31, …)`), sin glow.
+- Radios: `6` / `10` / `14` / `20` / `28` / `pill`. Más redondeados que la
+  revisión 1 para acompañar la estética pop.
+- Sombras: **duras, sin blur**, en morado (`2px`, `4px`, `6px` de offset).
+  `--shadow-hard-accent` existe para fondos morados.
 - Movimiento: `120 ms`, `180 ms`, `240 ms`; curvas
-  `cubic-bezier(0.23, 1, 0.32, 1)` y `cubic-bezier(0.77, 0, 0.175, 1)`.
-- Presión táctil: `scale(0.98)` en 120 ms.
+  `cubic-bezier(0.23, 1, 0.32, 1)`, `cubic-bezier(0.77, 0, 0.175, 1)` y
+  `--ease-pop` para micro-rebotes.
+- Presión táctil: `scale(0.97)` en 120 ms; hover de tarjeta: `translateY(-3px)`.
 - `prefers-reduced-motion`: sin desplazamientos; color/opacidad en 80 ms.
 - Contenedor: `max-width: 1240px`, padding lateral fluido.
-
-### Contraste
-
-Verificado sobre los pares principales: tinta sobre papel ≈ 15:1, texto suave
-sobre papel ≈ 5:1, blanco sobre verde pino ≈ 12:1, cobre sobre blanco ≈ 6.8:1.
-**TBD:** si los dueños cambian la paleta, hay que volver a medir.
 
 ---
 
@@ -162,7 +205,7 @@ sobre papel ≈ 5:1, blanco sobre verde pino ≈ 12:1, cobre sobre blanco ≈ 6.
 
 `components.html` cubre, con sus estados:
 
-1. **Fundamentos:** swatches, escala tipográfica, radios, sombras, espaciado.
+1. **Fundamentos:** swatches, escala tipográfica, extrusión, radios, sombras, espaciado.
 2. **Cabecera:** marca, navegación por línea, buscador, carrito con contador,
    variante móvil.
 3. **Tarjetas:** en stock, sin stock (encargo), oferta, con decants.
@@ -189,17 +232,24 @@ mockups de cada change.
 
 ### Capturas renderizadas
 
-| Archivo | Viewport |
-|---|---|
-| `previews/components-mobile-390x844.png` | 390 × 844 |
-| `previews/components-desktop-1440x900.png` | 1440 × 900 |
+| Archivo | Viewport | Revisión |
+|---|---|---|
+| `previews/components-mobile-390x844.png` | 390 × 844 | pendiente de re-render (rev 2) |
+| `previews/components-desktop-1440x900.png` | 1440 × 900 | pendiente de re-render (rev 2) |
+| `mockups/c-01-shell/previews/shell-mobile-390x844.png` | 390 × 844 | rev 2 |
+| `mockups/c-01-shell/previews/shell-desktop-1440x900.png` | 1440 × 900 | rev 2 |
 
-Se generaron con Chrome headless + emulación de dispositivo por DevTools
-(390 × 844 exactos). No hay Playwright MCP instalado en el entorno.
+Se generan con Chrome headless + DevTools Protocol y
+`Emulation.setDeviceMetricsOverride` (390 × 844 exactos). No hay Playwright MCP
+instalado en el entorno.
 
 El HTML se abre localmente, sin servidor:
 
 - `design-system/components.html` (doble clic).
+- `design-system/mockups/c-01-shell/shell.html` (doble clic).
+
+Las fuentes se cargan del CDN de Google Fonts en los previews. Para revisar sin
+internet, usar los fallbacks del sistema (cambia el aspecto, no el layout).
 
 ### Re-renderizar
 
@@ -208,7 +258,7 @@ produce un viewport de 390 px: Chrome impone un ancho mínimo de ventana y el
 layout sale a ~485 px, por lo que la captura queda recortada. Hay dos formas
 correctas:
 
-1. **Manual (recomendada para revisar):** abrir `components.html` en Chrome,
+1. **Manual (recomendada para revisar):** abrir el HTML en Chrome,
    F12 → activar la barra de dispositivos (Ctrl+Shift+M) → elegir 390 × 844
    (iPhone 12/13) → capturar. Repetir con 1440 × 900.
 2. **Automatizada:** usar DevTools Protocol con
@@ -216,15 +266,17 @@ correctas:
    (es lo que se usó para los PNG de este directorio).
 
 Si se usa `--screenshot`, verificar el resultado: el header debe entrar en una
-columna y no debe haber scroll horizontal. En este documento
-`document.documentElement.scrollWidth` es igual al viewport en ambos tamaños.
+columna y no debe haber scroll horizontal.
 
 ### Qué mirar
 
 - La cabecera no se rompe a 390 px (se ocultan nav y buscador).
+- El morado y el naranja no se tocan sin separación (bordes o blanco de por
+  medio) y ningún texto blanco cae sobre naranja.
+- La extrusión no invade el titular siguiente ni se corta en el borde.
 - La ficha pasa a una columna y el selector de presentación sigue legible.
 - El carrito no supera el ancho de la pantalla.
-- Los textos no se cortan ni se superponen.
+- Los precios se leen sin esfuerzo (Nunito, ≥ 16 px, morado).
 - El foco visible funciona con Tab en botones, chips y campos.
 - El logo muestra su leyenda de provisional.
 
@@ -232,19 +284,21 @@ columna y no debe haber scroll horizontal. En este documento
 
 ## 7. Aprobación
 
-`Approval: approved (2026-11-05, by user)`
+`Approval: pending (2026-11-11)` — revisión 2.
 
-Para aprobar, el usuario debe revisar `components.html` y los previews y decir
-explícitamente que la fundación sirve. Recién entonces:
+Para aprobar, el usuario debe revisar `components.html`, el mockup del shell de
+C-01 y los previews, y decir explícitamente que la fundación sirve. Recién
+entonces:
 
 1. Cambiar en este archivo a `Approval: approved (<fecha>, by user)`.
-2. Registrar `visual_design.status: "approved"` en
+2. Registrar `visual_design.revision: 2` y `visual_design.status: "approved"` en
    `.active-orchestrator-state.json` (lo hace el orquestador).
+3. Registrar la aprobación del mockup en `mockups/c-01-shell/README.md`.
 
 Un pedido de cambios mantiene `Approval: pending` y sube la revisión si se
 modifica un token o asset compartido.
 
-**Se puede aprobar con `(TBD)` visibles** (nombre, logo, fotos) siempre que estén
+**Se puede aprobar con `(TBD)` visibles** (logo, fotos) siempre que estén
 rotulados como provisionales. Lo que no se puede es presentarlos como finales.
 
 ---
@@ -258,8 +312,9 @@ rotulados como provisionales. Lo que no se puede es presentarlos como finales.
    ```js
    var BRAND_NAME = "Nuevo Nombre";
    ```
-3. Actualizar también el texto de respaldo en `components.html` (los elementos
-   con `data-brand-name`) para que el HTML siga siendo correcto sin JS.
+3. Actualizar también el texto de respaldo en `components.html` y en los
+   mockups (los elementos con `data-brand-name`) para que el HTML siga siendo
+   correcto sin JS.
 4. Actualizar `brand.md` §1 y la tabla de fuentes.
 5. Re-renderizar los previews.
 6. Subir `Revision:` en este README y volver a pedir aprobación.
@@ -272,7 +327,8 @@ No hace falta tocar CSS: el nombre no está en ningún token.
    ruta). Mantener un `viewBox` horizontal similar a `0 0 320 88`.
 2. Quitar la leyenda "MARCA PROVISIONAL · PLACEHOLDER" del SVG únicamente cuando
    exista un logo aprobado.
-3. Verificar que se lea a 30–38 px de alto (tamaño de cabecera).
+3. Verificar que se lea a 30–38 px de alto (tamaño de cabecera) y que la
+   extrusión no se empaste a ese tamaño.
 4. Revisar `assets/` en busca de copias antiguas; no debe quedar más de un logo.
 5. Actualizar `brand.md` §4 (origen, reglas, autor).
 6. Re-renderizar los previews y pedir aprobación.
@@ -284,27 +340,38 @@ Para el logo reducido (sello "OP") se recomienda un archivo aparte,
 
 1. Editar **solo** `design-system/tokens.css`.
 2. No escribir valores hex ni `px` de color dentro de `components.html` ni de
-   futuros mockups; usar `var(--token)`.
+   los mockups; usar `var(--token)`.
 3. Verificar contraste de los pares texto/fondo (mínimo 4.5:1 para texto normal,
-   3:1 para texto grande y bordes de foco).
+   3:1 para texto grande y bordes de foco). Recordar la regla del naranja.
 4. Revisar que "En stock", "Encargo", "Oferta" y "Alerta" sigan diferenciándose,
    y que el estado no dependa solo del color.
-5. Re-renderizar los previews.
+5. Re-renderizar los previews y los mockups afectados.
 6. Subir `Revision:` y listar los mockups afectados. La aprobación vuelve a
    `pending`.
 7. Actualizar el resumen de §4 en este README y `brand.md` §6.
 
-### 8.4 Reemplazar la tipografía por una fuente local propia
+### 8.4 Fuentes (DynaPuff + Nunito)
 
-1. Copiar el archivo `.woff2` a `design-system/assets/fonts/`.
-2. Declarar `@font-face` en `tokens.css` con `font-display: swap` y la ruta
+Los previews las cargan del CDN de Google Fonts para revisión sin setup:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
+**En producción se auto-hospedan** (C-01). Motivo: la restricción del proyecto
+es infraestructura gratuita y hardware limitado; no conviene depender de un CDN
+externo para la tipografía de marca.
+
+1. Descargar los `.woff2` (subset latin) de DynaPuff 400–700 y Nunito 400–700.
+2. Copiarlos a `design-system/assets/fonts/`.
+3. Declarar `@font-face` en `tokens.css` con `font-display: swap` y ruta
    relativa.
-3. Cambiar `--font-display` / `--font-sans` por la familia declarada.
-4. Confirmar licencia de uso e incluirla en `assets/fonts/`.
-5. Re-renderizar y aprobar.
-
-No se permite una fuente remota (Google Fonts, CDN): la restricción es
-infraestructura gratuita y hardware limitado.
+4. Confirmar licencia (ambas son SIL Open Font License) e incluirla en
+   `assets/fonts/`.
+5. Mantener `--font-display` / `--font-sans` apuntando a las mismas familias.
+6. Re-renderizar y aprobar.
 
 ### 8.5 Cambiar la política visual
 
@@ -319,9 +386,11 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
 - Cambiar un token o asset compartido = **nueva revisión**.
 - Cambiar el texto de un componente sin tocar tokens = no cambia la revisión,
   pero sí se re-renderiza el preview.
-- Nunca editar un mockup ya aprobado en silencio: se muestra el cambio.
+- Nunca editar un mockup aprobado en silencio: se muestra el cambio.
 - Los mockups de cada change enlazan esta revisión en su `design.md`
-  (`Design system revision: 1`).
+  (`Design system revision: 2`).
+- Ningún componente puede introducir un color propio: si falta un matiz, se
+  agrega el token acá.
 
 ---
 
@@ -329,20 +398,17 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
 
 | # | Decisión | Impacto | Estado |
 |---|---|---|---|
-| 1 | Paleta definitiva (verde pino + cobre vs. otra dirección) | Toda la interfaz | Pendiente de dueños |
-| 2 | Logo real y tipografía de marca | Cabecera, redes, impresos | No existe asset |
+| 1 | ~~Paleta definitiva~~ | Toda la interfaz | **Resuelta (D-07, 2026-11-11):** morado `#30004b`, naranja `#febd59`, naranja claro `#ffdeab`, DynaPuff + Nunito |
+| 2 | **Logo real** y versión reducida | Cabecera, redes, impresos | **Pendiente**: solo existe placeholder; la paleta ya está confirmada |
 | 3 | Nombre exacto y bajada ("Oloroso Pit" / "Perfumes") | `brand.js`, logo | A confirmar |
 | 4 | Fotos: origen, calidad y responsable de subirlas | Tarjetas y ficha | Abierto en la KB |
 | 5 | Detalle de ofertas (% o precio tachado, vencimiento, decants) | Tag y precio | Abierto (US-006) |
 | 6 | Decants integrados / sección aparte / ambos | Ficha y navegación | Abierto en la KB |
-| 7 | Semántica de acordes múltiples (OR) | Filtros y contadores | A confirmar (US-008) |
-| 8 | Buscador en v1 (US-010) | Cabecera | Propuesto |
+| 7 | Semántica de acordes múltiples (OR) | Filtros y contadores | Resuelta a nivel técnico (D-09), falta validar datos |
+| 8 | Buscador en v1 (US-010) | Cabecera | Fuera del MVP según CHANGES §8 |
 | 9 | Login con correo vs. usuario genérico | Campo del login | Abierto |
-| 10 | Recuperación de contraseña en v1 | Nota del login | Propuesto |
-| 11 | Tono: más juvenil (Instagram) o más sobrio (nicho) | Dirección visual | Pendiente de dueños |
-
-Ninguna de estas decisiones bloquea la aprobación de la fundación si el usuario
-acepta que están rotuladas como provisionales.
+| 10 | Recuperación de contraseña en v1 | Nota del login | Fuera del MVP |
+| 11 | Tono: más juvenil (Instagram) o más sobrio | Dirección visual | **Resuelta:** pop urbano (identidad confirmada) |
 
 ---
 
@@ -352,21 +418,24 @@ acepta que están rotuladas como provisionales.
 - Ilustraciones, iconografía propia o fotografía de producto.
 - Modo oscuro (no está en el brief; la paleta actual es solo clara).
 - Internacionalización y multi-moneda.
-- Cualquier recurso remoto o servicio pago.
+- Cualquier recurso pago.
 
 ---
 
 ## 12. Fuentes
 
 - `docs/discovery/brief-clientes.md` (v5, 2026-11-05)
+- Confirmación de identidad visual de los clientes (2026-11-11, decisión D-07)
 - `knowledge-base/01_vision_y_objetivos.md`
 - `knowledge-base/02_descripcion_general.md`
 - `knowledge-base/03_actores_y_roles.md`
 - `knowledge-base/06_funcionalidades.md`
+- `CHANGES.md` §6 (D-07) y §7
 - `.active-orchestrator-state.json` (política `visual_design`)
 - `design-system/brand.md`, `tokens.css`, `brand.js`, `components.html`
 
 ---
 
-**Handoff:** mode `system-and-mockups` · revision `1` · status `pending` ·
-previews en `design-system/previews/` · decisiones abiertas en §10.
+**Handoff:** mode `system-and-mockups` · revision `2` · status `pending` ·
+previews en `design-system/previews/` · mockup del shell en
+`design-system/mockups/c-01-shell/` · decisiones abiertas en §10.

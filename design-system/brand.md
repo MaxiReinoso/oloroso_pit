@@ -1,11 +1,11 @@
 # Marca — Oloroso Pit
 
-> **Estado: provisional (TBD).** Este documento propone una dirección visual; no
-> afirma hechos de marca aprobados por los dueños. Cada punto indica su fuente o
-> queda marcado como pendiente.
+> **Estado: identidad confirmada, logo pendiente.** Los clientes confirmaron la
+> paleta, la tipografía y el estilo general el 2026-11-11 (D-07). El logo real
+> todavía no existe: el archivo actual es un placeholder rotulado.
 
-- **Revisión:** 1
-- **Aprobación:** pendiente (2026-11-05)
+- **Revisión:** 2
+- **Aprobación:** pendiente (2026-11-11)
 - **Alcance:** catálogo público + panel de administración (web responsive)
 
 ---
@@ -27,33 +27,30 @@ preview usa `data-brand-name`.
 
 ## 2. Tono visual
 
-**Dirección propuesta: "vidrio ahumado".** Un catálogo editorial, cálido y
-sobrio, con verde pino profundo sobre papel mineral. La referencia es una
-perfumería de barrio bien curada, no una joyería.
+**Dirección confirmada: "pop urbano".** Morado profundo, naranja vibrante y
+tipografía redondeada con extrusión sólida. La referencia es una gráfica de
+Instagram de barrio bien hecha: alegre, directa y cercana, sin solemnidad de
+joyería.
 
 | Atributo | Sí | No |
 |---|---|---|
-| Temperamento | Sobrio, cálido, preciso | Frío, tecnológico, estridente |
-| Lujo | Discreto, por material y espacio | Oro + negro, brillos, mármol genérico |
-| Color | Neutros cálidos + un verde profundo + cobre escaso | Beige/marrón de la planilla, lila IA, neón |
-| Tipografía | Serif local para nombres; sans para interfaz | Inter, fuentes remotas, serif en el panel |
-| Densidad | Aireada en catálogo; compacta y clara en admin | Tarjetas apiladas sin jerarquía |
+| Temperamento | Pop, vibrante, urbano | Sobrio, editorial, frío |
+| Lujo | Cercano y honesto: buen precio, buen perfume | Oro + negro, mármol, brillos |
+| Color | Morado `#30004B` + naranja `#FEBD59` + naranja claro `#FFDEAB` + blanco puro | Beige/marrón de la planilla, pasteles desaturados |
+| Tipografía | DynaPuff para display; Nunito para cuerpo y UI | Serif, Molenila, sans finas de 300 |
+| Forma | Radios grandes, sombras duras sin difuminado | Sombras difusas, glassmorphism, degradados suaves |
+| Densidad | Aireada en catálogo; clara y directa en admin | Tarjetas apiladas sin jerarquía |
 
-**Fuente del tono:** propuesta del desarrollador a partir de
-`knowledge-base/01_vision_y_objetivos.md` (compra por encargo, asesoramiento,
-cierre por WhatsApp) y `knowledge-base/02_descripcion_general.md` (catálogo
-público + panel).
+**Fuente del tono:** confirmación de identidad visual de los clientes
+(2026-11-11, decisión D-07), sobre
+`knowledge-base/01_vision_y_objetivos.md` y
+`knowledge-base/02_descripcion_general.md`.
 
 **Restricción explícita del cliente:** "los colores de la planilla actual (beige
-y marrón) se van a cambiar. Colores nuevos sin definir" —
-`docs/discovery/brief-clientes.md`. Por eso esta paleta es una propuesta, no una
-continuidad.
+y marrón) se van a cambiar" — `docs/discovery/brief-clientes.md`. La identidad
+oficial los reemplaza por morado y naranja; no hay continuidad con el beige.
 
-**TBD:**
-- Validar la dirección con los dueños (¿les resulta "de perfume importado"?).
-- Confirmar si el negocio quiere un tono más juvenil (público de Instagram) o
-  más sobrio (público de nicho).
-- Referencias visuales propias: no hay ninguna en el repositorio.
+**TBD:** validar el nombre y la bajada; conseguir el logo real.
 
 ---
 
@@ -78,28 +75,32 @@ signos de exclamación en serie. No usar emojis en la interfaz.
 
 - Ruta estable: `design-system/assets/logo.svg`
 - Formato: SVG con `viewBox="0 0 320 88"`, sin fuentes remotas.
-- Composición: sello cuadrado con monograma "OP" + logotipo serif + etiqueta
-  cobre "MARCA PROVISIONAL · PLACEHOLDER" con línea punteada.
+- Composición: sello redondeado morado con monograma "OP" en naranja +
+  logotipo redondeado morado con extrusión naranja + etiqueta
+  "MARCA PROVISIONAL · PLACEHOLDER" con línea punteada.
 - El archivo **dice explícitamente que es provisional**. No debe presentarse
   como identidad aprobada.
+- El SVG no puede cargar webfonts: usa una sans redondeada del sistema como
+  aproximación de DynaPuff. El wordmark definitivo debe venir como vector.
 
 ### Reglas de uso
 
 | Regla | Valor |
 |---|---|
-| Altura en cabecera | 38 px escritorio / 30 px móvil (el asset se escala desde 88 px) |
+| Altura en cabecera | 44 px escritorio / 34 px móvil (el asset se escala desde 88 px) |
 | Área de resguardo | Mínimo el alto de la "O" del wordmark a cada lado |
-| Fondo | Papel `--color-paper` o superficie blanca; no sobre fotos sin velo |
+| Fondo | Blanco, naranja claro `#FFDEAB` o morado; nunca sobre foto sin velo |
 | Color | Solo la versión original; no recolorear a mano sin actualizar el asset |
-| Distorsión | Prohibido estirar, rotar o aplicar sombras |
+| Distorsión | Prohibido estirar, rotar o aplicar sombras adicionales |
+| Extrusión | Ya está dentro del SVG; no duplicarla con CSS sobre la imagen |
 | Versión reducida | Solo el sello "OP" en contextos menores a 120 px de ancho |
 
 **TBD:**
 - ¿Existe un logo real? No hay archivos de marca en el repositorio.
 - ¿El nombre lleva alguna bajada ("Perfumes", "Importados")?
 - ¿Se usa el monograma como avatar de Instagram/WhatsApp?
-- Tipografía definitiva del wordmark: hoy es una serif del sistema
-  (Georgia/Palatino), no una fuente de marca.
+- Tipografía definitiva del wordmark: hoy es una aproximación; la marca usa
+  DynaPuff en la web.
 
 ### Reemplazo
 
@@ -113,7 +114,7 @@ leyenda de placeholder, mantener el `viewBox` y volver a renderizar los previews
 | Regla | Valor | Fuente |
 |---|---|---|
 | Proporción | 4:5 vertical, encuadre centrado | Propuesta de diseño |
-| Fondo | Gradiente mineral `#F1F0E9 → #E7E6DC`, sin fondo blanco puro | Propuesta de diseño |
+| Fondo | Degradado `#FFF2DD → #FFDEAB` (`--product-bg`), sin blanco puro | Identidad pop urbana |
 | Objeto | Frasco completo, sin recortes ni manos | **(TBD)** calidad de las fotos |
 | Tratamiento | Sin filtros de color fuertes; sin marcos ni brillos | Propuesta de diseño |
 | Texto sobre imagen | Permitido solo el tag de oferta o estado | Propuesta de diseño |
@@ -132,27 +133,37 @@ superpuestos, ni imágenes de otro perfume como relleno.
 
 ## 6. Color y material (resumen)
 
-La paleta completa vive en `tokens.css`. Dirección:
+La paleta completa vive en `tokens.css`. Dirección **pop urbana**:
 
-- **Papel** `#F6F5F0` y **arena** `#EFEEE7`: base cálida, no beige.
-- **Verde pino** `#1E3B31`: marca, botones, selección.
-- **Cobre** `#A05C3B`: exclusivamente ofertas y énfasis editorial.
-- **Verde stock** `#2C6A4C` y **oliva encargo** `#7B6636`: estados.
-- **Tinta** `#1B211E`: nunca negro puro.
-- **Alerta** `#A33B33`: solo errores reales.
+- **Morado marca** `#30004B`: marca, botones primarios, franjas, texto.
+- **Naranja vibrante** `#FEBD59`: CTA, ofertas, etiquetas, títulos extruidos.
+- **Naranja claro** `#FFDEAB`: fondo general y secciones secundarias.
+- **Blanco puro** `#FFFFFF`: tarjetas, paneles y ficha. Sin tints.
+- **Verde stock** `#0F6B3F` y **ámbar encargo** `#8A5200`: estados.
+- **Alerta** `#B3261E`: solo errores reales.
 
-Regla: un solo color de acción por pantalla. El cobre no se usa para botones
-primarios. El estado nunca se comunica solo por color: siempre lleva texto.
+Reglas duras:
 
-**TBD:** aprobación de la paleta por los dueños; verificar contraste si se
-ajustan los valores.
+1. **Nunca blanco sobre naranja** (1.66:1). Todo relleno naranja lleva texto
+   morado.
+2. **Un solo color de acción por pantalla.** El CTA principal es morado con
+   texto blanco; el naranja se reserva para ofertas y acciones secundarias de
+   énfasis.
+3. **Tarjetas siempre blancas.** El naranja claro es fondo, no superficie de
+   lectura.
+4. **El estado nunca se comunica solo por color:** siempre lleva texto.
+5. **La extrusión es decorativa.** Nunca en precios, párrafos ni botones.
+
+Ratios verificados: tinta sobre blanco 17.11:1, tinta sobre naranja claro
+13.27:1, naranja sobre morado 10.30:1, blanco sobre morado 17.11:1.
 
 ---
 
 ## 7. Movimiento
 
 - Entradas con `--ease-out` (arranca rápido), 120–240 ms.
-- Presión de botón: `scale(0.98)` en 120 ms.
+- Presión de botón: `scale(0.97)` en 120 ms.
+- Hover de tarjeta: `translateY(-3px)` + sombra dura de 4 px (sin blur).
 - Sin animaciones en acciones de teclado ni en listas de uso frecuente.
 - `prefers-reduced-motion`: se elimina todo desplazamiento; quedan transiciones
   de color de 80 ms.
@@ -168,7 +179,10 @@ necesario.
 
 - Repetir el beige/marrón de la planilla como color principal.
 - Oro + negro + mármol como atajo de "lujo".
-- Degradados de texto, glows, neón, lila IA.
+- Texto blanco sobre naranja vibrante (falla contraste).
+- Degradados suaves, glows, sombras difusas: la identidad usa sombras duras.
+- Serif o Molenila (descartadas por el cliente): la marca es redondeada.
+- Extrusión en cuerpos de texto, precios, botones o íconos.
 - Emojis en la interfaz o en el logo.
 - Mostrar "agotado" en gris deshabilitado: el encargo es una venta válida.
 - Prometer pago online, cuotas o checkout.
@@ -180,6 +194,7 @@ necesario.
 ## Fuentes consultadas
 
 - `docs/discovery/brief-clientes.md` (v5, 2026-11-05)
+- Confirmación de identidad visual de los clientes (2026-11-11, D-07)
 - `knowledge-base/01_vision_y_objetivos.md`
 - `knowledge-base/02_descripcion_general.md`
 - `knowledge-base/03_actores_y_roles.md`

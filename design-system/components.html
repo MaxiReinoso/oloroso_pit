@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-brand-title>Oloroso Pit — Catálogo</title>
-<meta name="description" content="Referencia visual provisional del catálogo Oloroso Pit. Revisión 1, aprobación pendiente.">
+<meta name="description" content="Referencia visual del catálogo Oloroso Pit. Revisión 2, aprobación pendiente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <style>
   /* =========================================================================
@@ -17,7 +20,7 @@
 
   body {
     margin: 0;
-    background: var(--color-paper);
+    background: var(--color-surface-alt);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--text-base);
@@ -54,7 +57,7 @@
     z-index: var(--z-toast);
     padding: var(--space-2) var(--space-4);
     background: var(--color-primary-700);
-    color: #fff;
+    color: var(--color-surface);
     border-radius: var(--radius-sm);
     font-size: var(--text-sm);
     text-decoration: none;
@@ -82,7 +85,7 @@
      Document header
      ========================================================================= */
   .doc-header {
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 3px solid var(--color-primary-700);
     background: var(--color-surface);
   }
 
@@ -101,7 +104,7 @@
     margin: 0;
     font-family: var(--font-display);
     font-size: var(--text-2xl);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-tight);
     line-height: var(--leading-tight);
   }
@@ -191,7 +194,7 @@
     margin: 0;
     font-family: var(--font-display);
     font-size: var(--text-2xl);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-semibold);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
   }
@@ -253,9 +256,24 @@
   }
   .type-row:last-child { border-bottom: 0; padding-bottom: 0; }
   .type-row__label { font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-ink-muted); }
-  .type-display { font-family: var(--font-display); font-size: var(--text-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); }
-  .type-h2 { font-family: var(--font-display); font-size: var(--text-3xl); line-height: var(--leading-tight); }
-  .type-h3 { font-family: var(--font-display); font-size: var(--text-xl); line-height: var(--leading-snug); }
+  .type-display {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--title-fill);
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    -webkit-text-stroke: var(--title-stroke-lg);
+    paint-order: stroke fill;
+    text-shadow: var(--title-extrude);
+  }
+  .type-h2 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: var(--weight-semibold); line-height: var(--leading-tight); }
+  .type-h3 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-semibold); line-height: var(--leading-snug); }
   .type-body { font-size: var(--text-base); color: var(--color-ink-soft); line-height: var(--leading-relaxed); max-width: var(--measure); }
   .type-ui { font-size: var(--text-sm); font-weight: var(--weight-medium); }
   .type-caps { font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-weight: var(--weight-semibold); color: var(--color-ink-muted); }
@@ -276,6 +294,7 @@
     background: var(--color-primary-050);
     border: 1px solid var(--color-primary-100);
   }
+  .radius-xs { border-radius: var(--radius-xs); }
   .radius-sm { border-radius: var(--radius-sm); }
   .radius-md { border-radius: var(--radius-md); }
   .radius-lg { border-radius: var(--radius-lg); }
@@ -309,21 +328,22 @@
     gap: var(--space-5);
     padding: var(--space-3) var(--space-4);
     background: var(--color-surface);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
   .site-brand { display: flex; align-items: center; gap: var(--space-2); text-decoration: none; flex: none; }
-  .site-brand img { height: 38px; width: auto; }
+  .site-brand img { height: 44px; width: auto; }
   .provisional-chip {
     padding: 3px 8px;
-    border: 1px dashed rgba(160, 92, 59, 0.55);
+    border: 1px dashed var(--color-primary-700);
     border-radius: var(--radius-pill);
-    background: var(--color-accent-100);
+    background: var(--color-accent-600);
     font-size: 9px;
     font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: var(--color-accent-700);
+    color: var(--color-primary-700);
     white-space: nowrap;
   }
   .site-nav { display: flex; gap: var(--space-1); }
@@ -354,7 +374,7 @@
   }
   .search:focus-within {
     border-color: var(--color-focus);
-    box-shadow: 0 0 0 3px rgba(62, 126, 99, 0.16);
+    box-shadow: var(--ring-focus);
   }
   .search input {
     width: 170px;
@@ -389,7 +409,7 @@
     padding-inline: 4px;
     border-radius: var(--radius-pill);
     background: var(--color-primary-700);
-    color: #fff;
+    color: var(--color-surface);
     font-size: 10px;
     font-weight: var(--weight-semibold);
     line-height: 1;
@@ -409,7 +429,8 @@
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
     background: var(--color-primary-700);
-    color: #fff;
+    color: var(--color-surface);
+    box-shadow: 0 3px 0 0 var(--color-primary-900);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
@@ -424,7 +445,7 @@
       transform var(--duration-fast) var(--ease-out);
   }
   .btn svg { flex: none; }
-  .btn:active { transform: scale(var(--motion-press)); }
+  .btn:active { transform: scale(var(--motion-press)); box-shadow: 0 1px 0 0 var(--color-primary-900); }
   .btn:focus-visible { outline-color: var(--color-focus-on-dark); outline-offset: 2px; }
 
   .btn--secondary {
@@ -471,7 +492,7 @@
     .btn:hover { background: var(--color-primary-900); }
     .btn--secondary:hover { background: var(--color-primary-050); border-color: var(--color-primary-600); }
     .btn--ghost:hover { background: var(--color-surface-alt); color: var(--color-ink); }
-    .btn--danger:hover { background: var(--color-danger-soft); border-color: rgba(163, 59, 51, 0.4); }
+    .btn--danger:hover { background: var(--color-danger-soft); border-color: var(--color-danger-line); }
     .icon-btn:hover { background: var(--color-surface-alt); }
     .doc-index a:hover { color: var(--color-primary-700); }
   }
@@ -493,7 +514,7 @@
     text-transform: uppercase;
     line-height: 1.4;
   }
-  .tag--offer { background: var(--color-offer-soft); color: var(--color-offer); border: 1px solid rgba(160, 92, 59, 0.28); }
+  .tag--offer { background: var(--color-offer-soft); color: var(--color-offer); border: 1px solid var(--color-offer-line); }
   .tag--info { background: var(--color-primary-050); color: var(--color-primary-700); border: 1px solid var(--color-primary-100); }
   .tag--neutral { background: var(--color-surface-alt); color: var(--color-ink-soft); border: 1px solid var(--color-line); }
 
@@ -562,12 +583,12 @@
   .chip[aria-pressed="true"] {
     background: var(--color-primary-700);
     border-color: var(--color-primary-700);
-    color: #fff;
+    color: var(--color-surface);
   }
   .chip[aria-pressed="true"]:focus-visible { outline-color: var(--color-focus); }
   .chip__count { font-size: var(--text-2xs); opacity: 0.68; font-variant-numeric: tabular-nums; }
-  .chip--offer { border-color: rgba(160, 92, 59, 0.4); color: var(--color-offer); }
-  .chip--offer[aria-pressed="true"] { background: var(--color-offer); border-color: var(--color-offer); color: #fff; }
+  .chip--offer { border-color: var(--color-offer-line); color: var(--color-offer); }
+  .chip--offer[aria-pressed="true"] { background: var(--color-offer-soft); border-color: var(--color-offer-line); color: var(--color-offer); }
 
   .results-bar {
     display: flex;
@@ -606,15 +627,16 @@
     display: flex;
     flex-direction: column;
     background: var(--color-surface);
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-line-strong);
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-standard);
   }
   .product-media {
     position: relative;
     aspect-ratio: 4 / 5;
-    background: linear-gradient(160deg, #f1f0e9 0%, #e7e6dc 100%);
+    background: var(--product-bg);
     display: grid;
     place-items: center;
     padding: var(--space-3);
@@ -640,7 +662,7 @@
     margin: 0;
     font-family: var(--font-display);
     font-size: var(--text-xl);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-semibold);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
   }
@@ -700,7 +722,7 @@
   .sheet__media {
     position: relative;
     border-radius: var(--radius-md);
-    background: linear-gradient(160deg, #f1f0e9 0%, #e7e6dc 100%);
+    background: var(--product-bg);
     overflow: hidden;
     min-height: 420px;
   }
@@ -713,7 +735,7 @@
     margin: 0;
     font-family: var(--font-display);
     font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-semibold);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
   }
@@ -847,7 +869,7 @@
     margin: var(--space-2) 0 0;
     font-family: var(--font-display);
     font-size: var(--text-xl);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-semibold);
     line-height: var(--leading-tight);
     max-width: 18ch;
   }
@@ -908,7 +930,7 @@
     box-shadow: var(--shadow-sm);
   }
   .cart__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
-  .cart__head h3 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-regular); }
+  .cart__head h3 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-semibold); }
   .cart__head span { font-size: var(--text-xs); color: var(--color-ink-muted); }
 
   .cart-group { margin-top: var(--space-4); }
@@ -936,7 +958,7 @@
   .cart-thumb {
     width: 52px; height: 62px;
     border-radius: var(--radius-sm);
-    background: linear-gradient(160deg, #f1f0e9 0%, #e7e6dc 100%);
+    background: var(--product-bg);
     display: grid; place-items: center;
     padding: 4px;
   }
@@ -1004,10 +1026,10 @@
   .input:focus, .select:focus, .textarea:focus {
     outline: none;
     border-color: var(--color-focus);
-    box-shadow: 0 0 0 3px rgba(62, 126, 99, 0.16);
+    box-shadow: var(--ring-focus);
   }
   .input[aria-invalid="true"] { border-color: var(--color-danger); }
-  .input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(163, 59, 51, 0.14); }
+  .input[aria-invalid="true"]:focus { box-shadow: var(--ring-danger); }
   .input:disabled { background: var(--color-surface-alt); color: var(--color-ink-muted); cursor: not-allowed; }
   .textarea { min-height: 104px; resize: vertical; }
 
@@ -1035,7 +1057,7 @@
     top: 3px; left: 3px;
     width: 17px; height: 17px;
     border-radius: 50%;
-    background: #fff;
+    background: var(--color-surface);
     box-shadow: var(--shadow-xs);
     transition: transform var(--duration-base) var(--ease-out);
   }
@@ -1061,8 +1083,8 @@
   .alert svg { flex: none; margin-top: 2px; }
   .alert p { margin: 0; }
   .alert strong { display: block; font-weight: var(--weight-semibold); margin-bottom: 2px; }
-  .alert--success { background: var(--color-success-soft); border-color: rgba(44, 106, 76, 0.24); color: var(--color-stock); }
-  .alert--danger { background: var(--color-danger-soft); border-color: rgba(163, 59, 51, 0.24); color: var(--color-danger); }
+  .alert--success { background: var(--color-success-soft); border-color: var(--color-success-line); color: var(--color-stock); }
+  .alert--danger { background: var(--color-danger-soft); border-color: var(--color-danger-line); color: var(--color-danger); }
   .alert--info { background: var(--color-primary-050); border-color: var(--color-primary-100); color: var(--color-primary-700); }
 
   /* =========================================================================
@@ -1079,7 +1101,7 @@
     margin: var(--space-2) 0 0;
     font-family: var(--font-display);
     font-size: var(--text-2xl);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-semibold);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
     max-width: 20ch;
@@ -1117,7 +1139,7 @@
     display: grid; place-items: center;
     border-radius: var(--radius-md);
     background: var(--color-primary-700);
-    color: #fff;
+    color: var(--color-accent-600);
     font-family: var(--font-display);
     font-size: 18px;
     letter-spacing: 0.5px;
@@ -1155,7 +1177,7 @@
   .skeleton-card { display: flex; flex-direction: column; gap: var(--space-3); }
   .skeleton {
     border-radius: var(--radius-sm);
-    background: linear-gradient(90deg, var(--color-surface-alt) 25%, #f8f7f2 37%, var(--color-surface-alt) 63%);
+    background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 37%, var(--skeleton-base) 63%);
     background-size: 400% 100%;
     animation: shimmer 1.4s var(--ease-standard) infinite;
   }
@@ -1185,7 +1207,7 @@
     background: var(--color-surface-alt);
     color: var(--color-ink-muted);
   }
-  .empty h5 { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); font-weight: var(--weight-regular); }
+  .empty h5 { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); font-weight: var(--weight-semibold); }
   .empty p { margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted); line-height: var(--leading-snug); }
 
   /* =========================================================================
@@ -1213,7 +1235,7 @@
   @media (max-width: 520px) {
     .doc-logo { height: 46px; }
     .product-grid { grid-template-columns: 1fr; }
-    .site-brand img { height: 30px; }
+    .site-brand img { height: 34px; }
     .provisional-chip { display: none; }
     .spec { padding-block: var(--space-6); }
   }
@@ -1238,13 +1260,13 @@
         <p>Referencia de componentes para catálogo público y panel de administración.</p>
       </div>
       <div class="doc-meta">
-        <span class="status-pill">Revisión 1 · aprobación pendiente</span>
-        <p>Colores, tipografía y logo son <strong>provisionales (TBD)</strong>. No representan una identidad aprobada.</p>
+        <span class="status-pill">Revisión 2 · aprobación pendiente</span>
+        <p>La identidad está <strong>confirmada (D-07)</strong>. El logo sigue siendo un <strong>placeholder (TBD)</strong>.</p>
       </div>
     </div>
     <div class="notice" style="margin-bottom: var(--space-4);">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
-      <p><strong>Provisional.</strong> Todo valor visual sale de <code>tokens.css</code>; el nombre, de <code>brand.js</code>; el logo, de <code>assets/logo.svg</code>. Reemplazar esos tres puntos actualiza todas las maquetas.</p>
+      <p><strong>Identidad confirmada (2026-11-11).</strong> Paleta y tipografía están aprobadas por los clientes; el logo es un placeholder. Todo valor visual sale de <code>tokens.css</code>; el nombre, de <code>brand.js</code>; el logo, de <code>assets/logo.svg</code>.</p>
     </div>
   </div>
 </header>
@@ -1276,16 +1298,24 @@
       <p class="eyebrow">01 · Fundamentos</p>
       <div>
         <h2 id="fundamentos-title">Color, tipografía y forma</h2>
-        <p>La propuesta se aleja del beige y marrón de la planilla actual. Base mineral cálida, verde pino profundo como color de marca y cobre reservado para ofertas. Sin degradados llamativos, sin negro puro y sin tipografías remotas.</p>
+        <p>La identidad oficial reemplaza el beige y marrón de la planilla: morado profundo, naranja vibrante y tipografía redondeada. Sombras duras sin difuminado, radios grandes y tarjetas en blanco puro. El naranja vibrante nunca lleva texto blanco.</p>
       </div>
     </div>
 
     <div class="canvas">
-      <p class="type-caps" style="margin-top:0">Paleta provisional</p>
+      <p class="type-caps" style="margin-top:0">Paleta confirmada · D-07 (2026-11-11)</p>
       <div class="swatches" style="margin-top: var(--space-3);">
         <div class="swatch">
-          <div class="swatch__color" style="background: var(--color-paper);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Papel</span><span class="swatch__value">#F6F5F0</span><span class="swatch__use">Fondo del catálogo</span></div>
+          <div class="swatch__color" style="background: var(--color-primary-700);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Morado marca</span><span class="swatch__value">#30004B</span><span class="swatch__use">Marca y acción primaria</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-accent-600);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Naranja vibrante</span><span class="swatch__value">#FEBD59</span><span class="swatch__use">CTA, ofertas y tags</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-accent-100);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Naranja claro</span><span class="swatch__value">#FFDEAB</span><span class="swatch__use">Fondo general y secciones</span></div>
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-surface);"></div>
@@ -1293,60 +1323,56 @@
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-ink);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Tinta</span><span class="swatch__value">#1B211E</span><span class="swatch__use">Texto principal</span></div>
+          <div class="swatch__meta"><span class="swatch__name">Tinta</span><span class="swatch__value">#30004B</span><span class="swatch__use">Texto principal</span></div>
         </div>
         <div class="swatch">
-          <div class="swatch__color" style="background: var(--color-primary-700);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Verde pino</span><span class="swatch__value">#1E3B31</span><span class="swatch__use">Marca y acción primaria</span></div>
+          <div class="swatch__color" style="background: var(--color-ink-soft);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Tinta suave</span><span class="swatch__value">#5D2A6E</span><span class="swatch__use">Texto secundario</span></div>
         </div>
         <div class="swatch">
-          <div class="swatch__color" style="background: var(--color-primary-100);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Verde velo</span><span class="swatch__value">#E4EBE6</span><span class="swatch__use">Selección y frases</span></div>
-        </div>
-        <div class="swatch">
-          <div class="swatch__color" style="background: var(--color-accent-600);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Cobre</span><span class="swatch__value">#A05C3B</span><span class="swatch__use">Solo ofertas</span></div>
+          <div class="swatch__color" style="background: var(--color-line);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Línea</span><span class="swatch__value">#E9D5EF</span><span class="swatch__use">Bordes de 1 px</span></div>
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-stock);"></div>
-          <div class="swatch__meta"><span class="swatch__name">En stock</span><span class="swatch__value">#2C6A4C</span><span class="swatch__use">Estado disponible</span></div>
+          <div class="swatch__meta"><span class="swatch__name">En stock</span><span class="swatch__value">#0F6B3F</span><span class="swatch__use">Estado disponible</span></div>
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-order);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Encargo</span><span class="swatch__value">#7B6636</span><span class="swatch__use">Sin stock, no es error</span></div>
+          <div class="swatch__meta"><span class="swatch__name">Encargo</span><span class="swatch__value">#8A5200</span><span class="swatch__use">Sin stock, no es error</span></div>
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-danger);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Alerta</span><span class="swatch__value">#A33B33</span><span class="swatch__use">Errores de formulario</span></div>
+          <div class="swatch__meta"><span class="swatch__name">Alerta</span><span class="swatch__value">#B3261E</span><span class="swatch__use">Errores de formulario</span></div>
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-surface-alt);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Arena</span><span class="swatch__value">#EFEEE7</span><span class="swatch__use">Fondos secundarios</span></div>
+          <div class="swatch__meta"><span class="swatch__name">Sección clara</span><span class="swatch__value">#FFF2DD</span><span class="swatch__use">Fondos muy claros</span></div>
         </div>
       </div>
 
       <div style="height: 1px; background: var(--color-line); margin-block: var(--space-5);"></div>
 
-      <p class="type-caps" style="margin-top:0">Tipografía local</p>
+      <p class="type-caps" style="margin-top:0">Tipografía de marca · Google Fonts, auto-hospedada en producción</p>
       <div class="type-rows" style="margin-top: var(--space-3);">
         <div class="type-row">
-          <span class="type-row__label">display · serif</span>
+          <span class="type-row__label">display · DynaPuff 700 · naranja con extrusión morada</span>
           <span class="type-display">Perfume importado</span>
         </div>
         <div class="type-row">
-          <span class="type-row__label">h2 · 36px serif</span>
+          <span class="type-row__label">h2 · 36px DynaPuff 600</span>
           <span class="type-h2">Árabes, diseñador y nicho</span>
         </div>
         <div class="type-row">
-          <span class="type-row__label">h3 · 22px serif</span>
+          <span class="type-row__label">h3 · 22px DynaPuff 600</span>
           <span class="type-h3">Khamrah · Lattafa</span>
         </div>
         <div class="type-row">
-          <span class="type-row__label">body · 16px sans</span>
+          <span class="type-row__label">body · 16px Nunito</span>
           <span class="type-body">Ámbar dulce con canela, dátiles y praliné. Un aroma envolvente para noches frías. El precio y la disponibilidad se muestran siempre, incluso si el perfume es por encargo.</span>
         </div>
         <div class="type-row">
-          <span class="type-row__label">ui · 14px sans</span>
+          <span class="type-row__label">ui · 14px Nunito</span>
           <span class="type-ui">Filtrar por acordes · 12 resultados</span>
         </div>
         <div class="type-row">
@@ -1359,20 +1385,24 @@
 
       <div class="shape-grid">
         <div class="shape-card">
+          <div class="shape-card__chip radius-xs"></div>
+          <p><strong>Radio xs · 6px</strong><br>Chips internos y detalles.</p>
+        </div>
+        <div class="shape-card">
           <div class="shape-card__chip radius-sm"></div>
-          <p><strong>Radio sm · 6px</strong><br>Botones, campos, chips internos.</p>
+          <p><strong>Radio sm · 10px</strong><br>Botones y campos.</p>
         </div>
         <div class="shape-card">
           <div class="shape-card__chip radius-md"></div>
-          <p><strong>Radio md · 10px</strong><br>Paneles, alertas, presentaciones.</p>
+          <p><strong>Radio md · 14px</strong><br>Paneles, alertas, presentaciones.</p>
         </div>
         <div class="shape-card">
           <div class="shape-card__chip radius-lg"></div>
-          <p><strong>Radio lg · 16px</strong><br>Tarjetas de producto y ficha.</p>
+          <p><strong>Radio lg · 20px</strong><br>Tarjetas de producto y ficha.</p>
         </div>
         <div class="shape-card">
           <div class="shape-card__chip radius-sm shadow-md"></div>
-          <p><strong>Sombra teñida</strong><br>Elevación con verde, nunca gris puro.</p>
+          <p><strong>Sombra dura</strong><br>Offset sólido morado, sin difuminado.</p>
         </div>
       </div>
 
@@ -1854,7 +1884,7 @@
       </div>
       </div>
 
-      <p class="note"><strong>Mensaje generado:</strong> el texto separa "COMPRA (en stock)" y "ENCARGO (sin stock)", incluye presentación, cantidad y precio por ítem, y se codifica con <code>encodeURIComponent</code>. Con el carrito vacío el botón queda deshabilitado. El verde pino se mantiene para el CTA: el deep link no necesita el verde oficial de WhatsApp.</p>
+      <p class="note"><strong>Mensaje generado:</strong> el texto separa "COMPRA (en stock)" y "ENCARGO (sin stock)", incluye presentación, cantidad y precio por ítem, y se codifica con <code>encodeURIComponent</code>. Con el carrito vacío el botón queda deshabilitado. El CTA usa el naranja de marca; el deep link no necesita el verde oficial de WhatsApp.</p>
     </div>
   </section>
 
@@ -2109,9 +2139,9 @@
 
 <footer style="padding-block: var(--space-6) var(--space-8);">
   <div class="container" style="display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); justify-content: space-between; align-items: baseline;">
-    <p class="eyebrow" style="margin: 0;">Oloroso Pit · Sistema visual provisional · Revisión 1</p>
+    <p class="eyebrow" style="margin: 0;">Oloroso Pit · Sistema visual · Revisión 2 · Identidad confirmada (D-07), logo provisional</p>
     <p style="margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted);">
-      Fuente: <span style="font-family: var(--font-mono);">knowledge-base/01, 02, 03, 06</span> · Aprobación pendiente de los dueños.
+      Fuente: <span style="font-family: var(--font-mono);">knowledge-base/01, 02, 03, 06</span> · Aprobación pendiente de los dueños (revisión 2).
     </p>
   </div>
 </footer>

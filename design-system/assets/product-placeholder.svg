@@ -3,16 +3,17 @@
   <desc id="phDesc">Silueta de frasco de perfume con la leyenda "sin imagen". Se usa cuando un perfume todavía no tiene foto cargada.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
-      <stop offset="0" stop-color="#F1F0E9"/>
-      <stop offset="1" stop-color="#E7E6DC"/>
+      <stop offset="0" stop-color="#FFF2DD"/>
+      <stop offset="1" stop-color="#FFDEAB"/>
     </linearGradient>
   </defs>
   <rect width="400" height="500" fill="url(#bg)"/>
-  <g fill="none" stroke="#A9B0A9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <g fill="none" stroke="#30004B" stroke-opacity="0.42" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
     <path d="M162 112h76v30l22 16v24H140v-24l22-16z"/>
-    <rect x="128" y="184" width="144" height="196" rx="20"/>
-    <path d="M168 224h64" stroke-opacity="0.55"/>
-    <path d="M168 244h40" stroke-opacity="0.4"/>
+    <rect x="128" y="184" width="144" height="196" rx="26"/>
+    <path d="M168 224h64" stroke-opacity="0.5"/>
+    <path d="M168 244h40" stroke-opacity="0.35"/>
   </g>
-  <text x="200" y="436" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" letter-spacing="2.4" fill="#7A837C">SIN IMAGEN</text>
+  <rect x="146" y="404" width="108" height="24" rx="12" fill="#FEBD59"/>
+  <text x="200" y="420" text-anchor="middle" font-family="Nunito, 'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#30004B">SIN IMAGEN</text>
 </svg>

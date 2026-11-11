@@ -1,18 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 88" width="320" height="88" role="img" aria-labelledby="logoTitle logoDesc">
   <title id="logoTitle">Logotipo provisional de Oloroso Pit</title>
-  <desc id="logoDesc">Marca provisional: monograma OP y la leyenda "marca provisional, placeholder". No es una identidad aprobada.</desc>
+  <desc id="logoDesc">Marca provisional: sello OP y logotipo redondeado con extrusión, más la leyenda "marca provisional, placeholder". No es una identidad aprobada.</desc>
 
-  <!-- Seal / monogram -->
-  <rect x="4" y="14" width="60" height="60" rx="16" fill="#1E3B31"/>
-  <rect x="11.5" y="21.5" width="45" height="45" rx="11" fill="none" stroke="#F6F5F0" stroke-opacity="0.28" stroke-width="1"/>
-  <text x="34" y="52" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" letter-spacing="1" fill="#F6F5F0">OP</text>
-  <circle cx="58" cy="66" r="2.5" fill="#A05C3B"/>
+  <!-- Seal / monogram: brand purple with orange mark -->
+  <rect x="4" y="14" width="60" height="60" rx="18" fill="#30004B"/>
+  <rect x="11.5" y="21.5" width="45" height="45" rx="13" fill="none" stroke="#FEBD59" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="34" y="53" text-anchor="middle" font-family="DynaPuff, 'Trebuchet MS', system-ui, sans-serif" font-weight="700" font-size="22" letter-spacing="0.5" fill="#FEBD59">OP</text>
+  <circle cx="58" cy="66" r="2.5" fill="#FEBD59"/>
 
-  <!-- Wordmark -->
-  <text x="78" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="26" letter-spacing="2.2" fill="#1B211E">OLOROSO PIT</text>
+  <!-- Wordmark: orange fill, purple outline + hard extrusion (client logo look) -->
+  <g font-family="DynaPuff, 'Trebuchet MS', system-ui, sans-serif" font-weight="700" font-size="25" letter-spacing="1.6">
+    <text x="81" y="47" fill="#30004B">OLOROSO PIT</text>
+    <text x="80" y="46" fill="#30004B">OLOROSO PIT</text>
+    <text x="78" y="44" paint-order="stroke fill" stroke="#30004B" stroke-width="0.9" stroke-linejoin="round" fill="#FEBD59">OLOROSO PIT</text>
+  </g>
 
   <!-- Provisional label: remove only after the owners approve a real logo -->
-  <rect x="78" y="53" width="171" height="12" rx="6" fill="#F3E4DA"/>
-  <text x="84" y="62" font-family="'Segoe UI', system-ui, sans-serif" font-size="7.5" font-weight="600" letter-spacing="1.4" fill="#8A4A2C">MARCA PROVISIONAL · PLACEHOLDER</text>
-  <line x1="78" y1="72" x2="249" y2="72" stroke="#A05C3B" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="4 4"/>
+  <rect x="78" y="53" width="184" height="12" rx="6" fill="#FFDEAB"/>
+  <text x="84" y="62" font-family="Nunito, 'Segoe UI', system-ui, sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.4" fill="#30004B">MARCA PROVISIONAL · PLACEHOLDER</text>
+  <line x1="78" y1="72" x2="262" y2="72" stroke="#FEBD59" stroke-width="1.5" stroke-dasharray="4 4"/>
 </svg>

@@ -1,71 +1,102 @@
 /*
  * Oloroso Pit — Design tokens
- * Revision: 1 · Approval: pending (2026-11-05)
+ * Revision: 2 · Approval: pending (2026-11-11)
  *
- * PROVISIONAL. Every color below is a proposal, not an approved brand fact.
+ * IDENTITY: "Pop urbano" — client-confirmed palette (decision D-07, 2026-11-11).
+ * Deep purple #30004b + vibrant orange #febd59 + light orange #ffdeab.
+ * Round display type (DynaPuff) with hard 3D extrusion; Nunito for UI and body.
+ *
+ * Rules that the tokens encode (do not break them in components):
+ *  1. White text NEVER goes on #febd59 (1.66:1). Orange fills always carry
+ *     dark purple text (10.30:1).
+ *  2. Cards stay pure white; the light orange is for page background and
+ *     secondary sections only.
+ *  3. Shadows are hard offsets with no blur. No soft/diffuse elevation.
+ *  4. Only the display font gets the extruded orange treatment, and only on
+ *     large headings.
+ *
  * Replace values here (single source of truth) and bump README.md Revision.
- * See README.md > "How to replace" for the exact procedure.
- *
- * No remote fonts, no external assets, no build step required.
+ * See README.md > "Cómo reemplazar" for the exact procedure.
  */
 
 :root {
   color-scheme: light;
 
   /* ---------------------------------------------------------------------
-   * Color · brand (PROVISIONAL — TBD)
-   * Direction: "vidrio ahumado" — deep pine glass instead of the usual
-   * black-and-gold perfume cliché, on a warm mineral paper.
+   * Color · brand — CLIENT CONFIRMED (D-07)
+   * Purple carries brand + primary action. Orange carries CTA, offers and
+   * emphasis. Never swap those roles.
    * ------------------------------------------------------------------ */
-  --color-primary-900: #14291f;
-  --color-primary-700: #1e3b31; /* brand / primary action */
-  --color-primary-600: #2a4e41;
-  --color-primary-100: #e4ebe6;
-  --color-primary-050: #f1f5f2;
+  --color-primary-900: #24003a; /* pressed */
+  --color-primary-800: #2a0042;
+  --color-primary-700: #30004b; /* BRAND — exact client value */
+  --color-primary-600: #3d0060; /* hover */
+  --color-primary-100: #f1e3f7; /* soft brand tint (derived) */
+  --color-primary-050: #faf3fc; /* faintest brand tint (derived) */
 
-  /* Accent: muted copper. Used ONLY for offers and editorial emphasis. */
-  --color-accent-700: #8a4a2c;
-  --color-accent-600: #a05c3b;
-  --color-accent-100: #f3e4da;
+  /* Accent — exact client values. Accent-100 is also the page background. */
+  --color-accent-700: #e0a03c; /* pressed / hover on dark */
+  --color-accent-600: #febd59; /* CTA / offers — exact client value */
+  --color-accent-300: #fed695; /* derived, borders on dark */
+  --color-accent-100: #ffdeab; /* secondary + page background — exact value */
 
   /* ---------------------------------------------------------------------
-   * Color · neutrals (warm mineral, deliberately NOT the old beige/brown)
+   * Color · surfaces
+   * Cards are pure white. Light orange is the general background.
    * ------------------------------------------------------------------ */
-  --color-paper: #f6f5f0;
+  --color-paper: var(--color-accent-100);
   --color-surface: #ffffff;
-  --color-surface-alt: #efeee7;
-  --color-ink: #1b211e; /* off-black, never #000 */
-  --color-ink-soft: #4b554f;
-  --color-ink-muted: #626c65;
-  --color-line: #dedcd3;
-  --color-line-strong: #c4c2b7;
-  --color-overlay: rgba(20, 41, 31, 0.42);
+  --color-surface-alt: #fff2dd; /* very light warm section fill */
+  --color-band: var(--color-primary-700); /* brand bands: hero, footer */
+  --color-band-ink: var(--color-accent-100);
+
+  /* ---------------------------------------------------------------------
+   * Color · neutrals — all derived from the brand purple
+   * ------------------------------------------------------------------ */
+  --color-ink: #30004b; /* 17.11:1 on white · 13.27:1 on paper */
+  --color-ink-soft: #5d2a6e; /* 10.39:1 on white · 8.06:1 on paper */
+  --color-ink-muted: #7a4a8a; /* 5.13:1 on paper (AA) */
+  --color-line: #e9d5ef;
+  --color-line-strong: #cfb2da;
+  --color-overlay: rgba(48, 0, 75, 0.55);
 
   /* ---------------------------------------------------------------------
    * Color · semantic states
    * "Encargo" is NOT an error: it is a valid, normal way to buy.
    * ------------------------------------------------------------------ */
-  --color-stock: #2c6a4c;
-  --color-stock-soft: #e6efe9;
-  --color-order: #7b6636;
-  --color-order-soft: #f4efe1;
-  --color-offer: var(--color-accent-700);
-  --color-offer-soft: var(--color-accent-100);
-  --color-danger: #a33b33;
-  --color-danger-soft: #f7e7e5;
+  --color-stock: #0f6b3f; /* 6.57:1 on white · 5.10:1 on paper */
+  --color-stock-soft: #e2f5e9;
+  --color-stock-line: rgba(15, 107, 63, 0.32);
+  --color-order: #8a5200; /* 6.39:1 on white · 4.95:1 on paper */
+  --color-order-soft: #fff0d6;
+  --color-offer: var(--color-primary-700); /* text that sits on an orange fill */
+  --color-offer-soft: var(--color-accent-600); /* the orange fill itself */
+  --color-offer-line: var(--color-accent-700);
+  --color-danger: #b3261e; /* 6.54:1 on white · 5.07:1 on paper */
+  --color-danger-soft: #fde7e4;
+  --color-danger-line: rgba(179, 38, 30, 0.35);
   --color-success: var(--color-stock);
   --color-success-soft: var(--color-stock-soft);
-  --color-focus: #3e7e63;
-  --color-focus-on-dark: #cfe3d7;
+  --color-success-line: var(--color-stock-line);
+  --color-focus: var(--color-primary-700); /* 13.27:1 on paper */
+  --color-focus-on-dark: var(--color-accent-600); /* 10.30:1 on purple */
+
+  /* Rings: hard, flat, no blur — matches the pop treatment. */
+  --color-focus-ring: rgba(48, 0, 75, 0.22);
+  --color-danger-ring: rgba(179, 38, 30, 0.18);
+  --ring-focus: 0 0 0 3px var(--color-focus-ring);
+  --ring-danger: 0 0 0 3px var(--color-danger-ring);
 
   /* ---------------------------------------------------------------------
-   * Typography · local stacks only (no Google Fonts, no paid fonts)
-   * Display serif for editorial catalog surfaces; sans for UI and admin.
+   * Typography
+   * Display: DynaPuff (Google Fonts) — rounded, chunky, made for extrusion.
+   * Body/UI: Nunito (Google Fonts) — rounded but highly legible at 12–16px.
+   * Production must self-host both families (see README §8.4).
    * ------------------------------------------------------------------ */
-  --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino,
-    Georgia, "Times New Roman", serif;
-  --font-sans: ui-sans-serif, "Segoe UI Variable Text", "Segoe UI", system-ui,
-    -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "DynaPuff", ui-rounded, "Segoe UI Rounded", "Trebuchet MS",
+    system-ui, sans-serif;
+  --font-sans: "Nunito", ui-sans-serif, "Segoe UI Variable Text", "Segoe UI",
+    system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
 
   --text-2xs: 0.6875rem; /* 11px — eyebrows, legal */
@@ -77,7 +108,7 @@
   --text-2xl: 1.75rem; /* 28px */
   --text-3xl: 2.25rem; /* 36px */
   --text-4xl: 3rem; /* 48px */
-  --text-display: clamp(2.25rem, 1.4rem + 3.2vw, 3.75rem);
+  --text-display: clamp(2.5rem, 1.35rem + 4vw, 4.25rem);
 
   --leading-none: 1;
   --leading-tight: 1.15;
@@ -100,6 +131,20 @@
   --measure-tight: 46ch;
 
   /* ---------------------------------------------------------------------
+   * Title "sticker" treatment — the client's logo look
+   * Fill orange, extrude with solid purple. Only for large display headings
+   * on dark or high-contrast surfaces (see README §4.3 for the AA rule).
+   * ------------------------------------------------------------------ */
+  --title-fill: var(--color-accent-600);
+  --title-shadow: var(--color-primary-700);
+  --title-stroke: 1px var(--color-primary-700);
+  --title-stroke-lg: 2px var(--color-primary-700);
+  --title-extrude-sm: 2px 2px 0 var(--title-shadow);
+  --title-extrude: 2px 2px 0 var(--title-shadow), 4px 4px 0 var(--title-shadow);
+  --title-extrude-lg: 3px 3px 0 var(--title-shadow),
+    6px 6px 0 var(--title-shadow);
+
+  /* ---------------------------------------------------------------------
    * Spacing · 4px base
    * ------------------------------------------------------------------ */
   --space-1: 0.25rem; /* 4 */
@@ -116,24 +161,32 @@
   --container-pad: clamp(1rem, 4vw, 3rem);
 
   /* ---------------------------------------------------------------------
-   * Radii · restrained; pill only for chips and counters
+   * Radii · noticeably rounder than revision 1 (pop, friendly)
    * ------------------------------------------------------------------ */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-pill: 999px;
 
   /* ---------------------------------------------------------------------
-   * Elevation · tinted with the brand green, no glow
+   * Elevation · hard offsets, zero blur, brand purple
    * ------------------------------------------------------------------ */
-  --shadow-xs: 0 1px 2px rgba(27, 33, 30, 0.05);
-  --shadow-sm: 0 1px 3px rgba(27, 33, 30, 0.06),
-    0 1px 2px rgba(27, 33, 30, 0.04);
-  --shadow-md: 0 10px 24px -14px rgba(20, 41, 31, 0.28);
-  --shadow-lg: 0 26px 50px -28px rgba(20, 41, 31, 0.34);
-  --shadow-press: inset 0 1px 2px rgba(20, 41, 31, 0.18);
+  --shadow-xs: 0 1px 0 0 var(--color-line);
+  --shadow-sm: 2px 2px 0 0 var(--color-primary-700);
+  --shadow-md: 4px 4px 0 0 var(--color-primary-700);
+  --shadow-lg: 6px 6px 0 0 var(--color-primary-700);
+  --shadow-press: inset 2px 2px 0 0 rgba(48, 0, 75, 0.35);
+  --shadow-hard-sm: var(--shadow-sm);
+  --shadow-hard: var(--shadow-md);
+  --shadow-hard-lg: var(--shadow-lg);
+  --shadow-hard-accent: 4px 4px 0 0 var(--color-accent-600);
+
+  /* Product media placeholder tint (also used by product-placeholder.svg) */
+  --product-bg: linear-gradient(160deg, #fff2dd 0%, #ffdeab 100%);
+  --skeleton-base: #fbe7c9;
+  --skeleton-shine: #fff8ec;
 
   /* ---------------------------------------------------------------------
    * Motion · custom curves, short durations (UI stays under 250ms)
@@ -142,13 +195,14 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --duration-fast: 120ms;
   --duration-base: 180ms;
   --duration-slow: 240ms;
 
-  --motion-lift: -2px;
-  --motion-press: 0.98;
+  --motion-lift: -3px;
+  --motion-press: 0.97;
 
   /* ---------------------------------------------------------------------
    * Layers · only for real system layers

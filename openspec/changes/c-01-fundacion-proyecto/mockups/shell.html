@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-brand-title>Oloroso Pit — Catálogo</title>
+<meta name="description" content="Mockup del shell de C-01 con la identidad visual oficial (revisión 2). Pendiente de aprobación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../design-system/tokens.css">
+<style>
+  /* =========================================================================
+     MOCKUP C-01 · Shell del sitio — no es código final.
+     Todos los valores visuales salen de design-system/tokens.css (revision 2).
+     ========================================================================= */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  img, svg { display: block; }
+  img { max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button { font: inherit; }
+
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: -120px;
+    z-index: var(--z-toast);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary-700);
+    color: var(--color-surface);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+  .skip-link:focus { top: var(--space-3); }
+
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+  }
+
+  /* Mockup instrument — deliberately not part of the product UI ------------ */
+  .mock-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1) var(--space-3);
+    padding: 6px var(--space-4);
+    background: var(--color-surface);
+    border-bottom: 2px dashed var(--color-primary-700);
+    color: var(--color-primary-700);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .mock-note strong { color: var(--color-danger); }
+
+  /* Announcement bar ------------------------------------------------------ */
+  .announce {
+    background: var(--color-accent-600);
+    color: var(--color-primary-700);
+    border-bottom: 2px solid var(--color-primary-700);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+  }
+  .announce__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1) var(--space-3);
+    min-height: 34px;
+    padding-block: 6px;
+    text-align: center;
+  }
+  .announce__inner span[aria-hidden] { opacity: 0.55; }
+  .announce a {
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+
+  /* Header ---------------------------------------------------------------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-primary-700);
+    box-shadow: 0 3px 0 0 var(--color-line);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 72px;
+    padding-block: var(--space-2);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: none;
+    text-decoration: none;
+  }
+  .brand img { height: 44px; width: auto; }
+  .brand__mark { display: none; }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+  }
+  .site-nav a:hover { background: var(--color-primary-050); color: var(--color-primary-700); }
+  .site-nav a[aria-current="page"] {
+    color: var(--color-primary-700);
+    box-shadow: inset 0 -3px 0 0 var(--color-accent-600);
+  }
+  .site-nav a .dot {
+    width: 7px; height: 7px;
+    margin-left: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-600);
+  }
+
+  .header__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-primary-700);
+    box-shadow: 0 3px 0 0 var(--color-primary-700);
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .icon-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 0 0 var(--color-primary-700); }
+  .icon-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 0 var(--color-primary-700); }
+
+  .cart-btn {
+    position: relative;
+    background: var(--color-accent-600);
+    box-shadow: 0 3px 0 0 var(--color-primary-700);
+  }
+  .cart-btn:hover { background: var(--color-accent-600); }
+  .cart-count {
+    position: absolute;
+    top: -8px; right: -8px;
+    min-width: 22px; height: 22px;
+    display: grid;
+    place-items: center;
+    padding-inline: 5px;
+    border: 2px solid var(--color-surface);
+    border-radius: var(--radius-pill);
+    background: var(--color-primary-700);
+    color: var(--color-surface);
+    font-size: 11px;
+    font-weight: var(--weight-bold);
+    line-height: 1;
+  }
+
+  .menu-btn { display: none; }
+
+  /* Hero ------------------------------------------------------------------ */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border-bottom: 3px solid var(--color-primary-700);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--color-primary-700) 1.5px, transparent 1.7px);
+    background-size: 22px 22px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 460px;
+    height: 460px;
+    right: -120px;
+    top: -140px;
+    border: 3px solid var(--color-primary-700);
+    border-radius: 50%;
+    opacity: 0.16;
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(var(--space-5), 6vw, var(--space-8));
+    align-items: center;
+    padding-block: clamp(var(--space-6), 7vw, var(--space-9));
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-3);
+    padding: 5px 12px;
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-pill);
+    background: var(--color-primary-700);
+    color: var(--color-accent-600);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    margin: 0;
+    max-width: 15ch;
+    color: var(--title-fill);
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.2rem + 4.6vw, 4rem);
+    font-weight: var(--weight-bold);
+    line-height: 1.04;
+    letter-spacing: 0.005em;
+    -webkit-text-stroke: var(--title-stroke-lg);
+    paint-order: stroke fill;
+    text-shadow: var(--title-extrude-lg);
+    text-wrap: balance;
+  }
+
+  .hero__lead {
+    margin: var(--space-4) 0 0;
+    max-width: 46ch;
+    color: var(--color-ink-soft);
+    font-size: clamp(var(--text-base), 0.9rem + 0.35vw, var(--text-lg));
+    line-height: var(--leading-relaxed);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 52px;
+    padding-inline: var(--space-5);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-standard);
+  }
+  .btn--primary {
+    background: var(--color-accent-600);
+    color: var(--color-primary-700);
+    box-shadow: 0 5px 0 0 var(--color-primary-900);
+  }
+  .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 7px 0 0 var(--color-primary-900); }
+  .btn--primary:active { transform: translateY(2px); box-shadow: 0 2px 0 0 var(--color-primary-900); }
+
+  .btn--ghost {
+    background: transparent;
+    border-color: var(--color-primary-700);
+    color: var(--color-primary-700);
+  }
+  .btn--ghost:hover { background: var(--color-primary-050); }
+  .btn--ghost:focus-visible { outline-color: var(--color-accent-600); }
+
+  .hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink-soft);
+  }
+  .hero__facts li { display: inline-flex; align-items: center; gap: 7px; }
+  .hero__facts li::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary-700);
+    flex: none;
+  }
+
+  /* Hero visual: product "sticker" ---------------------------------------- */
+  .hero__visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-block: var(--space-4);
+  }
+  .sticker {
+    width: min(320px, 100%);
+    background: var(--color-surface);
+    border: 3px solid var(--color-primary-900);
+    border-radius: var(--radius-xl);
+    box-shadow: 8px 8px 0 0 var(--color-accent-600);
+    color: var(--color-ink);
+    transform: rotate(-2.5deg);
+    overflow: hidden;
+  }
+  .sticker__media {
+    position: relative;
+    padding: var(--space-3);
+    background: var(--product-bg);
+    border-bottom: 3px solid var(--color-primary-900);
+  }
+  .sticker__media img { width: 100%; height: auto; }
+  .sticker__tag {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    padding: 5px 10px;
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent-600);
+    color: var(--color-primary-700);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  .sticker__body { padding: var(--space-3) var(--space-4) var(--space-4); }
+  .sticker__brand {
+    margin: 0;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .sticker__name {
+    margin: 2px 0 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+  }
+  .sticker__price {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .sticker__note {
+    margin: 2px 0 0;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-stock);
+  }
+  .hero__stamp {
+    position: absolute;
+    top: -12px;
+    right: -18px;
+    display: grid;
+    place-content: center;
+    gap: 1px;
+    width: 122px;
+    height: 122px;
+    padding: var(--space-2);
+    border: 3px solid var(--color-accent-600);
+    border-radius: 50%;
+    background: var(--color-primary-700);
+    box-shadow: 5px 5px 0 0 var(--color-primary-900);
+    color: var(--color-accent-600);
+    text-align: center;
+    transform: rotate(7deg);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .hero__stamp strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* Sections -------------------------------------------------------------- */
+  .section { padding-block: clamp(var(--space-6), 6vw, var(--space-8)); }
+
+  .section--alt { background: var(--color-surface-alt); border-block: 2px solid var(--color-line); }
+
+  .section__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+  .eyebrow {
+    margin: 0 0 var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+  .section__head h2 {
+    margin: 0;
+    color: var(--color-primary-700);
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-2xl), 1.4rem + 1.6vw, var(--text-3xl));
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    color: var(--color-primary-700);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  .link-arrow:hover { color: var(--color-primary-600); }
+
+  /* Line cards ------------------------------------------------------------ */
+  .lines {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .line-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .line-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .line-card__icon {
+    display: grid;
+    place-items: center;
+    width: 56px; height: 56px;
+    flex: none;
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-md);
+    background: var(--color-accent-600);
+    color: var(--color-primary-700);
+  }
+  .line-card h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+  }
+  .line-card p { margin: 2px 0 0; font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-ink-muted); }
+  .line-card__count {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary-050);
+    color: var(--color-primary-700);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    white-space: nowrap;
+  }
+
+  /* Product cards (illustrative — the real grid is C-04) ------------------ */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: transform var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out);
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .product-card__media {
+    position: relative;
+    padding: var(--space-3);
+    background: var(--product-bg);
+    border-bottom: 2px solid var(--color-primary-700);
+  }
+  .product-card__media img { width: 100%; height: auto; }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .tag--offer {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    background: var(--color-offer-soft);
+    color: var(--color-offer);
+    border: 2px solid var(--color-primary-700);
+  }
+  .product-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-3) var(--space-4) var(--space-4);
+  }
+  .product-card__brand {
+    margin: 0;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .product-card__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+  }
+  .product-card__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+  .price-now {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .price-was {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    text-decoration: line-through;
+  }
+  .stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+  }
+  .stock::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    flex: none;
+  }
+  .stock--in { color: var(--color-stock); }
+  .stock--order { color: var(--color-order); }
+
+  /* Trust strip ----------------------------------------------------------- */
+  .trust {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .trust__item {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 2px solid var(--color-line-strong);
+  }
+  .trust__icon {
+    display: grid;
+    place-items: center;
+    width: 44px; height: 44px;
+    flex: none;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent-600);
+    color: var(--color-primary-700);
+  }
+  .trust__item h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+  }
+  .trust__item p { margin: 3px 0 0; font-size: var(--text-xs); color: var(--color-ink-soft); line-height: var(--leading-snug); }
+
+  /* Footer ---------------------------------------------------------------- */
+  .site-footer {
+    background: var(--color-band);
+    color: var(--color-accent-100);
+    border-top: 3px solid var(--color-primary-900);
+  }
+  .footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 0.8fr));
+    gap: var(--space-5);
+    padding-block: clamp(var(--space-6), 6vw, var(--space-8)) var(--space-6);
+  }
+  .footer__brand h2 {
+    margin: 0;
+    color: var(--title-fill);
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-2xl), 1.5rem + 1.4vw, var(--text-3xl));
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .footer__brand p {
+    margin: var(--space-3) 0 0;
+    max-width: 32ch;
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-accent-100);
+  }
+  .footer__chip {
+    display: inline-block;
+    margin-top: var(--space-3);
+    padding: 4px 10px;
+    border: 1px dashed var(--color-accent-100);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-accent-100);
+  }
+  .footer__col h3 {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-accent-600);
+  }
+  .footer__col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+  .footer__col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-100);
+    text-decoration: none;
+  }
+  .footer__col a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    padding-block: var(--space-4);
+    border-top: 2px solid var(--color-primary-600);
+    font-size: var(--text-xs);
+    color: var(--color-accent-100);
+  }
+  .footer__bottom span[aria-hidden] { opacity: 0.5; }
+
+  /* Responsive ------------------------------------------------------------ */
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .footer__inner { grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 900px) {
+    .site-nav, .search-btn { display: none; }
+    .menu-btn { display: inline-flex; }
+    .hero__inner { grid-template-columns: minmax(0, 1fr); padding-block: var(--space-6); }
+    .hero__visual { display: none; }
+    .hero h1 { max-width: 18ch; }
+    .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .trust { grid-template-columns: minmax(0, 1fr); }
+    .footer__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer__brand { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 620px) {
+    .announce { font-size: 10px; }
+    .header__inner { min-height: 64px; gap: var(--space-2); }
+    .brand img { height: 34px; }
+    .hero h1 { font-size: clamp(2.25rem, 1.2rem + 7vw, 2.9rem); -webkit-text-stroke-width: 1px; text-shadow: var(--title-extrude); }
+    .hero__lead { font-size: var(--text-base); }
+    .btn { width: 100%; }
+    .lines { grid-template-columns: minmax(0, 1fr); }
+    .product-card__body { padding: var(--space-2) var(--space-3) var(--space-3); }
+    .product-card__name { font-size: var(--text-base); }
+    .price-now { font-size: var(--text-base); }
+    .product-card__media { padding: var(--space-2); }
+    .tag--offer { top: var(--space-2); left: var(--space-2); font-size: 10px; padding: 3px 7px; }
+    .footer__inner { grid-template-columns: minmax(0, 1fr); }
+    .footer__bottom { justify-content: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<div class="mock-note" role="note">
+  Mockup C-01 · Shell · Design system revisión 2 · <strong>Pendiente de aprobación</strong>
+</div>
+
+<div class="announce">
+  <div class="container announce__inner">
+    <span>Perfumes importados · pedidos por WhatsApp</span>
+    <span aria-hidden="true">•</span>
+    <a href="#catalogo">Ver catálogo</a>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="#" aria-label="Oloroso Pit — inicio">
+      <img src="../../../../design-system/assets/logo.svg" alt="Oloroso Pit. Marca provisional.">
+    </a>
+
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#catalogo" aria-current="page">Catálogo</a>
+      <a href="#lineas">Árabes</a>
+      <a href="#catalogo">Ofertas <span class="dot" aria-hidden="true"></span></a>
+    </nav>
+
+    <div class="header__tools">
+      <button class="icon-btn search-btn" type="button" aria-label="Buscar perfumes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/>
+        </svg>
+      </button>
+      <button class="icon-btn cart-btn" type="button" aria-label="Carrito, 2 unidades">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 7h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/>
+          <path d="M9.5 7a2.5 2.5 0 0 1 5 0"/>
+        </svg>
+        <span class="cart-count">2</span>
+      </button>
+      <button class="icon-btn menu-btn" type="button" aria-label="Abrir menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero__inner">
+      <div>
+        <p class="hero__eyebrow">Por encargo y en stock</p>
+        <h1 id="hero-title">Perfumes importados, sin vueltas.</h1>
+        <p class="hero__lead">
+          Precio y disponibilidad siempre a la vista. Armá tu pedido y enviálo por
+          WhatsApp: comprá lo que está en stock o encargá lo que falta.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#catalogo">
+            Ver catálogo
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#como-comprar">Cómo comprar</a>
+        </div>
+        <ul class="hero__facts">
+          <li>Precios en pesos</li>
+          <li>Decants de 5 y 10 ml</li>
+          <li>No se paga en el sitio</li>
+        </ul>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <article class="sticker">
+          <div class="sticker__media">
+            <span class="sticker__tag">En stock</span>
+            <img src="../../../../design-system/assets/product-placeholder.svg" alt="">
+          </div>
+          <div class="sticker__body">
+            <p class="sticker__brand">Lattafa</p>
+            <p class="sticker__name">Khamrah</p>
+            <p class="sticker__price">$52.400</p>
+            <p class="sticker__note">Frasco sellado · listo para enviar</p>
+          </div>
+        </article>
+        <div class="hero__stamp">
+          <span>Elegí</span>
+          <strong>Compra<br>o encargo</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lineas" aria-labelledby="lineas-title">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2 id="lineas-title">Explorá por línea</h2>
+        </div>
+        <a class="link-arrow" href="#catalogo">Ver todos los perfumes
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="lines">
+        <a class="line-card" href="#catalogo">
+          <span class="line-card__icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10M9 3v4l-4 7a5 5 0 0 0 4.5 7h5A5 5 0 0 0 19 14l-4-7V3"/><path d="M7 14h10"/></svg>
+          </span>
+          <span>
+            <h3>Árabes</h3>
+            <p>La línea con la que arrancamos</p>
+          </span>
+          <span class="line-card__count">24</span>
+        </a>
+        <a class="line-card" href="#catalogo">
+          <span class="line-card__icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.3 5.8.5-4.4 3.8 1.3 5.6L12 15.4 7.1 18.2l1.3-5.6L4 8.8l5.8-.5L12 3Z"/></svg>
+          </span>
+          <span>
+            <h3>Ofertas</h3>
+            <p>Precios rebajados, por tiempo limitado</p>
+          </span>
+          <span class="line-card__count">6</span>
+        </a>
+      </div>
+      <p class="eyebrow" style="margin-top: var(--space-3);">Diseñador y Nicho aparecen cuando tengan productos cargados.</p>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="catalogo" aria-labelledby="catalogo-title">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">Destacados</p>
+          <h2 id="catalogo-title">Lo que está entrando</h2>
+        </div>
+        <a class="link-arrow" href="#catalogo">Ver catálogo completo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card">
+          <div class="product-card__media">
+            <span class="tag tag--offer">Oferta</span>
+            <img src="../../../../design-system/assets/product-placeholder.svg" alt="Imagen de referencia de Khamrah">
+          </div>
+          <div class="product-card__body">
+            <p class="product-card__brand">Lattafa</p>
+            <h3 class="product-card__name">Khamrah</h3>
+            <p class="product-card__price"><span class="price-now">$45.900</span><span class="price-was">$52.400</span></p>
+            <span class="stock stock--in">En stock</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-card__media">
+            <img src="../../../../design-system/assets/product-placeholder.svg" alt="Imagen de referencia de Yara">
+          </div>
+          <div class="product-card__body">
+            <p class="product-card__brand">Lattafa</p>
+            <h3 class="product-card__name">Yara</h3>
+            <p class="product-card__price"><span class="price-now">$41.200</span></p>
+            <span class="stock stock--order">Sin stock · por encargo</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-card__media">
+            <img src="../../../../design-system/assets/product-placeholder.svg" alt="Imagen de referencia de Fakhar">
+          </div>
+          <div class="product-card__body">
+            <p class="product-card__brand">Lattafa</p>
+            <h3 class="product-card__name">Fakhar</h3>
+            <p class="product-card__price"><span class="price-now">$39.800</span></p>
+            <span class="stock stock--in">En stock</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-card__media">
+            <img src="../../../../design-system/assets/product-placeholder.svg" alt="Imagen de referencia de 9PM">
+          </div>
+          <div class="product-card__body">
+            <p class="product-card__brand">Afnan</p>
+            <h3 class="product-card__name">9PM</h3>
+            <p class="product-card__price"><span class="price-now">$47.500</span></p>
+            <span class="stock stock--order">Sin stock · por encargo</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="como-comprar" aria-labelledby="como-title">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">Cómo comprar</p>
+          <h2 id="como-title">Tres pasos, un mensaje</h2>
+        </div>
+      </div>
+      <div class="trust">
+        <div class="trust__item">
+          <span class="trust__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          </span>
+          <div>
+            <h3>Precio siempre visible</h3>
+            <p>El precio del frasco sellado está en cada tarjeta, haya stock o no.</p>
+          </div>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v12H3zM14 10h4l3 3v5h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+          </span>
+          <div>
+            <h3>Compra o encargo</h3>
+            <p>Lo que está en stock se compra; lo que falta se encarga. Se separan solos.</p>
+          </div>
+        </div>
+        <div class="trust__item">
+          <span class="trust__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a7.5 7.5 0 0 1-11 6.7L4 20l1.8-4.6A7.5 7.5 0 1 1 20 11.5Z"/><path d="M9 10.5c0 .8.6 1.5 1.5 1.5H12"/></svg>
+          </span>
+          <div>
+            <h3>Pedido por WhatsApp</h3>
+            <p>Se abre WhatsApp con el pedido armado. No se paga en el sitio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h2>OLOROSO PIT</h2>
+        <p>Perfumes importados, vendidos en su mayoría por encargo. Elegí, armá el pedido y mandalo por WhatsApp.</p>
+        <span class="footer__chip">Logo provisional</span>
+      </div>
+      <div class="footer__col">
+        <h3>Catálogo</h3>
+        <ul>
+          <li><a href="#catalogo">Todos los perfumes</a></li>
+          <li><a href="#lineas">Árabes</a></li>
+          <li><a href="#catalogo">Ofertas</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="#como-comprar">Cómo comprar</a></li>
+          <li><a href="#como-comprar">Envíos y encargos</a></li>
+          <li><a href="#como-comprar">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Contacto</h3>
+        <ul>
+          <li><a href="#como-comprar">WhatsApp</a></li>
+          <li><a href="#como-comprar">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Oloroso Pit · Identidad confirmada 2026-11-11 · Revisión 2</span>
+      <span aria-hidden="true">·</span>
+      <span>No se paga en el sitio. El pedido se envía por WhatsApp.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../../../design-system/brand.js"></script>
+</body>
+</html>

@@ -142,9 +142,10 @@
   "visual_design": {
     "created_by": "design-system",
     "mode": "system-and-mockups",
-    "status": "approved",
-    "revision": 1,
-    "path": "design-system/README.md"
+    "status": "pending",
+    "revision": 2,
+    "path": "design-system/README.md",
+    "approved_revision_note": "Revision 1 aprobada (identidad beige/verde). Revision 2 reemplaza la paleta por la identidad oficial confirmada por el cliente y queda pendiente de aprobacion."
   },
   "roadmap": {
     "created_by": "roadmap-generator",
