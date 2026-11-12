@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-brand-title>Oloroso Pit — Catálogo</title>
-<meta name="description" content="Referencia visual del catálogo Oloroso Pit. Revisión 2, aprobación pendiente.">
+<meta name="description" content="Referencia visual del catálogo Oloroso Pit. Revisión 3, aprobación pendiente.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@
     font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
-    color: var(--color-ink-muted);
+    color: var(--color-ink-soft);
   }
 
   /* =========================================================================
@@ -202,7 +202,7 @@
   .spec-head code {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    background: var(--color-surface-alt);
+    background: var(--color-paper);
     padding: 1px 5px;
     border-radius: var(--radius-xs);
   }
@@ -221,10 +221,10 @@
   .note {
     margin: var(--space-3) 0 0;
     font-size: var(--text-xs);
-    color: var(--color-ink-muted);
+    color: var(--color-ink-soft);
     line-height: var(--leading-relaxed);
   }
-  .note strong { color: var(--color-ink-soft); font-weight: var(--weight-semibold); }
+  .note strong { color: var(--color-ink); font-weight: var(--weight-semibold); }
 
   /* =========================================================================
      Foundations · color, type, radius, elevation, spacing
@@ -1260,7 +1260,7 @@
         <p>Referencia de componentes para catálogo público y panel de administración.</p>
       </div>
       <div class="doc-meta">
-        <span class="status-pill">Revisión 2 · aprobación pendiente</span>
+        <span class="status-pill">Revisión 3 · aprobación pendiente</span>
         <p>La identidad está <strong>confirmada (D-07)</strong>. El logo sigue siendo un <strong>placeholder (TBD)</strong>.</p>
       </div>
     </div>
@@ -1298,7 +1298,7 @@
       <p class="eyebrow">01 · Fundamentos</p>
       <div>
         <h2 id="fundamentos-title">Color, tipografía y forma</h2>
-        <p>La identidad oficial reemplaza el beige y marrón de la planilla: morado profundo, naranja vibrante y tipografía redondeada. Sombras duras sin difuminado, radios grandes y tarjetas en blanco puro. El naranja vibrante nunca lleva texto blanco.</p>
+        <p>La identidad oficial combina morado profundo, naranja vibrante y fondos lila (revisión 3). Sombras duras sin difuminado, radios grandes y tarjetas en blanco puro. El naranja vibrante nunca lleva texto blanco y el lila exterior no lleva texto atenuado.</p>
       </div>
     </div>
 
@@ -1315,7 +1315,19 @@
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-accent-100);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Naranja claro</span><span class="swatch__value">#FFDEAB</span><span class="swatch__use">Fondo general y secciones</span></div>
+          <div class="swatch__meta"><span class="swatch__name">Naranja suave</span><span class="swatch__value">#FFDEAB</span><span class="swatch__use">Texto sobre morado (pie)</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-lilac-100);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Lila base</span><span class="swatch__value">#FFABF8</span><span class="swatch__use">Referencia de la familia lila</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-surface-alt);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Lila exterior</span><span class="swatch__value">#E69ADE</span><span class="swatch__use">Fondo general y secciones</span></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: var(--color-paper);"></div>
+          <div class="swatch__meta"><span class="swatch__name">Lila interior</span><span class="swatch__value">#FFE6FB</span><span class="swatch__use">Paneles, avisos y portada</span></div>
         </div>
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-surface);"></div>
@@ -1344,10 +1356,6 @@
         <div class="swatch">
           <div class="swatch__color" style="background: var(--color-danger);"></div>
           <div class="swatch__meta"><span class="swatch__name">Alerta</span><span class="swatch__value">#B3261E</span><span class="swatch__use">Errores de formulario</span></div>
-        </div>
-        <div class="swatch">
-          <div class="swatch__color" style="background: var(--color-surface-alt);"></div>
-          <div class="swatch__meta"><span class="swatch__name">Sección clara</span><span class="swatch__value">#FFF2DD</span><span class="swatch__use">Fondos muy claros</span></div>
         </div>
       </div>
 
@@ -2139,9 +2147,9 @@
 
 <footer style="padding-block: var(--space-6) var(--space-8);">
   <div class="container" style="display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); justify-content: space-between; align-items: baseline;">
-    <p class="eyebrow" style="margin: 0;">Oloroso Pit · Sistema visual · Revisión 2 · Identidad confirmada (D-07), logo provisional</p>
-    <p style="margin: 0; font-size: var(--text-xs); color: var(--color-ink-muted);">
-      Fuente: <span style="font-family: var(--font-mono);">knowledge-base/01, 02, 03, 06</span> · Aprobación pendiente de los dueños (revisión 2).
+    <p class="eyebrow" style="margin: 0;">Oloroso Pit · Sistema visual · Revisión 3 · Identidad confirmada (D-07), logo provisional</p>
+    <p style="margin: 0; font-size: var(--text-xs); color: var(--color-ink-soft);">
+      Fuente: <span style="font-family: var(--font-mono);">knowledge-base/01, 02, 03, 06</span> · Aprobación pendiente de los dueños (revisión 3).
     </p>
   </div>
 </footer>

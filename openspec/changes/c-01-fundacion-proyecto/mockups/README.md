@@ -1,7 +1,7 @@
 # Mockup — C-01 `fundacion-proyecto` · Shell del sitio
 
 ```
-Design system revision: 2
+Design system revision: 3
 Decision: yes
 Approval: pending (2026-11-11)
 Preview: rendered (2026-11-11)
@@ -9,8 +9,9 @@ Visual verify: pending (se completa al implementar C-01)
 ```
 
 Mockup local del **shell** (cabecera, portada, pie) con la identidad oficial
-confirmada por los clientes el 2026-11-11 (D-07). No es código final: es el
-artefacto de aprobación previo a implementar C-01.
+confirmada por los clientes el 2026-11-11 (D-07) y los fondos lila de la
+revisión 3. No es código final: es el artefacto de aprobación previo a
+implementar C-01.
 
 ## Archivos
 
@@ -38,11 +39,12 @@ se ven los fallbacks del sistema; el layout no cambia.
    naranja).
 2. **Cabecera sticky** blanca: logo, navegación, buscador, carrito con contador
    y menú móvil.
-3. **Portada naranja clara** con titular DynaPuff naranja y extrusión sólida
+3. **Portada lila interior** con titular DynaPuff naranja y extrusión sólida
    morada, CTA naranja con texto morado, y una tarjeta "sticker" de producto.
 4. **Entrada por línea** con tarjetas blancas y sombra dura.
-5. **Grilla ilustrativa** de 4 tarjetas (oferta, en stock, por encargo). El
-   grid real y sus filtros son de C-04: acá solo valida la identidad.
+5. **Grilla ilustrativa** de 4 tarjetas (oferta, en stock, por encargo) sobre
+   una franja lila exterior. El grid real y sus filtros son de C-04: acá solo
+   valida la identidad.
 6. **Franja "Cómo comprar"** en tres pasos.
 7. **Pie morado** con wordmark naranja plano, columnas y nota de "no se paga
    en el sitio".
@@ -104,7 +106,7 @@ sube la revisión del design system.
 
 ## Fuentes
 
-- `design-system/README.md` §3–§4 (dirección y tokens, revisión 2)
+- `design-system/README.md` §3–§4 (dirección y tokens, revisión 3)
 - `design-system/tokens.css`
 - `CHANGES.md` §C-01, §6 (D-07), §8
 - `knowledge-base/05_reglas_de_negocio.md` (RN-CAT-02)

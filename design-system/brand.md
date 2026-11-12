@@ -4,7 +4,7 @@
 > paleta, la tipografía y el estilo general el 2026-11-11 (D-07). El logo real
 > todavía no existe: el archivo actual es un placeholder rotulado.
 
-- **Revisión:** 2
+- **Revisión:** 3
 - **Aprobación:** pendiente (2026-11-11)
 - **Alcance:** catálogo público + panel de administración (web responsive)
 
@@ -27,16 +27,16 @@ preview usa `data-brand-name`.
 
 ## 2. Tono visual
 
-**Dirección confirmada: "pop urbano".** Morado profundo, naranja vibrante y
-tipografía redondeada con extrusión sólida. La referencia es una gráfica de
-Instagram de barrio bien hecha: alegre, directa y cercana, sin solemnidad de
-joyería.
+**Dirección confirmada: "pop urbano".** Morado profundo, naranja vibrante,
+fondos lila y tipografía redondeada con extrusión sólida. La referencia es una
+gráfica de Instagram de barrio bien hecha: alegre, directa y cercana, sin
+solemnidad de joyería.
 
 | Atributo | Sí | No |
 |---|---|---|
 | Temperamento | Pop, vibrante, urbano | Sobrio, editorial, frío |
 | Lujo | Cercano y honesto: buen precio, buen perfume | Oro + negro, mármol, brillos |
-| Color | Morado `#30004B` + naranja `#FEBD59` + naranja claro `#FFDEAB` + blanco puro | Beige/marrón de la planilla, pasteles desaturados |
+| Color | Morado `#30004B` + naranja `#FEBD59` + lila exterior `#E69ADE` + lila interior `#FFE6FB` + blanco puro | Beige/marrón de la planilla, fondos naranja, pasteles desaturados |
 | Tipografía | DynaPuff para display; Nunito para cuerpo y UI | Serif, Molenila, sans finas de 300 |
 | Forma | Radios grandes, sombras duras sin difuminado | Sombras difusas, glassmorphism, degradados suaves |
 | Densidad | Aireada en catálogo; clara y directa en admin | Tarjetas apiladas sin jerarquía |
@@ -48,7 +48,8 @@ joyería.
 
 **Restricción explícita del cliente:** "los colores de la planilla actual (beige
 y marrón) se van a cambiar" — `docs/discovery/brief-clientes.md`. La identidad
-oficial los reemplaza por morado y naranja; no hay continuidad con el beige.
+oficial los reemplaza por morado, naranja y lila; no hay continuidad con el
+beige.
 
 **TBD:** validar el nombre y la bajada; conseguir el logo real.
 
@@ -114,7 +115,7 @@ leyenda de placeholder, mantener el `viewBox` y volver a renderizar los previews
 | Regla | Valor | Fuente |
 |---|---|---|
 | Proporción | 4:5 vertical, encuadre centrado | Propuesta de diseño |
-| Fondo | Degradado `#FFF2DD → #FFDEAB` (`--product-bg`), sin blanco puro | Identidad pop urbana |
+| Fondo | Degradado `#FFE6FB → #E69ADE` (`--product-bg`), sin blanco puro | Identidad pop urbana (Rev. 3, fondos lila) |
 | Objeto | Frasco completo, sin recortes ni manos | **(TBD)** calidad de las fotos |
 | Tratamiento | Sin filtros de color fuertes; sin marcos ni brillos | Propuesta de diseño |
 | Texto sobre imagen | Permitido solo el tag de oferta o estado | Propuesta de diseño |
@@ -137,25 +138,27 @@ La paleta completa vive en `tokens.css`. Dirección **pop urbana**:
 
 - **Morado marca** `#30004B`: marca, botones primarios, franjas, texto.
 - **Naranja vibrante** `#FEBD59`: CTA, ofertas, etiquetas, títulos extruidos.
-- **Naranja claro** `#FFDEAB`: fondo general y secciones secundarias.
+- **Lila exterior** `#E69ADE`: fondo general y secciones secundarias.
+- **Lila interior** `#FFE6FB`: paneles, avisos, portada y superficies de lectura.
 - **Blanco puro** `#FFFFFF`: tarjetas, paneles y ficha. Sin tints.
 - **Verde stock** `#0F6B3F` y **ámbar encargo** `#8A5200`: estados.
 - **Alerta** `#B3261E`: solo errores reales.
 
 Reglas duras:
 
-1. **Nunca blanco sobre naranja** (1.66:1). Todo relleno naranja lleva texto
-   morado.
-2. **Un solo color de acción por pantalla.** El CTA principal es morado con
-   texto blanco; el naranja se reserva para ofertas y acciones secundarias de
-   énfasis.
-3. **Tarjetas siempre blancas.** El naranja claro es fondo, no superficie de
-   lectura.
-4. **El estado nunca se comunica solo por color:** siempre lleva texto.
+1. **Nunca blanco sobre naranja** (1.66:1) **ni blanco sobre lila exterior**
+   (2.09:1). Todo relleno naranja lleva texto morado.
+2. **El CTA principal es naranja con texto morado.** El morado se reserva para
+   la acción primaria del panel y para las franjas de marca.
+3. **Tarjetas siempre blancas.** El lila es fondo, no superficie de lectura; el
+   texto atenuado no va sobre el lila exterior (3.16:1).
+4. **El estado nunca se comunica solo por color:** siempre lleva texto, y los
+   estados van sobre blanco o lila interior.
 5. **La extrusión es decorativa.** Nunca en precios, párrafos ni botones.
 
-Ratios verificados: tinta sobre blanco 17.11:1, tinta sobre naranja claro
-13.27:1, naranja sobre morado 10.30:1, blanco sobre morado 17.11:1.
+Ratios verificados: tinta sobre blanco 17.11:1, tinta sobre lila interior
+14.64:1, tinta sobre lila exterior 8.18:1, texto suave sobre exterior 4.97:1,
+naranja sobre morado 10.30:1, blanco sobre morado 17.11:1.
 
 ---
 
@@ -180,6 +183,7 @@ necesario.
 - Repetir el beige/marrón de la planilla como color principal.
 - Oro + negro + mármol como atajo de "lujo".
 - Texto blanco sobre naranja vibrante (falla contraste).
+- Texto blanco o atenuado sobre lila exterior (falla contraste).
 - Degradados suaves, glows, sombras difusas: la identidad usa sombras duras.
 - Serif o Molenila (descartadas por el cliente): la marca es redondeada.
 - Extrusión en cuerpos de texto, precios, botones o íconos.

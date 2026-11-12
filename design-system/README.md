@@ -2,14 +2,17 @@
 
 ```
 Mode: system-and-mockups
-Revision: 2
+Revision: 3
 Approval: pending (2026-11-11)
 ```
 
 > **Identidad confirmada, logo todavía no.** Los clientes confirmaron la
 > identidad visual el 2026-11-11 (decisión **D-07**): paleta morado/naranja,
-> tipografía redondeada y estilo pop urbano. El **logo real sigue siendo un
-> placeholder** rotulado como tal: no existe un archivo de marca aprobado.
+> tipografía redondeada y estilo pop urbano. La **revisión 3** reemplaza los
+> fondos naranja por una familia lila derivada de `#ffabf8` (exterior
+> `#e69ade`, interior `#ffe6fb`), a pedido de los dueños. El **logo real sigue
+> siendo un placeholder** rotulado como tal: no existe un archivo de marca
+> aprobado.
 
 Este documento es la fuente de verdad de la fundación visual. Los mockups de
 cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión.
@@ -25,10 +28,12 @@ cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión
    revisa con el usuario.
 3. La implementación no empieza hasta que ese mockup esté aprobado.
 
-**Estado:** `Revision: 2` pendiente de aprobación. La revisión 1 (verde pino +
+**Estado:** `Revision: 3` pendiente de aprobación. La revisión 1 (verde pino +
 cobre + serif) fue aprobada el 2026-11-05 y **quedó reemplazada** por la
-identidad oficial. La aprobación de la revisión 2 la otorga el usuario tras
-revisar `components.html`, `mockups/c-01-shell/` y los previews.
+identidad oficial. La revisión 2 (fondos naranja) fue revisada por los dueños,
+que pidieron fondos lila; la revisión 3 la reemplaza. La aprobación de la
+revisión 3 la otorga el usuario tras revisar `components.html`, el mockup del
+shell de C-01 y los previews.
 
 ---
 
@@ -44,7 +49,7 @@ revisar `components.html`, `mockups/c-01-shell/` y los previews.
 | `assets/logo.svg` | Logo **placeholder** rotulado como provisional, ya en la paleta nueva. |
 | `assets/product-placeholder.svg` | Placeholder 4:5 para perfumes sin foto. |
 | `previews/` | Capturas 390×844 y 1440×900 + instrucciones de re-render. |
-| `mockups/c-01-shell/` | Mockup del shell de C-01 con esta revisión (gate de aprobación). |
+| `mockups/` | Mockups de cada change; el shell de C-01 vive en `openspec/changes/c-01-fundacion-proyecto/mockups/` (gate de aprobación). |
 
 Sin build, sin Figma y sin cuentas pagas. **Sí hay dos fuentes de Google
 Fonts** (DynaPuff y Nunito), decisión aceptada con la identidad oficial; en
@@ -92,14 +97,14 @@ Fuente: `docs/discovery/brief-clientes.md`,
 
 ### Dirección visual
 
-**"Pop urbano".** Morado profundo, naranja vibrante y tipografía redondeada con
-extrusión sólida. La referencia es una gráfica de Instagram de barrio bien
-hecha: alegre, directa, sin solemnidad de joyería.
+**"Pop urbano".** Morado profundo, naranja vibrante, fondos lila y tipografía
+redondeada con extrusión sólida. La referencia es una gráfica de Instagram de
+barrio bien hecha: alegre, directa, sin solemnidad de joyería.
 
 | Atributo | Sí | No |
 |---|---|---|
 | Temperamento | Pop, vibrante, urbano, cercano | Sobrio, editorial, minimalista frío |
-| Color | Morado `#30004b`, naranja `#febd59`, naranja claro `#ffdeab`, blanco puro | Beige/marrón de la planilla, pasteles desaturados, oro + negro |
+| Color | Morado `#30004b`, naranja `#febd59`, lila exterior `#e69ade`, lila interior `#ffe6fb`, blanco puro | Beige/marrón de la planilla, fondos naranja, pasteles desaturados, oro + negro |
 | Tipografía | DynaPuff para display; Nunito para cuerpo y UI | Serif, Molenila, sans geométricas finas de 300 |
 | Forma | Radios grandes, sombras duras sin difuminado, bordes definidos | Sombras difusas, glassmorphism, degradados suaves |
 | Títulos | Naranja con extrusión morada, tamaño grande | Extrusión en párrafos, precios o textos pequeños |
@@ -126,13 +131,15 @@ en componentes, salvo valores geométricos de layout.
 |---|---|---|
 | `--color-primary-700` | `#30004b` | **Marca** y acción primaria |
 | `--color-accent-600` | `#febd59` | **CTA, ofertas y énfasis** |
-| `--color-accent-100` / `--color-paper` | `#ffdeab` | **Fondo general** y secciones secundarias |
+| `--color-accent-100` | `#ffdeab` | Texto suave sobre morado (pie); ya no es fondo |
+| `--color-lilac-300` / `--color-surface-alt` | `#e69ade` | **Fondo general/exterior** y secciones secundarias |
+| `--color-lilac-050` / `--color-paper` | `#ffe6fb` | **Paneles interiores**, avisos y portada |
+| `--color-lilac-100` | `#ffabf8` | Base de referencia de la familia lila |
 | `--color-surface` | `#FFFFFF` | Tarjetas, paneles, ficha |
-| `--color-surface-alt` | `#FFF2DD` | Secciones muy claras |
 | `--color-band` | `#30004B` | Franjas de marca (barra superior, pie) |
 | `--color-ink` | `#30004B` | Texto principal |
-| `--color-ink-soft` | `#5D2A6E` | Texto secundario |
-| `--color-ink-muted` | `#7A4A8A` | Metadatos y ayudas |
+| `--color-ink-soft` | `#5D2A6E` | Texto secundario; mínimo sobre lila exterior |
+| `--color-ink-muted` | `#7A4A8A` | Metadatos y ayudas sobre blanco/interior (no sobre exterior) |
 | `--color-line` | `#E9D5EF` | Bordes de 1 px |
 | `--color-stock` | `#0F6B3F` | "En stock" |
 | `--color-order` | `#8A5200` | "Sin stock · por encargo" |
@@ -148,20 +155,30 @@ Medido con WCAG 2.1 sobre los pares reales:
 | Par | Ratio | Veredicto |
 |---|---|---|
 | Tinta `#30004B` sobre blanco | **17.11:1** | AAA |
-| Tinta sobre naranja claro `#FFDEAB` | **13.27:1** | AAA |
+| Tinta sobre lila interior `#FFE6FB` | **14.64:1** | AAA |
+| Tinta sobre lila exterior `#E69ADE` | **8.18:1** | AAA |
+| Texto suave `#5D2A6E` sobre interior | **8.89:1** | AAA |
+| Texto suave `#5D2A6E` sobre exterior | **4.97:1** | AA |
+| Texto atenuado `#7A4A8A` sobre interior | **5.66:1** | AA |
+| Texto atenuado `#7A4A8A` sobre exterior | **3.16:1** | **solo texto grande; no usar** |
 | Naranja `#FEBD59` sobre morado | **10.30:1** | AAA |
 | Morado sobre naranja `#FEBD59` | **10.30:1** | AAA |
-| Texto suave `#5D2A6E` sobre naranja claro | **8.06:1** | AAA |
-| Texto atenuado `#7A4A8A` sobre naranja claro | **5.13:1** | AA |
 | Blanco sobre naranja `#FEBD59` | **1.66:1** | **prohibido** |
+| Blanco sobre lila exterior `#E69ADE` | **2.09:1** | **prohibido para texto** |
+| Naranja `#FEBD59` sobre lila exterior | **1.26:1** | **no usar como texto** |
 
 Consecuencias obligatorias:
 
 1. **Nunca texto blanco sobre naranja vibrante.** Todo relleno naranja lleva
    texto morado (`--color-offer` / `--color-primary-700`).
-2. **Las tarjetas son blancas.** El naranja claro va de fondo general o en
-   secciones secundarias.
-3. **El título extruido es decorativo, no cuerpo de texto.** El relleno naranja
+2. **Las tarjetas son blancas.** El lila exterior es el fondo general; el lila
+   interior es para paneles, avisos y portada. Ningún texto blanco va sobre
+   lila.
+3. **El texto atenuado no va sobre el lila exterior.** A 3.16:1 no llega a AA:
+   usá `--color-ink-soft` (4.97:1) o colocá el texto sobre `--color-paper` o
+   blanco. Los estados (`stock`, `order`, `danger`) tampoco alcanzan AA sobre el
+   exterior: van siempre sobre blanco o interior.
+4. **El título extruido es decorativo, no cuerpo de texto.** El relleno naranja
    sobre blanco mide 1.66:1: solo se usa en titulares grandes (≥ 28 px). Sobre
    fondos claros siempre lleva `-webkit-text-stroke: var(--title-stroke-lg)` con
    `paint-order: stroke fill`, para que el contorno morado sostenga la forma.
@@ -273,6 +290,8 @@ columna y no debe haber scroll horizontal.
 - La cabecera no se rompe a 390 px (se ocultan nav y buscador).
 - El morado y el naranja no se tocan sin separación (bordes o blanco de por
   medio) y ningún texto blanco cae sobre naranja.
+- El lila exterior no lleva texto atenuado ni texto blanco; el texto vive sobre
+  interior o blanco.
 - La extrusión no invade el titular siguiente ni se corta en el borde.
 - La ficha pasa a una columna y el selector de presentación sigue legible.
 - El carrito no supera el ancho de la pantalla.
@@ -284,7 +303,7 @@ columna y no debe haber scroll horizontal.
 
 ## 7. Aprobación
 
-`Approval: pending (2026-11-11)` — revisión 2.
+`Approval: pending (2026-11-11)` — revisión 3.
 
 Para aprobar, el usuario debe revisar `components.html`, el mockup del shell de
 C-01 y los previews, y decir explícitamente que la fundación sirve. Recién
@@ -342,7 +361,8 @@ Para el logo reducido (sello "OP") se recomienda un archivo aparte,
 2. No escribir valores hex ni `px` de color dentro de `components.html` ni de
    los mockups; usar `var(--token)`.
 3. Verificar contraste de los pares texto/fondo (mínimo 4.5:1 para texto normal,
-   3:1 para texto grande y bordes de foco). Recordar la regla del naranja.
+   3:1 para texto grande y bordes de foco). Recordar las reglas del naranja y
+   del lila exterior.
 4. Revisar que "En stock", "Encargo", "Oferta" y "Alerta" sigan diferenciándose,
    y que el estado no dependa solo del color.
 5. Re-renderizar los previews y los mockups afectados.
@@ -398,7 +418,7 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
 
 | # | Decisión | Impacto | Estado |
 |---|---|---|---|
-| 1 | ~~Paleta definitiva~~ | Toda la interfaz | **Resuelta (D-07, 2026-11-11):** morado `#30004b`, naranja `#febd59`, naranja claro `#ffdeab`, DynaPuff + Nunito |
+| 1 | ~~Paleta definitiva~~ | Toda la interfaz | **Resuelta (D-07, 2026-11-11; Rev. 3):** morado `#30004b`, naranja `#febd59`, lila exterior `#e69ade`, lila interior `#ffe6fb`, DynaPuff + Nunito |
 | 2 | **Logo real** y versión reducida | Cabecera, redes, impresos | **Pendiente**: solo existe placeholder; la paleta ya está confirmada |
 | 3 | Nombre exacto y bajada ("Oloroso Pit" / "Perfumes") | `brand.js`, logo | A confirmar |
 | 4 | Fotos: origen, calidad y responsable de subirlas | Tarjetas y ficha | Abierto en la KB |
