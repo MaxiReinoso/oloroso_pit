@@ -143,9 +143,9 @@
     "created_by": "design-system",
     "mode": "system-and-mockups",
     "status": "pending",
-    "revision": 2,
+    "revision": 4,
     "path": "design-system/README.md",
-    "approved_revision_note": "Revision 1 aprobada (identidad beige/verde). Revision 2 reemplaza la paleta por la identidad oficial confirmada por el cliente y queda pendiente de aprobacion."
+    "approved_revision_note": "Revision 1 aprobada (identidad beige/verde). Revision 2 reemplaza la paleta por la identidad oficial confirmada por el cliente. Revision 3 pasa los fondos a lila. Revision 4 (2026-11-13) fija --color-surface-alt #CC7BCA, --color-paper #F0BBEA y --color-ink-soft #451452; queda pendiente de aprobacion."
   },
   "roadmap": {
     "created_by": "roadmap-generator",

@@ -2,17 +2,18 @@
 
 ```
 Mode: system-and-mockups
-Revision: 3
-Approval: pending (2026-11-11)
+Revision: 4
+Approval: pending (2026-11-13)
 ```
 
 > **Identidad confirmada, logo todavía no.** Los clientes confirmaron la
 > identidad visual el 2026-11-11 (decisión **D-07**): paleta morado/naranja,
-> tipografía redondeada y estilo pop urbano. La **revisión 3** reemplaza los
-> fondos naranja por una familia lila derivada de `#ffabf8` (exterior
-> `#e69ade`, interior `#ffe6fb`), a pedido de los dueños. El **logo real sigue
-> siendo un placeholder** rotulado como tal: no existe un archivo de marca
-> aprobado.
+> tipografía redondeada y estilo pop urbano. La **revisión 4 (2026-11-13)**
+> ajusta los fondos lila a `--color-surface-alt: #CC7BCA`, `--color-paper:
+> #F0BBEA` y oscurece `--color-ink-soft: #451452`. Los tokens
+> `--color-lilac-050` y `--color-lilac-300` se conservan como estaban. El
+> **logo real sigue siendo un placeholder** rotulado como tal: no existe un
+> archivo de marca aprobado.
 
 Este documento es la fuente de verdad de la fundación visual. Los mockups de
 cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión.
@@ -28,12 +29,13 @@ cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión
    revisa con el usuario.
 3. La implementación no empieza hasta que ese mockup esté aprobado.
 
-**Estado:** `Revision: 3` pendiente de aprobación. La revisión 1 (verde pino +
-cobre + serif) fue aprobada el 2026-11-05 y **quedó reemplazada** por la
-identidad oficial. La revisión 2 (fondos naranja) fue revisada por los dueños,
-que pidieron fondos lila; la revisión 3 la reemplaza. La aprobación de la
-revisión 3 la otorga el usuario tras revisar `components.html`, el mockup del
-shell de C-01 y los previews.
+**Estado:** `Revision: 4` pendiente de aprobación (2026-11-13). La revisión 1
+(verde pino + cobre + serif) fue aprobada el 2026-11-05 y **quedó reemplazada**
+por la identidad oficial. La revisión 2 (fondos naranja) fue revisada por los
+dueños, que pidieron fondos lila; la revisión 3 la reemplazó y la revisión 4
+ajusta sus valores (`#CC7BCA` exterior, `#F0BBEA` interior, `#451452` tinta
+suave). La aprobación de la revisión 4 la otorga el usuario tras revisar
+`components.html`, el mockup del shell de C-01 y los previews.
 
 ---
 
@@ -132,13 +134,15 @@ en componentes, salvo valores geométricos de layout.
 | `--color-primary-700` | `#30004b` | **Marca** y acción primaria |
 | `--color-accent-600` | `#febd59` | **CTA, ofertas y énfasis** |
 | `--color-accent-100` | `#ffdeab` | Texto suave sobre morado (pie); ya no es fondo |
-| `--color-lilac-300` / `--color-surface-alt` | `#e69ade` | **Fondo general/exterior** y secciones secundarias |
-| `--color-lilac-050` / `--color-paper` | `#ffe6fb` | **Paneles interiores**, avisos y portada |
+| `--color-surface-alt` | `#CC7BCA` | **Fondo general/exterior** y secciones secundarias |
+| `--color-paper` | `#F0BBEA` | **Paneles interiores**, avisos y portada |
+| `--color-lilac-300` | `#e69ade` | Lila de la Rev. 3, conservado |
+| `--color-lilac-050` | `#ffe6fb` | Lila de la Rev. 3, conservado |
 | `--color-lilac-100` | `#ffabf8` | Base de referencia de la familia lila |
 | `--color-surface` | `#FFFFFF` | Tarjetas, paneles, ficha |
 | `--color-band` | `#30004B` | Franjas de marca (barra superior, pie) |
 | `--color-ink` | `#30004B` | Texto principal |
-| `--color-ink-soft` | `#5D2A6E` | Texto secundario; mínimo sobre lila exterior |
+| `--color-ink-soft` | `#451452` | Texto secundario; mínimo sobre lila exterior |
 | `--color-ink-muted` | `#7A4A8A` | Metadatos y ayudas sobre blanco/interior (no sobre exterior) |
 | `--color-line` | `#E9D5EF` | Bordes de 1 px |
 | `--color-stock` | `#0F6B3F` | "En stock" |
@@ -151,6 +155,10 @@ en componentes, salvo valores geométricos de layout.
 ### 4.2 Contraste — reglas duras
 
 Medido con WCAG 2.1 sobre los pares reales:
+
+> **Revisión 4 (2026-11-13):** esta tabla mide la revisión 3. Los valores
+> nuevos (`#CC7BCA`, `#F0BBEA`, `#451452`) todavía no tienen verificación de
+> contraste registrada.
 
 | Par | Ratio | Veredicto |
 |---|---|---|
