@@ -13,7 +13,7 @@ supabase/.temp/
 supabase/.branches/
 
 # Backups del orquestador
-.active-orchestrator-state.json.bak-*
+.active-orchestrator-state.json.bak*
 
 # Sistema y editor
 .DS_Store
