@@ -8,7 +8,7 @@
 
 **Estado del proyecto**: no hay código todavía. Todos los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas.
 
-**Política visual**: `design-system/README.md` → `Mode: system-and-mockups`, `Revision: 2`, **aprobación pendiente (2026-11-11)**. La identidad de color y tipografía fue confirmada por los clientes (D-07); el logo sigue siendo un placeholder. Todo change marcado `Visual? Sí` requiere un mockup HTML local, renderizado a 390×844 y 1440×900, y **aprobación explícita del usuario antes de implementar**. Los mockups enlazan `Design system revision: 2` en su `design.md`.
+**Política visual**: `design-system/README.md` → `Mode: system-and-mockups`, `Revision: 4`, **aprobada (2026-11-13, by user)**. La identidad de color y tipografía fue confirmada por los clientes (D-07) y la revisión 4 fija los fondos lila (`#CC7BCA` exterior, `#F0BBEA` interior); el logo sigue siendo un placeholder. Todo change marcado `Visual? Sí` requiere un mockup HTML local, renderizado a 390×844 y 1440×900, y **aprobación explícita del usuario antes de implementar**. Los mockups enlazan `Design system revision: 4` en su `design.md`.
 
 ---
 
@@ -118,7 +118,7 @@ GATE 11: MVP completo + C-21 ✓
 ### [C-01] `fundacion-proyecto`
 - **Estado**: `[ ]` pendiente
 - **Funcionalidad**: el shell estático del sitio compila y levanta con Supabase y los tokens visuales.
-- **Visual?**: Sí — requiere mockup aprobado (revision 2). Mockup del shell en `openspec/changes/c-01-fundacion-proyecto/mockups/`, **pendiente de aprobación**.
+- **Visual?**: Sí — requiere mockup aprobado (revisión 4). Mockup del shell en `openspec/changes/c-01-fundacion-proyecto/mockups/`, **aprobado (2026-11-13)**.
 - **Governance**: BAJO
 - **Dependencias**: ninguna
 - **Bloqueos de cliente**: ninguno (T-01 resuelta: Astro + islas React + Supabase).
@@ -686,7 +686,7 @@ GATE 11: MVP completo + C-21 ✓
 ### [C-22] `despliegue-produccion`
 - **Estado**: `[ ]` pendiente
 - **Funcionalidad**: el dominio sirve el catálogo y un pedido de prueba llega al WhatsApp configurado.
-- **Visual?**: No (usa la identidad confirmada, `design-system` revisión 2; el logo sigue provisional y se reemplaza cuando exista el archivo real).
+- **Visual?**: No (usa la identidad confirmada, `design-system` revisión 4; el logo sigue provisional y se reemplaza cuando exista el archivo real).
 - **Governance**: ALTO
 - **Dependencias**: todas las del MVP + **C-21 con precedencia dura**.
 - **Bloqueos de cliente**: D-07 (identidad final del lanzamiento); D-05 (contenido fotográfico).
@@ -741,7 +741,7 @@ GATE 11: MVP completo + C-21 ✓
 | **T-01** | Stack: **Astro + islas React + Supabase** | C-01 deja de estar bloqueado. La salida es estática; la hidratación es por islas. |
 | **D-01** | La tarjeta muestra el **precio del frasco sellado**; decants y precios se ven en la ficha | El alta exige al menos un frasco sellado con precio. No bloquea el esquema. |
 | **D-09** | Género **selección única**; acordes **OR**, **sin tope** de selección | C-07 y C-10 quedan sin bloqueo de semántica. |
-| **D-07** | **Identidad visual confirmada por los clientes (2026-11-11)**: pop urbano, morado `#30004B` + naranja `#FEBD59` + naranja claro `#FFDEAB`, DynaPuff + Nunito, sombras duras | `design-system` revisión 2; C-01 y C-22 desbloqueados en lo visual. El logo real sigue pendiente (placeholder). |
+| **D-07** | **Identidad visual confirmada por los clientes (2026-11-11)**: pop urbano, morado `#30004B` + naranja `#FEBD59` + naranja claro `#FFDEAB`, fondos lila `#CC7BCA` / `#F0BBEA`, DynaPuff + Nunito, sombras duras | `design-system` revisión 4 (aprobada 2026-11-13); C-01 y C-22 desbloqueados en lo visual. El logo real sigue pendiente (placeholder). |
 | **T-02** | **Eliminado**: el alojamiento de imágenes queda dentro de **D-05** | No existe como decisión separada. |
 | **—** | **Eliminación de `activo`/`activa`** en perfumes, líneas, marcas y frases | No hay estado publicado/despublicado. Para retirar un perfume hay que borrarlo (ver R-05). |
 | **—** | **Eliminación de `presentaciones.disponible`** | Un solo concepto de visibilidad. No se puede ocultar una presentación sin borrarla. |

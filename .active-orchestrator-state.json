@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "roadmap",
+  "step": "done",
   "owner": "active-orchestrator",
   "discovery": {
     "created_by": "discovery-research",
@@ -151,5 +151,80 @@
   "roadmap": {
     "created_by": "roadmap-generator",
     "changes_file": "CHANGES.md"
+  },
+  "skills": {
+    "created_by": "find-skill",
+    "recommended": [
+      {
+        "name": "supabase-postgres-best-practices",
+        "repo": "supabase/agent-skills",
+        "why": "Skill oficial de Supabase (484K instalaciones, repo de 3K estrellas): Postgres, migraciones, indices, constraints y politicas RLS. Cubre C-02 (esquema + RLS + triggers + CHECK), C-03 (seed/vista publica) y C-21 (importacion masiva)."
+      },
+      {
+        "name": "supabase",
+        "repo": "supabase/agent-skills",
+        "why": "Skill oficial de Supabase (364K instalaciones, repo de 3K estrellas): cliente supabase-js, Auth con sesiones/JWT, Storage y auditorias de seguridad; declara soporte explicito de Astro. Cubre C-01 (cliente browser), C-13 (login sin signUp publico), C-16 (imagenes) y C-19 (settings)."
+      },
+      {
+        "name": "accessibility",
+        "repo": "addyosmani/web-quality-skills",
+        "why": "WCAG 2.2 con checks de contraste, foco, labels y tamano de objetivo (70K instalaciones, repo de 3K estrellas). Aplica a toda la UI con paleta lila/morado (C-04 a C-20) y al panel de dos administradores no tecnicos."
+      },
+      {
+        "name": "astro",
+        "repo": "astrolicious/agent-skills",
+        "why": "Guia general de Astro: CLI, config, routing, islas e hidratacion (19.5K instalaciones). Es la unica skill de Astro con volumen real para construir sitios. Cubre C-01 y las rutas de C-04 a C-10. Ojo: el repo tiene solo 13 estrellas, es referencia de docs, no un framework de trabajo."
+      },
+      {
+        "name": "vercel-react-best-practices",
+        "repo": "vercel-labs/agent-skills",
+        "why": "Patrones de React y rendimiento en componentes (896K instalaciones, verificado por Vercel). Util para las islas React de C-08 (selector de presentacion), C-11 (carrito con estado y localStorage) y C-12. Ignorar las reglas exclusivas de Next.js server components: el proyecto es Astro estatico."
+      },
+      {
+        "name": "performance",
+        "repo": "addyosmani/web-quality-skills",
+        "why": "Optimizacion de carga y assets (44K instalaciones). Respalda el criterio de aceptacion de C-22: catalogo sin errores ni requests fallidos en movil 4G, con imagenes de catalogo y fuentes auto-hospedadas."
+      },
+      {
+        "name": "fixing-metadata",
+        "repo": "ibelick/ui-skills",
+        "why": "Metadata, Open Graph, canonical y structured data (19.9K instalaciones, repo de 11K estrellas). Complementa C-04 (titulo y descripcion SEO por pagina) y C-22 (sitemap.xml, robots.txt, metadatos de producto)."
+      },
+      {
+        "name": "supabase-audit-rls",
+        "repo": "yoanbernabeu/supabase-pentest-skills",
+        "why": "Auditoria ofensiva de RLS con pruebas concretas de lectura/escritura por rol (1.2K instalaciones, 75 estrellas). Directo al riesgo R-07 y a los criterios bloqueantes de C-02, C-13 y C-22 (anon sin escritura, signUp cerrado). Opcional: escribe archivos de contexto de auditoria en el repo."
+      }
+    ],
+    "installed": [
+      "supabase",
+      "supabase-postgres-best-practices",
+      "accessibility"
+    ],
+    "install_note": "Instaladas por el orquestador tras el gate del usuario (2026-11-13) en ~/.agents/skills. npx skills reporto un fallo cosmetico del target \"PromptScript\" (no soporta instalacion global); las skills quedaron copiadas y disponibles."
+  },
+  "registry": {
+    "created_by": "skill-registry",
+    "file": ".atl/skill-registry.md"
+  },
+  "agents": {
+    "created_by": "agent-instruction",
+    "files": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "reglas_applied": [
+      "brief v5 manda sobre todo",
+      "stack T-01 Astro + islas React + Supabase, sin VPS",
+      "sin pagos online, pedido por wa.me",
+      "design-system revision 4 como unica referencia visual",
+      "cambio de token o asset sube revision y vuelve Approval a pending",
+      "TypeScript estricto, sin any, tipos de filas Supabase generados",
+      "RLS obligatoria, anon solo lectura, escritura authenticated, signUp cerrado",
+      "precios/marcas/acordes/frases/numero de WhatsApp como datos, no codigo",
+      "sin datos del comprador; carrito en localStorage",
+      "sin hex/px de color fuera de tokens.css; reglas de contraste",
+      "islas React con client:visible/client:idle por defecto"
+    ]
   }
 }
