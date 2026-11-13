@@ -7,7 +7,7 @@ Capturas de `components.html` en los dos tamaños de referencia:
 | `components-mobile-390x844.png` | 390 × 844 |
 | `components-desktop-1440x900.png` | 1440 × 900 |
 
-Generadas el 2026-11-11 (revisión 3) con Chrome headless y emulación de viewport
+Generadas el 2026-11-13 (revisión 4) con Chrome headless y emulación de viewport
 por DevTools (`Emulation.setDeviceMetricsOverride`). No son full-page: muestran
 el primer viewport. El resto del documento se revisa abriendo
 `../components.html`.
@@ -35,8 +35,8 @@ document.documentElement.scrollWidth    // debe ser igual, sin scroll horizontal
 
 ## Nota
 
-Los previews acompañan la **revisión 3** del sistema (identidad oficial
-confirmada el 2026-11-11; fondos lila a pedido de los dueños). Si cambia un
-token o el logo, hay que volver a generarlos y pedir aprobación de nuevo. El
-mockup del shell de C-01 tiene sus propios previews en
+Los previews acompañan la **revisión 4** del sistema (identidad oficial
+confirmada el 2026-11-11; fondos lila `#CC7BCA` / `#F0BBEA` desde el
+2026-11-13). Si cambia un token o el logo, hay que volver a generarlos y pedir
+aprobación de nuevo. El mockup del shell de C-01 tiene sus propios previews en
 `openspec/changes/c-01-fundacion-proyecto/mockups/previews/`.

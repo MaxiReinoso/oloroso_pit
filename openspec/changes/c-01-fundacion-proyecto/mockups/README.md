@@ -1,17 +1,17 @@
 # Mockup — C-01 `fundacion-proyecto` · Shell del sitio
 
 ```
-Design system revision: 3
+Design system revision: 4
 Decision: yes
-Approval: pending (2026-11-11)
-Preview: rendered (2026-11-11)
+Approval: approved (2026-11-13, by user)
+Preview: rendered (2026-11-13)
 Visual verify: pending (se completa al implementar C-01)
 ```
 
 Mockup local del **shell** (cabecera, portada, pie) con la identidad oficial
 confirmada por los clientes el 2026-11-11 (D-07) y los fondos lila de la
-revisión 3. No es código final: es el artefacto de aprobación previo a
-implementar C-01.
+revisión 4 (`#CC7BCA` exterior, `#F0BBEA` interior). No es código final: es el
+artefacto de aprobación previo a implementar C-01.
 
 ## Archivos
 
@@ -91,22 +91,22 @@ Para re-renderizar a mano: abrir el HTML en Chrome, F12, Ctrl+Shift+M, elegir
 
 ## Aprobación
 
-`Approval: pending (2026-11-11)`.
+`Approval: approved (2026-11-13, by user)`.
 
-Para aprobar, el usuario revisa `shell.html` y las capturas y dice
-explícitamente que la dirección sirve. Recién entonces:
+El usuario revisó `shell.html` y las capturas y aprobó la dirección. Por lo
+tanto:
 
-1. Cambiar acá a `Approval: approved (<fecha>, by user)`.
-2. Copiar el bloque `## UI Mockups` de este README al `design.md` del change
-   cuando se corra `/opsx:propose C-01-fundacion-proyecto`.
-3. Recién después implementar C-01.
+1. Este mockup queda aprobado contra `Design system revision: 4`.
+2. El bloque `## UI Mockups` de este README se copia al `design.md` del change
+   cuando se corra `/opsx:propose c-01-fundacion-proyecto`.
+3. Recién después se implementa C-01.
 
 Un pedido de cambios deja `Approval: pending` y, si toca tokens compartidos,
 sube la revisión del design system.
 
 ## Fuentes
 
-- `design-system/README.md` §3–§4 (dirección y tokens, revisión 3)
+- `design-system/README.md` §3–§4 (dirección y tokens, revisión 4)
 - `design-system/tokens.css`
 - `CHANGES.md` §C-01, §6 (D-07), §8
 - `knowledge-base/05_reglas_de_negocio.md` (RN-CAT-02)

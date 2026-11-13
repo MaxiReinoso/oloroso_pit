@@ -142,10 +142,11 @@
   "visual_design": {
     "created_by": "design-system",
     "mode": "system-and-mockups",
-    "status": "pending",
+    "status": "approved",
     "revision": 4,
     "path": "design-system/README.md",
-    "approved_revision_note": "Revision 1 aprobada (identidad beige/verde). Revision 2 reemplaza la paleta por la identidad oficial confirmada por el cliente. Revision 3 pasa los fondos a lila. Revision 4 (2026-11-13) fija --color-surface-alt #CC7BCA, --color-paper #F0BBEA y --color-ink-soft #451452; queda pendiente de aprobacion."
+    "approved_revision_note": "Revision 1 aprobada (identidad beige/verde). Revision 2 reemplaza la paleta por la identidad oficial. Revision 3 pasa los fondos a lila. Revision 4 (2026-11-13) fija --color-surface-alt #CC7BCA, --color-paper #F0BBEA y --color-ink-soft #451452. Revision 4 APROBADA por el usuario el 2026-11-13 tras revisar components.html, el mockup del shell de C-01 y los previews 390x844 / 1440x900; contrastes WCAG verificados en design-system/README.md 4.2. Vigente para los mockups de cada change.",
+    "approved_at": "2026-11-13"
   },
   "roadmap": {
     "created_by": "roadmap-generator",

@@ -1,6 +1,6 @@
 /*
  * Oloroso Pit — single point of change for the displayed brand name.
- * Revision: 3 · Approval: pending (2026-11-11)
+ * Revision: 4 · Approval: pending (2026-11-13)
  *
  * Usage in any local HTML preview:
  *   <h1 data-brand-name>Oloroso Pit</h1>

@@ -36,7 +36,7 @@ solemnidad de joyería.
 |---|---|---|
 | Temperamento | Pop, vibrante, urbano | Sobrio, editorial, frío |
 | Lujo | Cercano y honesto: buen precio, buen perfume | Oro + negro, mármol, brillos |
-| Color | Morado `#30004B` + naranja `#FEBD59` + lila exterior `#E69ADE` + lila interior `#FFE6FB` + blanco puro | Beige/marrón de la planilla, fondos naranja, pasteles desaturados |
+| Color | Morado `#30004B` + naranja `#FEBD59` + lila exterior `#CC7BCA` + lila interior `#F0BBEA` + blanco puro | Beige/marrón de la planilla, fondos naranja, pasteles desaturados |
 | Tipografía | DynaPuff para display; Nunito para cuerpo y UI | Serif, Molenila, sans finas de 300 |
 | Forma | Radios grandes, sombras duras sin difuminado | Sombras difusas, glassmorphism, degradados suaves |
 | Densidad | Aireada en catálogo; clara y directa en admin | Tarjetas apiladas sin jerarquía |
@@ -115,7 +115,7 @@ leyenda de placeholder, mantener el `viewBox` y volver a renderizar los previews
 | Regla | Valor | Fuente |
 |---|---|---|
 | Proporción | 4:5 vertical, encuadre centrado | Propuesta de diseño |
-| Fondo | Degradado `#FFE6FB → #E69ADE` (`--product-bg`), sin blanco puro | Identidad pop urbana (Rev. 3, fondos lila) |
+| Fondo | Degradado `#F0BBEA → #CC7BCA` (`--product-bg`), sin blanco puro | Identidad pop urbana (Rev. 4, fondos lila) |
 | Objeto | Frasco completo, sin recortes ni manos | **(TBD)** calidad de las fotos |
 | Tratamiento | Sin filtros de color fuertes; sin marcos ni brillos | Propuesta de diseño |
 | Texto sobre imagen | Permitido solo el tag de oferta o estado | Propuesta de diseño |
@@ -138,27 +138,28 @@ La paleta completa vive en `tokens.css`. Dirección **pop urbana**:
 
 - **Morado marca** `#30004B`: marca, botones primarios, franjas, texto.
 - **Naranja vibrante** `#FEBD59`: CTA, ofertas, etiquetas, títulos extruidos.
-- **Lila exterior** `#E69ADE`: fondo general y secciones secundarias.
-- **Lila interior** `#FFE6FB`: paneles, avisos, portada y superficies de lectura.
+- **Lila exterior** `#CC7BCA`: fondo general y secciones secundarias.
+- **Lila interior** `#F0BBEA`: paneles, avisos, portada y superficies de lectura.
 - **Blanco puro** `#FFFFFF`: tarjetas, paneles y ficha. Sin tints.
 - **Verde stock** `#0F6B3F` y **ámbar encargo** `#8A5200`: estados.
 - **Alerta** `#B3261E`: solo errores reales.
 
 Reglas duras:
 
-1. **Nunca blanco sobre naranja** (1.66:1) **ni blanco sobre lila exterior**
-   (2.09:1). Todo relleno naranja lleva texto morado.
+1. **Nunca blanco sobre naranja** (1.66:1) **ni blanco sobre lila** (2.90:1 en
+   el exterior, 1.62:1 en el interior). Todo relleno naranja lleva texto morado.
 2. **El CTA principal es naranja con texto morado.** El morado se reserva para
    la acción primaria del panel y para las franjas de marca.
 3. **Tarjetas siempre blancas.** El lila es fondo, no superficie de lectura; el
-   texto atenuado no va sobre el lila exterior (3.16:1).
-4. **El estado nunca se comunica solo por color:** siempre lleva texto, y los
-   estados van sobre blanco o lila interior.
+   texto atenuado no va sobre el lila exterior (2.29:1).
+4. **El estado nunca se comunica solo por color:** siempre lleva texto. Los
+   estados van sobre blanco; sobre el papel lila solo en texto grande (≥ 24 px),
+   porque quedan en ~4.0:1.
 5. **La extrusión es decorativa.** Nunca en precios, párrafos ni botones.
 
-Ratios verificados: tinta sobre blanco 17.11:1, tinta sobre lila interior
-14.64:1, tinta sobre lila exterior 8.18:1, texto suave sobre exterior 4.97:1,
-naranja sobre morado 10.30:1, blanco sobre morado 17.11:1.
+Ratios verificados (Rev. 4): tinta sobre blanco 17.11:1, tinta sobre papel lila
+10.59:1, tinta sobre lila exterior 5.91:1, texto suave sobre lila exterior
+4.92:1, naranja sobre morado 10.30:1, blanco sobre morado 17.11:1.
 
 ---
 
@@ -183,7 +184,7 @@ necesario.
 - Repetir el beige/marrón de la planilla como color principal.
 - Oro + negro + mármol como atajo de "lujo".
 - Texto blanco sobre naranja vibrante (falla contraste).
-- Texto blanco o atenuado sobre lila exterior (falla contraste).
+- Texto blanco o atenuado sobre lila (falla contraste en ambos lilas).
 - Degradados suaves, glows, sombras difusas: la identidad usa sombras duras.
 - Serif o Molenila (descartadas por el cliente): la marca es redondeada.
 - Extrusión en cuerpos de texto, precios, botones o íconos.

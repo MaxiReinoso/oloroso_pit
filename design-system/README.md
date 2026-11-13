@@ -3,7 +3,7 @@
 ```
 Mode: system-and-mockups
 Revision: 4
-Approval: pending (2026-11-13)
+Approval: approved (2026-11-13, by user)
 ```
 
 > **Identidad confirmada, logo todavía no.** Los clientes confirmaron la
@@ -29,13 +29,13 @@ cada change (`openspec/changes/<name>/mockups/`) reutilizan esta misma revisión
    revisa con el usuario.
 3. La implementación no empieza hasta que ese mockup esté aprobado.
 
-**Estado:** `Revision: 4` pendiente de aprobación (2026-11-13). La revisión 1
+**Estado:** `Revision: 4` **aprobada por el usuario el 2026-11-13**. La revisión 1
 (verde pino + cobre + serif) fue aprobada el 2026-11-05 y **quedó reemplazada**
 por la identidad oficial. La revisión 2 (fondos naranja) fue revisada por los
 dueños, que pidieron fondos lila; la revisión 3 la reemplazó y la revisión 4
 ajusta sus valores (`#CC7BCA` exterior, `#F0BBEA` interior, `#451452` tinta
-suave). La aprobación de la revisión 4 la otorga el usuario tras revisar
-`components.html`, el mockup del shell de C-01 y los previews.
+suave) con contraste WCAG verificado. La revisión 4 queda vigente para los
+mockups de cada change.
 
 ---
 
@@ -51,7 +51,7 @@ suave). La aprobación de la revisión 4 la otorga el usuario tras revisar
 | `assets/logo.svg` | Logo **placeholder** rotulado como provisional, ya en la paleta nueva. |
 | `assets/product-placeholder.svg` | Placeholder 4:5 para perfumes sin foto. |
 | `previews/` | Capturas 390×844 y 1440×900 + instrucciones de re-render. |
-| `mockups/` | Mockups de cada change; el shell de C-01 vive en `openspec/changes/c-01-fundacion-proyecto/mockups/` (gate de aprobación). |
+| — | Los mockups de cada change viven en `openspec/changes/<name>/mockups/`; el shell de C-01 está en `openspec/changes/c-01-fundacion-proyecto/mockups/` (gate de aprobación). |
 
 Sin build, sin Figma y sin cuentas pagas. **Sí hay dos fuentes de Google
 Fonts** (DynaPuff y Nunito), decisión aceptada con la identidad oficial; en
@@ -106,7 +106,7 @@ barrio bien hecha: alegre, directa, sin solemnidad de joyería.
 | Atributo | Sí | No |
 |---|---|---|
 | Temperamento | Pop, vibrante, urbano, cercano | Sobrio, editorial, minimalista frío |
-| Color | Morado `#30004b`, naranja `#febd59`, lila exterior `#e69ade`, lila interior `#ffe6fb`, blanco puro | Beige/marrón de la planilla, fondos naranja, pasteles desaturados, oro + negro |
+| Color | Morado `#30004b`, naranja `#febd59`, lila exterior `#CC7BCA`, lila interior `#F0BBEA`, blanco puro | Beige/marrón de la planilla, fondos naranja, pasteles desaturados, oro + negro |
 | Tipografía | DynaPuff para display; Nunito para cuerpo y UI | Serif, Molenila, sans geométricas finas de 300 |
 | Forma | Radios grandes, sombras duras sin difuminado, bordes definidos | Sombras difusas, glassmorphism, degradados suaves |
 | Títulos | Naranja con extrusión morada, tamaño grande | Extrusión en párrafos, precios o textos pequeños |
@@ -154,38 +154,42 @@ en componentes, salvo valores geométricos de layout.
 
 ### 4.2 Contraste — reglas duras
 
-Medido con WCAG 2.1 sobre los pares reales:
-
-> **Revisión 4 (2026-11-13):** esta tabla mide la revisión 3. Los valores
-> nuevos (`#CC7BCA`, `#F0BBEA`, `#451452`) todavía no tienen verificación de
-> contraste registrada.
+Medido con WCAG 2.1 sobre los pares reales de la **revisión 4**
+(`#30004B` / `#451452` / `#7A4A8A` sobre `#FFFFFF`, `#F0BBEA` y `#CC7BCA`):
 
 | Par | Ratio | Veredicto |
 |---|---|---|
 | Tinta `#30004B` sobre blanco | **17.11:1** | AAA |
-| Tinta sobre lila interior `#FFE6FB` | **14.64:1** | AAA |
-| Tinta sobre lila exterior `#E69ADE` | **8.18:1** | AAA |
-| Texto suave `#5D2A6E` sobre interior | **8.89:1** | AAA |
-| Texto suave `#5D2A6E` sobre exterior | **4.97:1** | AA |
-| Texto atenuado `#7A4A8A` sobre interior | **5.66:1** | AA |
-| Texto atenuado `#7A4A8A` sobre exterior | **3.16:1** | **solo texto grande; no usar** |
+| Tinta sobre papel lila `#F0BBEA` | **10.59:1** | AAA |
+| Tinta sobre lila exterior `#CC7BCA` | **5.91:1** | AA |
+| Texto suave `#451452` sobre blanco | **14.24:1** | AAA |
+| Texto suave sobre papel lila | **8.81:1** | AAA |
+| Texto suave sobre lila exterior | **4.92:1** | AA |
+| Texto atenuado `#7A4A8A` sobre blanco | **6.62:1** | AA |
+| Texto atenuado sobre papel lila | **4.10:1** | **solo texto grande** |
+| Texto atenuado sobre lila exterior | **2.29:1** | **prohibido** |
 | Naranja `#FEBD59` sobre morado | **10.30:1** | AAA |
 | Morado sobre naranja `#FEBD59` | **10.30:1** | AAA |
 | Blanco sobre naranja `#FEBD59` | **1.66:1** | **prohibido** |
-| Blanco sobre lila exterior `#E69ADE` | **2.09:1** | **prohibido para texto** |
-| Naranja `#FEBD59` sobre lila exterior | **1.26:1** | **no usar como texto** |
+| Blanco sobre papel lila `#F0BBEA` | **1.62:1** | **prohibido** |
+| Blanco sobre lila exterior `#CC7BCA` | **2.90:1** | **prohibido para texto** |
+| Naranja `#FEBD59` sobre papel lila | **1.03:1** | **prohibido** |
+| Estados `#0F6B3F` / `#8A5200` / `#B3261E` sobre blanco | **6.57 / 6.39 / 6.54:1** | AA |
+| Esos estados sobre papel lila | **≈ 4.0:1** | **solo texto grande** |
+| Esos estados sobre lila exterior | **≈ 2.2:1** | **prohibido** |
 
 Consecuencias obligatorias:
 
 1. **Nunca texto blanco sobre naranja vibrante.** Todo relleno naranja lleva
    texto morado (`--color-offer` / `--color-primary-700`).
-2. **Las tarjetas son blancas.** El lila exterior es el fondo general; el lila
-   interior es para paneles, avisos y portada. Ningún texto blanco va sobre
-   lila.
-3. **El texto atenuado no va sobre el lila exterior.** A 3.16:1 no llega a AA:
-   usá `--color-ink-soft` (4.97:1) o colocá el texto sobre `--color-paper` o
-   blanco. Los estados (`stock`, `order`, `danger`) tampoco alcanzan AA sobre el
-   exterior: van siempre sobre blanco o interior.
+2. **Las tarjetas son blancas.** El lila exterior es el fondo general; el papel
+   lila es para paneles, avisos y portada. Ningún texto blanco va sobre lila:
+   2.90:1 en el exterior y 1.62:1 en el interior.
+3. **El texto atenuado no va sobre el lila exterior** (2.29:1) **ni sobre el
+   papel lila** para cuerpo de texto (4.10:1). En el exterior, usá
+   `--color-ink-soft` (4.92:1). Los estados (`stock`, `order`, `danger`) van
+   siempre sobre blanco; sobre papel lila solo en texto grande (≥ 24 px / 18.66
+   px bold) y nunca sobre el exterior.
 4. **El título extruido es decorativo, no cuerpo de texto.** El relleno naranja
    sobre blanco mide 1.66:1: solo se usa en titulares grandes (≥ 28 px). Sobre
    fondos claros siempre lleva `-webkit-text-stroke: var(--title-stroke-lg)` con
@@ -259,19 +263,20 @@ mockups de cada change.
 
 | Archivo | Viewport | Revisión |
 |---|---|---|
-| `previews/components-mobile-390x844.png` | 390 × 844 | pendiente de re-render (rev 2) |
-| `previews/components-desktop-1440x900.png` | 1440 × 900 | pendiente de re-render (rev 2) |
-| `mockups/c-01-shell/previews/shell-mobile-390x844.png` | 390 × 844 | rev 2 |
-| `mockups/c-01-shell/previews/shell-desktop-1440x900.png` | 1440 × 900 | rev 2 |
+| `previews/components-mobile-390x844.png` | 390 × 844 | rev 4 (2026-11-13) |
+| `previews/components-desktop-1440x900.png` | 1440 × 900 | rev 4 (2026-11-13) |
+| `../openspec/changes/c-01-fundacion-proyecto/mockups/previews/shell-mobile-390x844.png` | 390 × 844 | rev 4 (2026-11-13) |
+| `../openspec/changes/c-01-fundacion-proyecto/mockups/previews/shell-desktop-1440x900.png` | 1440 × 900 | rev 4 (2026-11-13) |
 
 Se generan con Chrome headless + DevTools Protocol y
 `Emulation.setDeviceMetricsOverride` (390 × 844 exactos). No hay Playwright MCP
-instalado en el entorno.
+instalado en el entorno. Las capturas de este directorio son de viewport; el
+mockup del shell también tiene versiones de página completa.
 
 El HTML se abre localmente, sin servidor:
 
 - `design-system/components.html` (doble clic).
-- `design-system/mockups/c-01-shell/shell.html` (doble clic).
+- `openspec/changes/c-01-fundacion-proyecto/mockups/shell.html` (doble clic).
 
 Las fuentes se cargan del CDN de Google Fonts en los previews. Para revisar sin
 internet, usar los fallbacks del sistema (cambia el aspecto, no el layout).
@@ -311,16 +316,15 @@ columna y no debe haber scroll horizontal.
 
 ## 7. Aprobación
 
-`Approval: pending (2026-11-11)` — revisión 3.
+`Approval: approved (2026-11-13, by user)` — revisión 4 aprobada por el usuario
+tras revisar `components.html`, el mockup del shell de C-01 y los previews.
 
-Para aprobar, el usuario debe revisar `components.html`, el mockup del shell de
-C-01 y los previews, y decir explícitamente que la fundación sirve. Recién
-entonces:
+La aprobación cubre la fundación visual, **no** cada mockup de change: en
+`system-and-mockups` cada change visual sigue necesitando su propio mockup
+aprobado antes de implementar.
 
-1. Cambiar en este archivo a `Approval: approved (<fecha>, by user)`.
-2. Registrar `visual_design.revision: 2` y `visual_design.status: "approved"` en
-   `.active-orchestrator-state.json` (lo hace el orquestador).
-3. Registrar la aprobación del mockup en `mockups/c-01-shell/README.md`.
+Si se pide un cambio de tokens o assets compartidos, se sube la revisión y la
+aprobación vuelve a `pending` hasta una nueva revisión explícita.
 
 Un pedido de cambios mantiene `Approval: pending` y sube la revisión si se
 modifica un token o asset compartido.
@@ -416,7 +420,7 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
   pero sí se re-renderiza el preview.
 - Nunca editar un mockup aprobado en silencio: se muestra el cambio.
 - Los mockups de cada change enlazan esta revisión en su `design.md`
-  (`Design system revision: 2`).
+  (`Design system revision: 4`).
 - Ningún componente puede introducir un color propio: si falta un matiz, se
   agrega el token acá.
 
@@ -426,7 +430,7 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
 
 | # | Decisión | Impacto | Estado |
 |---|---|---|---|
-| 1 | ~~Paleta definitiva~~ | Toda la interfaz | **Resuelta (D-07, 2026-11-11; Rev. 3):** morado `#30004b`, naranja `#febd59`, lila exterior `#e69ade`, lila interior `#ffe6fb`, DynaPuff + Nunito |
+| 1 | ~~Paleta definitiva~~ | Toda la interfaz | **Resuelta (D-07, 2026-11-11; Rev. 4, 2026-11-13):** morado `#30004b`, naranja `#febd59`, lila exterior `#CC7BCA`, lila interior `#F0BBEA`, tinta suave `#451452`, DynaPuff + Nunito |
 | 2 | **Logo real** y versión reducida | Cabecera, redes, impresos | **Pendiente**: solo existe placeholder; la paleta ya está confirmada |
 | 3 | Nombre exacto y bajada ("Oloroso Pit" / "Perfumes") | `brand.js`, logo | A confirmar |
 | 4 | Fotos: origen, calidad y responsable de subirlas | Tarjetas y ficha | Abierto en la KB |
@@ -464,6 +468,6 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
 
 ---
 
-**Handoff:** mode `system-and-mockups` · revision `2` · status `pending` ·
+**Handoff:** mode `system-and-mockups` · revision `4` · status `approved` (2026-11-13) ·
 previews en `design-system/previews/` · mockup del shell en
-`design-system/mockups/c-01-shell/` · decisiones abiertas en §10.
+`openspec/changes/c-01-fundacion-proyecto/mockups/` · decisiones abiertas en §10.

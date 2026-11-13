@@ -3,8 +3,8 @@
   <desc id="phDesc">Silueta de frasco de perfume con la leyenda "sin imagen". Se usa cuando un perfume todavía no tiene foto cargada.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
-      <stop offset="0" stop-color="#FFE6FB"/>
-      <stop offset="1" stop-color="#E69ADE"/>
+      <stop offset="0" stop-color="#F0BBEA"/>
+      <stop offset="1" stop-color="#CC7BCA"/>
     </linearGradient>
   </defs>
   <rect width="400" height="500" fill="url(#bg)"/>
