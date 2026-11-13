@@ -1,0 +1,64 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Administración — Oloroso Pit">
+  <div class="container admin-home">
+    <p class="eyebrow">Provisional</p>
+    <h1>Panel de administración</h1>
+    <p class="admin-home__lead">
+      El acceso con usuario y contraseña se habilita en C-13. Por ahora esta
+      ruta es un placeholder: no muestra datos ni permite editar nada.
+    </p>
+    <p class="admin-home__hint">
+      El catálogo, los precios y el número de WhatsApp se cargan desde el panel
+      en los changes siguientes.
+    </p>
+  </div>
+</AdminLayout>
+
+<style>
+  .admin-home {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 60ch;
+    padding: var(--space-6);
+    border: 2px solid var(--color-line-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+
+  .admin-home h1 {
+    margin: 0;
+    color: var(--color-primary-700);
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-2xl), 1.4rem + 1.6vw, var(--text-3xl));
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+  }
+
+  .admin-home__lead {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .admin-home__hint {
+    margin: 0;
+    padding-top: var(--space-3);
+    border-top: 2px solid var(--color-line);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+</style>

@@ -1,0 +1,23 @@
+/*
+ * DynaPuff y Nunito auto-hospedadas (subset latin, variables 400–700).
+ * Los archivos viven en design-system/assets/fonts/ y se resuelven con Vite,
+ * que los emite hasheados en el build. Sin CDN de Google en producción.
+ * Licencias SIL Open Font License junto a los archivos.
+ */
+@font-face {
+  font-family: "DynaPuff";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../../design-system/assets/fonts/dynapuff-latin-variable.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../../design-system/assets/fonts/nunito-latin-variable.woff2")
+    format("woff2");
+}

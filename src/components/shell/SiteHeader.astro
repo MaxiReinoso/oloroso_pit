@@ -1,0 +1,164 @@
+---
+/**
+ * Cabecera del shell público: marca, navegación de escritorio y herramientas.
+ * En viewports angostos la navegación se oculta y el control de menú (isla
+ * React) queda visible. La cabecera es sticky en escritorio.
+ */
+import logoUrl from '../../../design-system/assets/logo.svg?url';
+import { CART_HREF, NAV_ITEMS, isCurrentPath } from '../../lib/navigation';
+import MobileMenu from './MobileMenu.tsx';
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label="Oloroso Pit — inicio">
+      <img
+        src={logoUrl}
+        alt="Oloroso Pit. Marca provisional."
+        width="160"
+        height="44"
+      />
+    </a>
+
+    <nav class="site-nav" aria-label="Navegación principal">
+      {
+        NAV_ITEMS.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isCurrentPath(item.href, pathname) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="header__tools">
+      <a
+        class="icon-btn cart-btn"
+        href={CART_HREF}
+        aria-label="Carrito de compras"
+      >
+        <svg
+          width="21"
+          height="21"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M6 7h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"></path>
+          <path d="M9.5 7a2.5 2.5 0 0 1 5 0"></path>
+        </svg>
+      </a>
+
+      <MobileMenu client:idle items={NAV_ITEMS} pathname={pathname} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-primary-700);
+    box-shadow: 0 3px 0 0 var(--color-line);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 72px;
+    padding-block: var(--space-2);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    text-decoration: none;
+  }
+
+  .brand img {
+    height: 44px;
+    width: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+  }
+
+  .site-nav a:hover {
+    background: var(--color-primary-050);
+    color: var(--color-primary-700);
+  }
+
+  .site-nav a[aria-current="page"] {
+    color: var(--color-primary-700);
+    box-shadow: inset 0 -3px 0 0 var(--color-accent-600);
+  }
+
+  .header__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  .cart-btn {
+    background: var(--color-accent-600);
+  }
+
+  @media (max-width: 900px) {
+    .site-nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .header__inner {
+      min-height: 64px;
+      gap: var(--space-2);
+    }
+
+    .brand img {
+      height: 34px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav a {
+      transition: none;
+    }
+  }
+</style>

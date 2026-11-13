@@ -1,0 +1,60 @@
+---
+/**
+ * Layout del sitio público: cabecera (con barra de anuncio), contenido
+ * principal y pie. El `main` es la única región variable entre páginas.
+ */
+import brandScript from '../../design-system/brand.js?url';
+import logoUrl from '../../design-system/assets/logo.svg?url';
+import AnnouncementBar from '../components/shell/AnnouncementBar.astro';
+import SiteFooter from '../components/shell/SiteFooter.astro';
+import SiteHeader from '../components/shell/SiteHeader.astro';
+import '../styles/global.css';
+import '../styles/shell.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Oloroso Pit — Perfumes importados',
+  description = 'Perfumes importados en stock y por encargo. Precio y disponibilidad a la vista; el pedido se cierra por WhatsApp.',
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={logoUrl} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <AnnouncementBar />
+    <SiteHeader pathname={pathname} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <SiteFooter />
+
+    <noscript>
+      <p class="noscript-nav">
+        Navegación sin JavaScript:
+        <a href="/perfumes">Catálogo</a>,
+        <a href="/ofertas">Ofertas</a>,
+        <a href="/#como-comprar">Cómo comprar</a>.
+      </p>
+    </noscript>
+
+    <script is:inline src={brandScript}></script>
+  </body>
+</html>

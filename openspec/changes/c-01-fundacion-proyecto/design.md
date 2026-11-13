@@ -138,7 +138,7 @@ La regla "ningún hex fuera de tokens" se verifica con un chequeo en `verify:bui
 - **Mockups:** `openspec/changes/c-01-fundacion-proyecto/mockups/` (`shell.html`, `README.md`, `previews/`)
 - **Approval:** approved (2026-11-13, by user)
 - **Preview:** rendered (2026-11-13) — 390×844, 1440×900 y página completa
-- **Visual verify:** pending (se completa al implementar)
+- **Visual verify:** passed (2026-11-13) - capturas en `mockups/verify/`, diferencias menores de alcance (buscador C-04, contador C-11, sticker C-04, "Árabes" C-05/C-06, Instagram sin URL) y dos defectos corregidos (franja bajo el pie en 404, foco del pie con contraste 10.30:1). Informe en `mockups/README.md` §Verificación visual y `mockups/verify/a11y-shell.md`.
 
 ### Cobertura del mockup en C-01
 

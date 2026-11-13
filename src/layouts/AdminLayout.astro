@@ -1,0 +1,54 @@
+---
+/**
+ * Layout del área de administración: encabezado y pie propios, sin barra de
+ * anuncio ni navegación principal pública. Comparte los tokens visuales del
+ * sitio. El guard de sesión llega en C-13.
+ */
+import brandScript from '../../design-system/brand.js?url';
+import logoUrl from '../../design-system/assets/logo.svg?url';
+import AdminFooter from '../components/admin/AdminFooter.astro';
+import AdminHeader from '../components/admin/AdminHeader.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Administración — Oloroso Pit' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href={logoUrl} />
+    <slot name="head" />
+  </head>
+  <body class="admin-body">
+    <AdminHeader />
+
+    <main id="main" class="admin-main">
+      <slot />
+    </main>
+
+    <AdminFooter />
+
+    <script is:inline src={brandScript}></script>
+  </body>
+</html>
+
+<style>
+  .admin-body {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-paper);
+  }
+
+  .admin-main {
+    flex: 1;
+    padding-block: clamp(var(--space-6), 6vw, var(--space-8));
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+/**
+ * Pie del shell público. Cierra el modelo de compra: el pedido se envía por
+ * WhatsApp y en el sitio no se paga.
+ */
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h2 data-brand-name>Oloroso Pit</h2>
+        <p>
+          Perfumes importados, vendidos en su mayoría por encargo. Elegí, armá el
+          pedido y mandalo por WhatsApp.
+        </p>
+        <span class="footer__chip">Logo provisional</span>
+      </div>
+
+      <div class="footer__col">
+        <h3>Catálogo</h3>
+        <ul>
+          <li><a href="/perfumes">Todos los perfumes</a></li>
+          <li><a href="/ofertas">Ofertas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="/#como-comprar">Cómo comprar</a></li>
+          <li><a href="/#como-comprar">Envíos y encargos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3>Contacto</h3>
+        <ul>
+          <li><a href="/#como-comprar">Pedidos por WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Oloroso Pit</span>
+      <span aria-hidden="true">·</span>
+      <span>Acá no se paga en el sitio: el pedido se envía por WhatsApp.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-band);
+    color: var(--color-accent-100);
+    border-top: 3px solid var(--color-primary-900);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 0.8fr));
+    gap: var(--space-5);
+    padding-block: clamp(var(--space-6), 6vw, var(--space-8)) var(--space-6);
+  }
+
+  .footer__brand h2 {
+    margin: 0;
+    color: var(--title-fill);
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-2xl), 1.5rem + 1.4vw, var(--text-3xl));
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-none);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .footer__brand p {
+    margin: var(--space-3) 0 0;
+    max-width: 32ch;
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-accent-100);
+  }
+
+  .footer__chip {
+    display: inline-block;
+    margin-top: var(--space-3);
+    padding: 4px 10px;
+    border: 1px dashed var(--color-accent-100);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-accent-100);
+  }
+
+  .footer__col h3 {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-accent-600);
+  }
+
+  .footer__col ul {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer__col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent-100);
+    text-decoration: none;
+  }
+
+  .footer__col a:hover {
+    color: var(--color-accent-600);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Sobre la banda morada el foco oscuro desaparecería: se usa el naranja. */
+  .footer__col a:focus-visible {
+    outline-color: var(--color-focus-on-dark);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    padding-block: var(--space-4);
+    border-top: 2px solid var(--color-primary-600);
+    font-size: var(--text-xs);
+    color: var(--color-accent-100);
+  }
+
+  .footer__bottom span[aria-hidden] {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    .footer__inner {
+      grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .footer__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .footer__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer__bottom {
+      justify-content: flex-start;
+    }
+  }
+</style>

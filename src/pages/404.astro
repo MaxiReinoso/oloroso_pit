@@ -1,0 +1,133 @@
+---
+import PublicLayout from '../layouts/PublicLayout.astro';
+---
+
+<PublicLayout
+  title="Página no encontrada — Oloroso Pit"
+  description="La página que buscás no existe o cambió de dirección. Volvé al catálogo o a la portada."
+>
+  <meta slot="head" name="robots" content="noindex" />
+
+  <section class="not-found" aria-labelledby="not-found-title">
+    <div class="container not-found__inner">
+      <p class="eyebrow">Error 404</p>
+      <h1 id="not-found-title">Esta página no existe.</h1>
+      <p class="not-found__lead">
+        Puede que el enlace esté viejo o que la dirección tenga un error. El
+        catálogo y la portada siguen a mano.
+      </p>
+      <div class="not-found__actions">
+        <a class="btn btn--primary" href="/perfumes">Ver catálogo</a>
+        <a class="btn btn--ghost" href="/">Volver a la portada</a>
+      </div>
+    </div>
+  </section>
+</PublicLayout>
+
+<style>
+  .not-found {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+    background: var(--color-paper);
+    border-bottom: 3px solid var(--color-primary-700);
+  }
+
+  .not-found__inner {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 60ch;
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+
+  .not-found h1 {
+    margin: 0;
+    color: var(--title-fill);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 3vw, 3rem);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    -webkit-text-stroke: var(--title-stroke-lg);
+    paint-order: stroke fill;
+    text-shadow: var(--title-extrude);
+    text-wrap: balance;
+  }
+
+  .not-found__lead {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding-inline: var(--space-5);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-none);
+    text-decoration: none;
+    transition:
+      transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .btn--primary {
+    background: var(--color-accent-600);
+    color: var(--color-primary-700);
+    box-shadow: 0 5px 0 0 var(--color-primary-900);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 0 var(--color-primary-900);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-primary-700);
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-primary-050);
+  }
+
+  @media (max-width: 620px) {
+    .btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
+
+    .btn--primary:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -5,7 +5,7 @@ Design system revision: 4
 Decision: yes
 Approval: approved (2026-11-13, by user)
 Preview: rendered (2026-11-13)
-Visual verify: pending (se completa al implementar C-01)
+Visual verify: passed (2026-11-13)
 ```
 
 Mockup local del **shell** (cabecera, portada, pie) con la identidad oficial
@@ -103,6 +103,47 @@ tanto:
 
 Un pedido de cambios deja `Approval: pending` y, si toca tokens compartidos,
 sube la revisión del design system.
+
+## Verificación visual de la implementación
+
+Implementado en `src/layouts/PublicLayout.astro` (shell), `src/pages/index.astro`
+(portada) y `src/pages/404.astro`. Capturas del build real, generadas con
+`node scripts/capture-shell.mjs`:
+
+| Captura | Viewport |
+|---|---|
+| [`verify/home-390x844.png`](verify/home-390x844.png) | 390 × 844, página completa |
+| [`verify/home-390x844-menu.png`](verify/home-390x844-menu.png) | 390 × 844, menú abierto |
+| [`verify/home-1440x900.png`](verify/home-1440x900.png) | 1440 × 900, página completa |
+| [`verify/404-390x844.png`](verify/404-390x844.png) | 390 × 844, 404 |
+| [`verify/404-1440x900.png`](verify/404-1440x900.png) | 1440 × 900, 404 |
+
+`Visual verify: passed`. La identidad, la jerarquía, los estados y el
+comportamiento responsive coinciden con el mockup aprobado (revisión 4). Las
+diferencias de abajo son de alcance, no defectos.
+
+### Diferencias por prioridad
+
+- **Bloqueantes:** ninguna.
+- **Mayores:** ninguna.
+- **Menores (alcance de otros changes, no defectos):**
+  - Buscador ausente en la cabecera → C-04 decide si existe; el brief no lo
+    incluye en v1.
+  - Contador del carrito ausente: el shell muestra el carrito como enlace sin
+    estado → C-11.
+  - Columna derecha del hero (tarjeta "sticker" de producto) y grilla de
+    destacados ausentes → C-04: mostrarían marca, nombre y precio hardcodeados,
+    prohibidos por la regla dura 8.
+  - El ítem de navegación "Árabes" no está: es un filtro de línea dentro de
+    `/perfumes` → C-05/C-06. La cabecera enlaza Catálogo, Ofertas y Cómo comprar.
+  - "Instagram" no aparece en el pie: no hay URL ni handle confirmado; se agrega
+    cuando el cliente lo defina.
+- **Defectos corregidos durante la verificación:**
+  - Franja lila bajo el pie en páginas cortas (404): el `body` no empujaba el
+    pie al fondo. Corregido con `main { flex: 1 }` en `src/styles/global.css`.
+  - Foco del pie invisible (contraste 1.00:1): el outline morado se perdía
+    sobre la banda morada. Corregido con `--color-focus-on-dark` (10.30:1).
+    Detalle en [`verify/a11y-shell.md`](verify/a11y-shell.md).
 
 ## Fuentes
 

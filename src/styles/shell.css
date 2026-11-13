@@ -1,0 +1,98 @@
+/*
+ * Clases compartidas entre el shell .astro y la isla React del menú móvil.
+ * Astro acota los estilos de cada componente, así que las reglas que cruzan
+ * esa frontera viven acá. Solo tokens: ningún color literal.
+ */
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--color-primary-700);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-primary-700);
+  box-shadow: 0 3px 0 0 var(--color-primary-700);
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 0 var(--color-primary-700);
+}
+
+.icon-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 0 var(--color-primary-700);
+}
+
+.menu-btn {
+  display: none;
+}
+
+.mobile-panel {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: var(--z-header);
+  border-bottom: 3px solid var(--color-primary-700);
+  background: var(--color-surface);
+  box-shadow: 0 8px 0 0 var(--color-line);
+}
+
+.mobile-panel[hidden] {
+  display: none;
+}
+
+.mobile-panel__nav ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: var(--space-3) var(--container-pad);
+  list-style: none;
+}
+
+.mobile-panel__nav a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink-soft);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.mobile-panel__nav a:hover {
+  background: var(--color-primary-050);
+  color: var(--color-primary-700);
+}
+
+.mobile-panel__nav a[aria-current="page"] {
+  color: var(--color-primary-700);
+  box-shadow: inset 4px 0 0 0 var(--color-accent-600);
+}
+
+@media (max-width: 900px) {
+  .menu-btn {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobile-panel {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn {
+    transition: none;
+  }
+}
