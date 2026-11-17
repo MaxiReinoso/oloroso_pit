@@ -6,7 +6,7 @@
 
 **Fuente de verdad**: `docs/discovery/brief-clientes.md` (v5, 2026-11-05). Manda sobre `knowledge-base/`, `discovery/` y el sistema visual. Donde la KB se aparta del brief, este documento aplica el brief y lo registra en §8.
 
-**Estado del proyecto**: no hay código todavía. Todos los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas.
+**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas. El próximo change es C-02.
 
 **Política visual**: `design-system/README.md` → `Mode: system-and-mockups`, `Revision: 4`, **aprobada (2026-11-13, by user)**. La identidad de color y tipografía fue confirmada por los clientes (D-07) y la revisión 4 fija los fondos lila (`#CC7BCA` exterior, `#F0BBEA` interior); el logo sigue siendo un placeholder. Todo change marcado `Visual? Sí` requiere un mockup HTML local, renderizado a 390×844 y 1440×900, y **aprobación explícita del usuario antes de implementar**. Los mockups enlazan `Design system revision: 4` en su `design.md`.
 
@@ -116,9 +116,9 @@ GATE 11: MVP completo + C-21 ✓
 ## FASE 0 — Fundación
 
 ### [C-01] `fundacion-proyecto`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` completado (2026-11-17) — change archivado en `openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/`
 - **Funcionalidad**: el shell estático del sitio compila y levanta con Supabase y los tokens visuales.
-- **Visual?**: Sí — requiere mockup aprobado (revisión 4). Mockup del shell en `openspec/changes/c-01-fundacion-proyecto/mockups/`, **aprobado (2026-11-13)**.
+- **Visual?**: Sí — requiere mockup aprobado (revisión 4). Mockup del shell en `openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/`, **aprobado (2026-11-13)**.
 - **Governance**: BAJO
 - **Dependencias**: ninguna
 - **Bloqueos de cliente**: ninguno (T-01 resuelta: Astro + islas React + Supabase).
@@ -205,6 +205,7 @@ GATE 11: MVP completo + C-21 ✓
 - **Governance**: BAJO
 - **Dependencias**: C-03
 - **Bloqueos de cliente**: ninguno.
+- **Navegación estática**: la navegación estática del sitio queda a cargo de este change — hacer reales los destinos de `src/lib/navigation.ts` (`/perfumes`, `/ofertas`, `/#como-comprar`), el estado de página actual y los mismos enlaces en el menú móvil. C-01 entregó el shell con esos enlaces apuntando a rutas que todavía no existen.
 - **Dentro**:
   - `/perfumes` como catálogo; `/` como entrada al catálogo.
   - Consulta de todos los perfumes con marca, línea, género y presentaciones.
@@ -383,6 +384,7 @@ GATE 11: MVP completo + C-21 ✓
 - **Governance**: MEDIO
 - **Dependencias**: C-08
 - **Bloqueos de cliente**: ninguno. **No depende de D-02.**
+- **Acceso al carrito**: el acceso al carrito desde la cabecera (ícono y contador de unidades en `SiteHeader.astro`, destino `CART_HREF`) queda a cargo de este change. C-01 entregó solo el ícono enlazado a `/carrito`, sin contador ni ruta implementada.
 - **Dentro**:
   - Agregar una presentación con cantidad desde la ficha.
   - Incrementar cantidad si la presentación ya está en el carrito.
@@ -813,11 +815,12 @@ Sin change. No se implementan en esta fase.
 | Métrica | Valor |
 |---|---|
 | Changes | **22** |
+| Changes completados | **1 / 22** (C-01 archivado el 2026-11-17) |
 | Fases | 6 (Fundación, Catálogo, Pedido, Panel, Ofertas, Datos y producción) |
 | Camino crítico | **9** (`C-01 → C-02 → C-03 → C-04 → C-08 → C-11 → C-12 → C-21 → C-22`) |
 | GATES | **12** (GATE 0 a GATE 11) |
 | Changes con UI (mockup obligatorio) | **18** |
 | Bloqueados totales por cliente | C-09 (D-02), C-20 (D-03), C-21 (D-08) |
-| Primer change recomendado | **C-01 `fundacion-proyecto`** |
+| Primer change recomendado | **C-02 `esquema-datos-rls`** (C-01 cerrado) |
 
-Para arrancar: `/opsx:propose C-01-fundacion-proyecto`
+Para arrancar: `/opsx:propose C-02-esquema-datos-rls`

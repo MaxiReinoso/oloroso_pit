@@ -51,7 +51,7 @@ mockups de cada change.
 | `assets/logo.svg` | Logo **placeholder** rotulado como provisional, ya en la paleta nueva. |
 | `assets/product-placeholder.svg` | Placeholder 4:5 para perfumes sin foto. |
 | `previews/` | Capturas 390×844 y 1440×900 + instrucciones de re-render. |
-| — | Los mockups de cada change viven en `openspec/changes/<name>/mockups/`; el shell de C-01 está en `openspec/changes/c-01-fundacion-proyecto/mockups/` (gate de aprobación). |
+| — | Los mockups de cada change viven en `openspec/changes/<name>/mockups/`; el shell de C-01, ya archivado, está en `openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/` (gate de aprobación). |
 
 Sin build, sin Figma y sin cuentas pagas. **Sí hay dos fuentes de Google
 Fonts** (DynaPuff y Nunito), decisión aceptada con la identidad oficial; en
@@ -265,8 +265,8 @@ mockups de cada change.
 |---|---|---|
 | `previews/components-mobile-390x844.png` | 390 × 844 | rev 4 (2026-11-13) |
 | `previews/components-desktop-1440x900.png` | 1440 × 900 | rev 4 (2026-11-13) |
-| `../openspec/changes/c-01-fundacion-proyecto/mockups/previews/shell-mobile-390x844.png` | 390 × 844 | rev 4 (2026-11-13) |
-| `../openspec/changes/c-01-fundacion-proyecto/mockups/previews/shell-desktop-1440x900.png` | 1440 × 900 | rev 4 (2026-11-13) |
+| `../openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/previews/shell-mobile-390x844.png` | 390 × 844 | rev 4 (2026-11-13) |
+| `../openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/previews/shell-desktop-1440x900.png` | 1440 × 900 | rev 4 (2026-11-13) |
 
 Se generan con Chrome headless + DevTools Protocol y
 `Emulation.setDeviceMetricsOverride` (390 × 844 exactos). No hay Playwright MCP
@@ -276,7 +276,7 @@ mockup del shell también tiene versiones de página completa.
 El HTML se abre localmente, sin servidor:
 
 - `design-system/components.html` (doble clic).
-- `openspec/changes/c-01-fundacion-proyecto/mockups/shell.html` (doble clic).
+- `openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/shell.html` (doble clic).
 
 Las fuentes se cargan del CDN de Google Fonts en los previews. Para revisar sin
 internet, usar los fallbacks del sistema (cambia el aspecto, no el layout).
@@ -470,4 +470,4 @@ Solo por pedido explícito del usuario. Actualizar `Mode:` acá y
 
 **Handoff:** mode `system-and-mockups` · revision `4` · status `approved` (2026-11-13) ·
 previews en `design-system/previews/` · mockup del shell en
-`openspec/changes/c-01-fundacion-proyecto/mockups/` · decisiones abiertas en §10.
+`openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/` · decisiones abiertas en §10.

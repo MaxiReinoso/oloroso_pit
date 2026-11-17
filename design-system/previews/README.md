@@ -39,4 +39,4 @@ Los previews acompañan la **revisión 4** del sistema (identidad oficial
 confirmada el 2026-11-11; fondos lila `#CC7BCA` / `#F0BBEA` desde el
 2026-11-13). Si cambia un token o el logo, hay que volver a generarlos y pedir
 aprobación de nuevo. El mockup del shell de C-01 tiene sus propios previews en
-`openspec/changes/c-01-fundacion-proyecto/mockups/previews/`.
+`openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/previews/`.

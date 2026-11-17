@@ -3,7 +3,7 @@
  * Genera las capturas de verificación del shell con Playwright.
  * Requiere `npm run build` y `npx playwright install chromium`.
  *
- * Salida: openspec/changes/c-01-fundacion-proyecto/mockups/verify/*.png
+ * Salida: openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/verify/*.png
  */
 import { createServer } from 'node:http';
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
@@ -15,7 +15,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const output = path.join(
   root,
-  'openspec/changes/c-01-fundacion-proyecto/mockups/verify',
+  'openspec/changes/archive/2026-11-17-c-01-fundacion-proyecto/mockups/verify',
 );
 
 const MIME = {
