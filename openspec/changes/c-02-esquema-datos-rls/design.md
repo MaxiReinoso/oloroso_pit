@@ -398,15 +398,19 @@ Detalle en D10. Cómo queda repartido:
 
 ## Plan de verificación
 
-| # | Criterio de aceptación (`CHANGES.md` §C-02) | Cómo se verifica | Evidencia |
+| # | Criterio de aceptación (`CHANGES.md` §C-02) | Cómo se verifica | Evidencia (2026-11-18) |
 |---|---|---|---|
-| 1 | **Las migraciones `0001_init.sql` y `0002_rls.sql` se aplican sin error sobre el proyecto de Supabase en la nube** (criterio reescrito, ver §Open questions) | `npx supabase db push --dry-run` y después `npx supabase db push`; terminan con código 0 | Salida de ambos comandos + `npx supabase migration list --linked` con `0001` y `0002` aplicadas |
-| 2 | Un `INSERT`, `UPDATE` o `DELETE` con `anon` falla en todas las tablas | Ruta anónima del script: 27 operaciones (9 tablas × 3 verbos) | Reporte tabla por tabla con el error recibido en cada una |
-| 3 | `authenticated` puede escribir en todas las tablas del catálogo | Ruta autenticada: `INSERT`/`UPDATE`/`DELETE` sobre las 8 tablas del catálogo (+ `UPDATE` de `settings`) con aserciones de conteo | `psql` sin errores y `ROLLBACK` al final |
-| 4 | `anon` lee todas las filas cargadas (no existe estado de publicación) y solo el campo del número en `settings` | Estructural: `pg_class.relrowsecurity` en las 9 tablas y `pg_policies` con `qual = true` para `anon` (sin filtro de filas). Empírica: lectura de las 9 tablas por REST y `select=*` sobre `settings` rechazado. **Con la base todavía vacía, la lectura de filas reales se completa en C-03**, cuyos criterios ya exigen que `anon` lea las 3 líneas y el número | Consulta de `pg_policies` + respuesta REST; cierre empírico en C-03 |
-| 5 | Un `INSERT` directo de una cuarta frase para un mismo perfume falla por trigger | Ruta autenticada: tres frases aceptadas, cuarta rechazada con `check_violation` (bloque `DO` con `EXCEPTION`); además un lote de cuatro rechazado | Aserciones del bloque `DO` en `psql` |
-| 6 | El `CHECK` de WhatsApp rechaza `+`, espacios, guiones y letras; el `CHECK (id = 1)` impide una segunda fila | Ruta autenticada: `UPDATE` de `settings` con cada formato inválido rechazado; `INSERT` de una segunda fila rechazado | Aserciones en `psql` |
-| 7 | Los `CHECK` rechazan precio negativo, stock negativo y oferta mayor o igual al precio de lista | Ruta autenticada: un `INSERT` por caso, cada uno rechazado | Aserciones en `psql` |
+| 1 | **Las migraciones `0001_init.sql` y `0002_rls.sql` se aplican sin error sobre el proyecto de Supabase en la nube** (criterio reescrito, ver §Open questions) | `npx supabase db push --dry-run` y después `npx supabase db push`; terminan con código 0 | `--dry-run` listó `0001` y `0002` en orden; `db push --remote` aplicó ambas (`Applying migration 0001_init.sql… Applying migration 0002_rls.sql… Finished`); `migration list --remote` las muestra aplicadas en Local y Remote |
+| 2 | Un `INSERT`, `UPDATE` o `DELETE` con `anon` falla en todas las tablas | Ruta anónima del script: 27 operaciones (9 tablas × 3 verbos) | `npm run security:anon` → 37/37 OK: las 27 escrituras rechazadas con `42501 permission denied` |
+| 3 | `authenticated` puede escribir en todas las tablas del catálogo | Ruta autenticada: `INSERT`/`UPDATE`/`DELETE` sobre las 8 tablas del catálogo (+ `UPDATE` de `settings`) con aserciones de conteo | Script autenticado corrido dos veces en el SQL Editor, sin errores: las 8 tablas aceptan alta, edición y borrado, y `settings` acepta `UPDATE`; cierre con `ROLLBACK` |
+| 4 | `anon` lee todas las filas cargadas (no existe estado de publicación) y solo el campo del número en `settings` | Estructural: `pg_class.relrowsecurity` en las 9 tablas y `pg_policies` con `qual = true` para `anon` (sin filtro de filas). Empírica: lectura de las 9 tablas por REST y `select=*` sobre `settings` rechazado. **Con la base todavía vacía, la lectura de filas reales se completa en C-03**, cuyos criterios ya exigen que `anon` lea las 3 líneas y el número | Sección 9 (solo lectura) del script: RLS activo 9/9, 9 políticas `SELECT` de `anon` con `qual = 'true'`, ninguna política ni privilegio de escritura para `anon`, `settings` con grant solo sobre `whatsapp_destino`. REST: 9 lecturas OK y `settings.select('*')` rechazado con `42501` |
+| 5 | Un `INSERT` directo de una cuarta frase para un mismo perfume falla por trigger | Ruta autenticada: tres frases aceptadas, cuarta rechazada con `check_violation` (bloque `DO` con `EXCEPTION`); además un lote de cuatro rechazado | Bloques 5.1 y 5.2: las tres primeras frases se conservaron; la cuarta y el lote de cuatro rechazados por el trigger, sin dejar filas |
+| 6 | El `CHECK` de WhatsApp rechaza `+`, espacios, guiones y letras; el `CHECK (id = 1)` impide una segunda fila | Ruta autenticada: `UPDATE` de `settings` con cada formato inválido rechazado; `INSERT` de una segunda fila rechazado | Bloques 7.1–7.4: los cuatro formatos rechazados con `check_violation`; bloque 2: la segunda fila de `settings` rechazada por `CHECK (id = 1)` |
+| 7 | Los `CHECK` rechazan precio negativo, stock negativo y oferta mayor o igual al precio de lista | Ruta autenticada: un `INSERT` por caso, cada uno rechazado | Bloques 6.1–6.5: precio negativo, stock negativo y oferta igual/mayor al precio de lista rechazados; la oferta válida se guardó y se leyó de vuelta |
+
+**Residuo cero (task 5.6):** después de cada corrida del script autenticado, el conteo de las nueve tablas quedó en **0** (la base estaba vacía y el `BEGIN…ROLLBACK` revierte el fixture completo). La segunda corrida dio el mismo resultado, lo que prueba que el script es re-ejecutable cuando C-03 cargue datos reales. La ruta anónima no escribe nada por diseño.
+
+Proyecto verificado: `Oloroso_Pit-Catalogo`, marcado `production` por el CLI. El project ref no se registra en los artefactos.
 
 Los criterios 5, 6 y 7 no se pueden probar contra una tabla vacía sin fixture: por eso la ruta autenticada **crea su fixture dentro de la transacción** y lo revierte al final.
 
@@ -445,7 +449,7 @@ Los criterios 5, 6 y 7 no se pueden probar contra una tabla vacía sin fixture: 
 1. `npx supabase init` y commit de `supabase/config.toml`.
 2. `0001_init.sql` y `0002_rls.sql` en `supabase/migrations/`, revisados localmente.
 3. `link` + `db push --dry-run` + `db push` con el usuario presente.
-4. `migration list --linked` para confirmar `0001` y `0002`.
+4. `migration list --remote` para confirmar `0001` y `0002`.
 5. `db:types` para generar `src/lib/supabase/database.types.ts`.
 6. Verificación de seguridad (ruta anónima, ruta autenticada y chequeo estructural).
 7. Verificación criterio por criterio del §Plan de verificación.

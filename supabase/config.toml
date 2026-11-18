@@ -1,0 +1,20 @@
+# supabase/config.toml — andamiaje mínimo del CLI.
+#
+# Este proyecto NO usa el stack local de Supabase: no hay `supabase start`,
+# `supabase db reset`, `supabase stop` ni Docker. El CLI solo necesita esta
+# carpeta + este archivo para resolver `link`, `db push --remote` y
+# `gen types --remote` contra el proyecto en la nube (ver README.md §Base de datos).
+#
+# Acá no va nada secreto: ni password, ni access token, ni project ref.
+# El vínculo con el proyecto remoto lo guarda `supabase link` en `supabase/.temp/`,
+# que está ignorado por git. La versión del CLI está fijada en `package.json`.
+
+project_id = "oloroso-pit"
+
+[db.migrations]
+# Las migraciones de supabase/migrations/ son la única fuente de DDL.
+enabled = true
+
+[db.seed]
+# Sin seeds: el catálogo lo carga C-03 y C-21 con sus propios changes.
+enabled = false
