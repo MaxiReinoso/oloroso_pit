@@ -126,7 +126,7 @@ FOR EACH ROW EXECUTE FUNCTION public.enforce_max_frases_por_perfume();
 
 ### D7 — RLS denegado por defecto, políticas por rol explícito y grants explícitos
 
-Cada tabla: `ENABLE ROW LEVEL SECURITY` + `REVOKE ALL ... FROM anon, authenticated` + `GRANT` explícito + políticas `TO anon` / `TO authenticated`. Sin `auth.role()` (deprecado y frágil con sign-ins anónimos): el rol se fija en la política con `TO`.
+Cada tabla: `ENABLE ROW LEVEL SECURITY` + `REVOKE ALL ... FROM anon, authenticated` + `GRANT` explícito + políticas `TO anon` / `TO authenticated`. Sin `auth.role()` (deprecado): el rol se fija en la política con `TO`. **`TO authenticated` no alcanza para distinguir una sesión anónima** — ver la corrección al final de esta decisión.
 
 | Tabla | `anon` SELECT | `authenticated` SELECT | `authenticated` INSERT | `authenticated` UPDATE | `authenticated` DELETE |
 |---|---|---|---|---|---|
@@ -140,11 +140,12 @@ Cada tabla: `ENABLE ROW LEVEL SECURITY` + `REVOKE ALL ... FROM anon, authenticat
 | `perfume_frases` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `settings` | ✅ **solo `whatsapp_destino`** (D8) | ✅ | ❌ | ✅ | ❌ |
 
-- Las ocho tablas del catálogo usan una sola política `FOR ALL TO authenticated USING (true) WITH CHECK (true)`. Con un único administrador en v1 (`03_actores_y_roles.md`: no hay roles intermedios) no existe predicado de propiedad que aplicar; `TO authenticated` ya es la autorización. Cuando haya más de un rol habrá que agregar el predicado (BOLA/IDOR), no antes.
+- Las ocho tablas del catálogo usan una sola política `FOR ALL TO authenticated USING (true) WITH CHECK (true)`. Con un único administrador en v1 (`03_actores_y_roles.md`: no hay roles intermedios) no existe predicado de propiedad que aplicar. `TO authenticated` autoriza al administrador, **pero no distingue una sesión anónima** (corrección abajo). Cuando haya más de un rol habrá que agregar el predicado (BOLA/IDOR), no antes.
 - `anon` tiene **una política `FOR SELECT` con `USING (true)`** y **ninguna política de escritura**: sin política, la escritura ya está denegada, y así una tabla nueva sin políticas queda cerrada.
 - `settings` no recibe `INSERT` ni `DELETE` para `authenticated`: la KB (RBAC) le da R y U, la fila la crea el seed de C-03 y el `CHECK (id = 1)` impide una segunda. Su política de `UPDATE` lleva `WITH CHECK (id = 1)` para que nadie pueda mover la PK.
 - **Grants explícitos, no confianza en el dashboard**: no dependemos de «Automatically expose new tables» ni del interruptor «Enable RLS». `0002_rls.sql` otorga lo mínimo y termina con `NOTIFY pgrst, 'reload schema'` para que la API vea las tablas sin esperar el refresco del dashboard.
 - Índices en todas las FKs (`perfumes.linea_id`, `perfumes.marca_id`, `perfume_acordes.acorde_id`, `perfume_frases.frase_id`): sin ellos, el chequeo de FK y los filtros del catálogo hacen scans completos. `presentaciones(perfume_id)` y `perfume_frases(perfume_id)` quedan cubiertos por la primera columna de sus claves únicas.
+- **Corrección (2026-11-18) — `TO authenticated` no excluye los sign-ins anónimos.** Supabase Auth le asigna el rol Postgres `authenticated` a una sesión anónima; lo único que las distingue es el claim `is_anonymous` del JWT. Por eso una política `FOR ALL TO authenticated` también acepta a un usuario anónimo. La defensa actual de C-02 es tener **«Allow anonymous sign-ins» desactivado** en la configuración de Auth del proyecto. Si algún día se habilita, cada política de escritura debe sumar el predicado del claim, p. ej. `with check ((select auth.jwt() ->> 'is_anonymous')::boolean is false)` en `USING` y `WITH CHECK`. Queda registrado en `CHANGES.md` §C-13 como requisito previo a dar por buena la autenticación de administradores.
 
 **Alternativas:** `auth.role() = 'authenticated'` (deprecado; además deja pasar sign-ins anónimos); políticas solo por grants (`GRANT SELECT` sin RLS) — la regla dura 7 lo prohíbe; `USING (true)` para `anon` sin separar por tabla (lo mismo, pero sin intención declarada).
 

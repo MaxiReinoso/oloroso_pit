@@ -143,7 +143,7 @@ GATE 11: MVP completo + C-21 ✓
   - brief §9 (restricciones de stack y costo)
 
 ### [C-02] `esquema-datos-rls`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` completado (2026-11-18) — change archivado en `openspec/changes/archive/2026-11-18-c-02-esquema-datos-rls/`
 - **Funcionalidad**: `anon` lee el catálogo y no puede escribir en ninguna tabla.
 - **Visual?**: No
 - **Governance**: CRÍTICO
@@ -158,7 +158,7 @@ GATE 11: MVP completo + C-21 ✓
   - Script de prueba de seguridad con `anon`.
 - **Fuera**: seeds reales, datos de catálogo, UI, columnas definitivas de oferta (dependen de D-03).
 - **Criterios de aceptación**:
-  - `supabase db reset` aplica `0001` y `0002` sin error.
+  - Las migraciones `0001_init.sql` y `0002_rls.sql` se aplican sin error sobre el proyecto de Supabase en la nube (**criterio reescrito**: no se usa Supabase local ni Docker).
   - Un `INSERT`, `UPDATE` o `DELETE` con `anon` **falla en todas las tablas**.
   - `authenticated` puede escribir en todas las tablas del catálogo.
   - `anon` lee todas las filas cargadas (no existe estado de publicación) y solo el campo del número en `settings`.
@@ -193,6 +193,7 @@ GATE 11: MVP completo + C-21 ✓
   - `knowledge-base/04_modelo_de_datos.md` §lineas, §settings, §Seed data inicial
   - `knowledge-base/05_reglas_de_negocio.md` §RN-CAR-07, RN-CAR-08, RN-CAR-09
   - brief §5 (pedidos al WhatsApp de Emi) y §8 (integraciones)
+- **Notas de C-02**: la lectura empírica con `anon` de filas reales (las 3 líneas y el número) se verifica en este change, porque C-02 se cerró con la base vacía. Si se crea la vista pública de `settings`, debe declararse `security_invoker = true`; el grant por columna de C-02 ya cubre el contrato mínimo mientras no exista la vista.
 
 ---
 
@@ -453,6 +454,7 @@ GATE 11: MVP completo + C-21 ✓
   - Error genérico sin revelar si el usuario existe.
   - Layout de panel.
   - **Registro público deshabilitado**: "Allow new users to sign up" en off, `auth.signUp` prohibido en el cliente, `anon` sin `INSERT` por RLS.
+  - **Endurecer las políticas de `authenticated` contra sesiones anónimas** antes de dar por buena la autenticación: un sign-in anónimo de Supabase también recibe el rol `authenticated`, así que `TO authenticated` **no** lo excluye. Exigir que el claim `is_anonymous` no sea `true` (p. ej. `(select auth.jwt() ->> 'is_anonymous')::boolean is false`) en `USING` y `WITH CHECK`, o mantener «Allow anonymous sign-ins» desactivado y verificarlo.
 - **Fuera**: registro público, roles intermedios, recuperación de contraseña autogestionada (fuera del brief).
 - **Criterios de aceptación**:
   - Sin sesión, cualquier `/admin/*` redirige a `/admin/login`.
@@ -460,6 +462,7 @@ GATE 11: MVP completo + C-21 ✓
   - Login válido redirige a `/admin`; recargar mantiene la sesión; logout la cierra.
   - **Un `signUp` anónimo falla**; no existe llamada a `auth.signUp` en el bundle del cliente.
   - `anon` no puede insertar filas en ninguna tabla del catálogo.
+  - Una sesión anónima de Supabase (`is_anonymous = true`) **no puede escribir** en ninguna tabla del catálogo.
 - **Leer antes**:
   - `knowledge-base/06_funcionalidades.md` §US-015
   - `knowledge-base/05_reglas_de_negocio.md` §RN-ADM-01, RN-ADM-02, RN-ADM-04, RN-ADM-06
@@ -649,6 +652,7 @@ GATE 11: MVP completo + C-21 ✓
   - `knowledge-base/05_reglas_de_negocio.md` §RN-CAT-10, RN-PRE-05, RN-PRE-06, RN-PRE-07
   - `knowledge-base/04_modelo_de_datos.md` §presentaciones (ofertas)
   - `knowledge-base/10_preguntas_abiertas.md` §Q-02
+- **Notas de C-02**: `precio_oferta_ars` ya existe en `presentaciones`, con `CHECK (precio_oferta_ars < precio_ars)`. `oferta_desde`/`oferta_hasta` siguen pendientes de D-03 y se agregan en este change con su propia migración; no están en el esquema.
 
 ---
 
@@ -815,12 +819,12 @@ Sin change. No se implementan en esta fase.
 | Métrica | Valor |
 |---|---|
 | Changes | **22** |
-| Changes completados | **1 / 22** (C-01 archivado el 2026-11-17) |
+| Changes completados | **2 / 22** (C-01 archivado el 2026-11-17; C-02 el 2026-11-18) |
 | Fases | 6 (Fundación, Catálogo, Pedido, Panel, Ofertas, Datos y producción) |
 | Camino crítico | **9** (`C-01 → C-02 → C-03 → C-04 → C-08 → C-11 → C-12 → C-21 → C-22`) |
 | GATES | **12** (GATE 0 a GATE 11) |
 | Changes con UI (mockup obligatorio) | **18** |
 | Bloqueados totales por cliente | C-09 (D-02), C-20 (D-03), C-21 (D-08) |
-| Primer change recomendado | **C-02 `esquema-datos-rls`** (C-01 cerrado) |
+| Primer change recomendado | **C-03 `datos-base-lineas-whatsapp`** (C-02 cerrado) |
 
-Para arrancar: `/opsx:propose C-02-esquema-datos-rls`
+Para arrancar: `/opsx:propose C-03-datos-base-lineas-whatsapp`
