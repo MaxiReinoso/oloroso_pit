@@ -171,9 +171,10 @@ GATE 11: MVP completo + C-21 ✓
   - `knowledge-base/08_arquitectura_propuesta.md` §Seguridad y RLS
   - `knowledge-base/03_actores_y_roles.md` §RBAC
   - brief §7 (reglas de negocio)
+- **Notas de C-03**: la lectura empírica de filas reales con `anon` que C-02 dejó pendiente quedó **cerrada en C-03**: `npm run verify:seed` leyó las tres líneas y el número de destino contra el proyecto real el 2026-11-18.
 
 ### [C-03] `datos-base-lineas-whatsapp`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` completado (2026-11-18) — change archivado en `openspec/changes/archive/2026-11-18-c-03-datos-base-lineas-whatsapp/`
 - **Funcionalidad**: `anon` lee las tres líneas y el número de destino, sin poder modificarlo.
 - **Visual?**: No
 - **Governance**: MEDIO
@@ -194,6 +195,7 @@ GATE 11: MVP completo + C-21 ✓
   - `knowledge-base/05_reglas_de_negocio.md` §RN-CAR-07, RN-CAR-08, RN-CAR-09
   - brief §5 (pedidos al WhatsApp de Emi) y §8 (integraciones)
 - **Notas de C-02**: la lectura empírica con `anon` de filas reales (las 3 líneas y el número) se verifica en este change, porque C-02 se cerró con la base vacía. Si se crea la vista pública de `settings`, debe declararse `security_invoker = true`; el grant por columna de C-02 ya cubre el contrato mínimo mientras no exista la vista.
+- **Notas de C-03**: `npm run verify:seed` valida **solo el estado posterior a C-03** (exactamente tres líneas con esos nombres y cinco tablas vacías). No se espera que pase cuando C-21 cargue perfumes reales, C-14 cree marcas o se renombren/reordenen las líneas: en ese momento debe **retirarse o reemplazarse** por las verificaciones de los changes que correspondan.
 
 ---
 
@@ -436,6 +438,7 @@ GATE 11: MVP completo + C-21 ✓
   - `knowledge-base/07_flujos_principales.md` §Flujo 4 (crítico)
   - `knowledge-base/02_descripcion_general.md` §Detalle de la integración con WhatsApp
   - brief §5, §7 y §8
+- **Notas de C-03**: la vista `configuracion_publica` devuelve `whatsapp_destino: string | null` (Postgres no propaga el `NOT NULL` de `settings` a través de la vista). «Sin número» es un **caso explícito** que el link `wa.me` debe manejar; no se puede asumir un `string` garantizado.
 
 ---
 
@@ -622,6 +625,7 @@ GATE 11: MVP completo + C-21 ✓
   - `knowledge-base/07_flujos_principales.md` §Flujo 8
   - `knowledge-base/03_actores_y_roles.md` §Escenarios de abuso
   - brief §5 y §7
+- **Notas de C-03**: el número real reemplaza el placeholder `5490000000000` sembrado en `0003_seed.sql`. El seed **no lo pisa**: el `INSERT` usa `ON CONFLICT (id) DO NOTHING`, así que reaplicar la migración conserva el número cargado desde el panel.
 
 ---
 
@@ -819,7 +823,7 @@ Sin change. No se implementan en esta fase.
 | Métrica | Valor |
 |---|---|
 | Changes | **22** |
-| Changes completados | **2 / 22** (C-01 archivado el 2026-11-17; C-02 el 2026-11-18) |
+| Changes completados | **3 / 22** (C-01 archivado el 2026-11-17; C-02 el 2026-11-18; C-03 el 2026-11-18) |
 | Fases | 6 (Fundación, Catálogo, Pedido, Panel, Ofertas, Datos y producción) |
 | Camino crítico | **9** (`C-01 → C-02 → C-03 → C-04 → C-08 → C-11 → C-12 → C-21 → C-22`) |
 | GATES | **12** (GATE 0 a GATE 11) |
