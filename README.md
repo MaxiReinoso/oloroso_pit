@@ -31,7 +31,9 @@ Si falta una de las variables, el arranque falla nombrando la variable faltante.
 
 El esquema y la política de acceso viven versionados en `supabase/migrations/`:
 `0001_init.sql` crea el modelo (dos enums, nueve tablas, constraints, índices y
-triggers) y `0002_rls.sql` activa RLS, las políticas y los grants.
+triggers), `0002_rls.sql` activa RLS, las políticas y los grants, y
+`0003_seed.sql` carga el dato base (las tres líneas y el número provisional de
+WhatsApp) y crea la vista pública `configuracion_publica`.
 
 Este proyecto trabaja **solo contra Supabase Cloud (plan Free)**: no hay
 Supabase local, no hay Docker y no se usan `supabase start`, `supabase db reset`
@@ -78,10 +80,13 @@ npx supabase db push --dry-run --remote
 npx supabase db push --remote
 ```
 
-El `--dry-run` lista `0001_init.sql` y `0002_rls.sql` en ese orden y nada más.
-El segundo comando las aplica: `0001` es puramente aditiva y `0002` depende de
-ella. Si `0001` falla no se registra nada en el historial y se corrige el
-archivo; si falla `0002`, solo se reintenta esa migración.
+El `--dry-run` lista las migraciones pendientes en orden; en un proyecto vacío
+son `0001_init.sql`, `0002_rls.sql` y `0003_seed.sql`, y nada más. El segundo
+comando las aplica: `0001` es puramente aditiva, `0002` depende de ella y
+`0003` siembra datos sobre el esquema ya asegurado. Si `0001` falla no se
+registra nada en el historial y se corrige el archivo; si falla `0002` o `0003`,
+solo se reintenta esa migración (el seed es re-ejecutable: no duplica filas ni
+pisa el número vigente).
 
 ### 4. Confirmar el estado
 
@@ -89,7 +94,7 @@ archivo; si falla `0002`, solo se reintenta esa migración.
 npx supabase migration list --remote
 ```
 
-`0001` y `0002` figuran como aplicadas en las dos columnas.
+`0001`, `0002` y `0003` figuran como aplicadas en las dos columnas.
 
 ### 5. Generar los tipos
 
@@ -101,19 +106,46 @@ Escribe `src/lib/supabase/database.types.ts` desde el proyecto vinculado. El
 archivo se versiona: es el contrato que consumen el sitio y el panel, y evita
 `any` en el borde de datos. Regeneralo cuando cambie el esquema.
 
+### 6. Dato base y número provisional
+
+`0003_seed.sql` carga el mínimo para que el sitio opere:
+
+- las tres líneas comerciales con su orden de navegación: Árabes (`arabes`, 1),
+  Diseñador (`disenador`, 2) y Nicho (`nicho`, 3);
+- la fila única de `settings` con el número `5490000000000`. **Es un placeholder
+  de 13 dígitos, no el número real de Emi**: cumple el formato del `CHECK` y se
+  reemplaza desde el panel en C-19, antes del lanzamiento;
+- la vista pública `configuracion_publica`, que expone únicamente
+  `whatsapp_destino` y se ejecuta con `security_invoker`, así que respeta la RLS
+  de `settings`. El grant por columna de `0002_rls.sql` sigue vigente.
+
+El seed no carga marcas, perfumes, presentaciones, acordes ni frases: no hay
+lista aprobada y esos datos llegan con C-21 y el panel. Los `INSERT` usan
+`ON CONFLICT DO NOTHING` y la vista `CREATE OR REPLACE`, así que re-aplicar el
+archivo no duplica líneas, no pisa un número ya configurado y no falla por
+objetos existentes.
+
+`npm run verify:seed` comprueba ese estado con la clave anónima (tres líneas,
+vista de una sola columna, formato del número, escrituras rechazadas y tablas
+sin datos aprobados). **Valida el estado inicial posterior a C-03**: una vez que
+C-21 importe perfumes, C-14 cree marcas o alguien renombre o reordene las
+líneas, el script deja de aplicar y no se espera que pase; no es un test
+permanente del catálogo cargado.
+
 ### Alternativa sin CLI: SQL Editor
 
 Para evitar el CLI, abrí el SQL Editor del dashboard y pegá el contenido
 completo de `supabase/migrations/0001_init.sql`, ejecutá, y después repetí con
-`0002_rls.sql`. El orden es obligatorio.
+`0002_rls.sql` y `0003_seed.sql`. El orden es obligatorio.
 
 El SQL Editor **no registra historial de migraciones**, así que si más adelante
-usás el CLI tenés que marcar ambas versiones a mano antes de cualquier
+usás el CLI tenés que marcar las versiones a mano antes de cualquier
 `db push`:
 
 ```powershell
 npx supabase migration repair --status applied 0001 --remote
 npx supabase migration repair --status applied 0002 --remote
+npx supabase migration repair --status applied 0003 --remote
 ```
 
 Elegí un camino y sostenelo: mezclar el SQL Editor con `db push` sin reparar el
@@ -186,6 +218,7 @@ editor lo corre en una sesión, muestra los `ok …` y deja la base como estaba.
 | `npm test` | Tests unitarios con Vitest |
 | `npm run db:types` | Genera `src/lib/supabase/database.types.ts` desde el proyecto vinculado |
 | `npm run security:anon` | Verifica que la clave anónima no pueda escribir (no escribe datos) |
+| `npm run verify:seed` | Verifica el dato base de C-03 y la vista pública (solo estado inicial; no escribe datos) |
 | `npm run verify:build` | Verifica el artefacto de `dist/` (fuentes locales, tokens, claves) |
 | `npm run verify:shell` | Verifica el shell en Chromium (menú móvil, foco, movimiento reducido) |
 
@@ -195,13 +228,13 @@ editor lo corre en una sesión, muestra los `ok …` y deja la base como estaba.
 design-system/          contrato visual (tokens, brand, fuentes, previews)
 knowledge-base/         dominio del producto
 openspec/               changes y specs
-supabase/               config.toml mínimo y migraciones versionadas (esquema y RLS)
+supabase/               config.toml mínimo y migraciones versionadas (esquema, RLS y seed)
 src/pages/              rutas
 src/layouts/            PublicLayout / AdminLayout
 src/components/         shell público y de administración
 src/lib/                navegación y cliente Supabase
 src/styles/             estilos base y @font-face auto-hospedado
-scripts/                verificación del build, de los tokens y de la seguridad
+scripts/                verificación del build, de los tokens, de la seguridad y del seed
 tests/                  tests unitarios
 ```
 

@@ -298,7 +298,18 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      configuracion_publica: {
+        Row: {
+          whatsapp_destino: string | null
+        }
+        Insert: {
+          whatsapp_destino?: string | null
+        }
+        Update: {
+          whatsapp_destino?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

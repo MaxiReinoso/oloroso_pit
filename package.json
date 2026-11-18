@@ -11,6 +11,7 @@
     "test": "vitest run",
     "db:types": "supabase gen types typescript --remote > src/lib/supabase/database.types.ts",
     "security:anon": "node --env-file=.env scripts/security-check-anon.mjs",
+    "verify:seed": "node --env-file=.env scripts/verify-seed.mjs",
     "verify:build": "node scripts/verify-build.mjs",
     "verify:shell": "node scripts/verify-shell-browser.mjs"
   },

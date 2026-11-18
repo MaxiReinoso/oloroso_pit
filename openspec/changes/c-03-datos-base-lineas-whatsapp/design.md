@@ -52,7 +52,7 @@ insert into public.settings (id, whatsapp_destino) values
   (1, '5490000000000')
 on conflict (id) do nothing;
 
-create view public.configuracion_publica
+create or replace view public.configuracion_publica
 with (security_invoker = true)
 as
 select whatsapp_destino
@@ -67,6 +67,7 @@ notify pgrst, 'reload schema';
 
 - **Idempotencia con `DO NOTHING`, no con `DO UPDATE`**: un `DO UPDATE` reescribiría el número real cada vez que se re-aplica el seed (por ejemplo, al reparar el historial del SQL Editor). La regla dura 8 y el brief piden que el número sea dato editable desde el panel; un seed que lo pisa rompe esa garantía. Lo mismo aplica a `orden` de las líneas: si alguien las reordena desde el panel, el seed no debe revertirlo.
 - **Conflicto declarado**: `on conflict (slug)` e `on conflict (id)` hacen explícito qué unicidad se espera; un `ON CONFLICT` sin target ocultaría conflictos por `lower(nombre)` que sí queremos ver como error (dos líneas con el mismo nombre y distinto slug serían un dato inconsistente).
+- **`CREATE OR REPLACE VIEW`**: los `INSERT` ya son idempotentes, así que la vista también tiene que serlo. Re-aplicar la migración —o pegarla dos veces en el SQL Editor— no falla con «relation already exists», y la definición completa se vuelve a fijar: una vista creada antes sin `security_invoker` se corrige al reaplicar. El reemplazo es seguro porque la vista no tiene dependientes todavía y mantiene el mismo nombre y columnas.
 - **La vista va en la misma migración**: el contrato público del número y su dato inicial se aplican juntos; dejar la vista para después produciría un estado donde el sitio tiene número pero no la ruta de lectura acordada.
 
 **Alternativas descartadas:** script Node con `service_role` para sembrar (introduce una clave privilegiada en el flujo y no queda versionado con el esquema); `INSERT` sin conflicto (falla al reintentar y deja el SQL Editor en un estado a medio aplicar); seed como datos de prueba del script de verificación (los datos quedarían fuera del control de migraciones).
@@ -107,6 +108,8 @@ La vista expone **una sola columna** (`whatsapp_destino`) y se crea con `WITH (s
 
 El script **no** usa `service_role` y aborta si la clave provista es de servicio.
 
+**Alcance del script (estado inicial):** `verify:seed` valida el estado **posterior a C-03 y previo a la carga real**: exactamente tres líneas con esos nombres y slugs, y cinco tablas de catálogo vacías. **No se espera que pase** una vez que C-21 importe perfumes, C-14 cree marcas o alguien renombre las líneas: a partir de ahí deja de ser una verificación del seed y se convierte en una aserción falsa. Esa limitación se declara en el encabezado del script y en `README.md`, y cuando llegue la carga real el script se retira o se reemplaza por las verificaciones de los changes que correspondan.
+
 **Por qué un script y no un test unitario de Vitest:** el contrato se cumple en Postgres, no en JavaScript. Un test que lea el SQL como texto sería tautológico (pasaría aunque la migración nunca se aplique). La verificación de integración es la que puede fallar de verdad, y es la que C-02 ya usa como evidencia.
 
 **TDD (modo estricto activo):** el artefacto de producción es SQL, así que la comprobación de integración es el test. Orden obligatorio: (1) escribir `verify-seed` y correrlo → **RED** (0 líneas, vista inexistente o error de relación); (2) aplicar `0003_seed.sql` → **GREEN**; (3) triangular con los casos de la tabla (orden, forma de la vista, rechazo de escritura, placeholder); (4) re-ejecutar el seed para probar idempotencia. La evidencia va en `design.md` §Plan de verificación.
@@ -135,7 +138,7 @@ const { data, error } = await supabase
 
 ### D6 — Tipos regenerados y `README` actualizado en el mismo change
 
-`npm run db:types` regenera `src/lib/supabase/database.types.ts`; el diff debe mostrar `configuracion_publica` en `Views` con `Row: { whatsapp_destino: string }`. Sin eso, C-12 tendría que usar `any` o un cast (regla dura 6). El `README.md` §Base de datos suma `0003_seed.sql`, la vista, el placeholder y `npm run verify:seed`.
+`npm run db:types` regenera `src/lib/supabase/database.types.ts`; el diff debe mostrar `configuracion_publica` en `Views` con `Row: { whatsapp_destino: string | null }`. El `null` es real: Postgres no propaga el `NOT NULL` de la tabla base a través de la vista, así que C-12 tendrá que tratar «sin número» como un caso explícito (no como un `string` garantizado). Sin los tipos generados, C-12 tendría que usar `any` o un cast (regla dura 6). El `README.md` §Base de datos suma `0003_seed.sql`, la vista, el placeholder y `npm run verify:seed`.
 
 ## Risks / Trade-offs
 
@@ -163,15 +166,24 @@ const { data, error } = await supabase
 
 ## Plan de verificación
 
-| # | Criterio (`CHANGES.md` §C-03) | Cómo se verifica | Evidencia |
+| # | Criterio (`CHANGES.md` §C-03) | Cómo se verifica | Evidencia (2026-11-18) |
 |---|---|---|---|
-| 1 | `anon` obtiene las 3 líneas con su orden | `npm run verify:seed`, comprobación 1 | _(a completar al aplicar)_ |
-| 2 | `anon` obtiene el número placeholder y **no** puede hacer `UPDATE` | Comprobaciones 4 y 5 (: lectura de la vista; `update` de `settings` rechazado con `42501`) | _(a completar)_ |
-| 3 | La vista pública no expone columnas internas de `settings` | Comprobación 3 (una sola clave en `select('*')`) + comprobación 6 (`select('*')` de `settings` rechazado) | _(a completar)_ |
-| 4 | El placeholder cumple el formato del `CHECK` de C-02 | Comprobación 4 (regex `^[0-9]{10,15}$`) | _(a completar)_ |
-| 5 | La vista respeta RLS (`security_invoker`) | `select c.reloptions from pg_class c join pg_namespace n on n.oid = c.relnamespace where n.nspname = 'public' and c.relname = 'configuracion_publica'` → `{security_invoker=true}` | _(a completar)_ |
-| 6 | El seed es idempotente | Re-ejecutar los dos `INSERT` y volver a correr `verify:seed`: 3 líneas, mismo número | _(a completar)_ |
-| 7 | No se sembraron datos sin aprobación | `verify:seed` informa 0 filas en `marcas`, `perfumes`, `presentaciones`, `acordes` y `frases` | _(a completar)_ |
+| 1 | `anon` obtiene las 3 líneas con su orden | `npm run verify:seed`, comprobación 1 | `16/16 OK`. Líneas leídas con `anon`: `Árabes/arabes/1`, `Diseñador/disenador/2`, `Nicho/nicho/3` |
+| 2 | `anon` obtiene el número placeholder y **no** puede hacer `UPDATE` | Comprobaciones 4 y 5: lectura de la vista y `update` de `settings` rechazado con `42501` | La vista devuelve `5490000000000`; `settings.update` → `[42501] permission denied for table settings`. `settings.insert` y `settings.delete` también rechazados |
+| 3 | La vista pública no expone columnas internas de `settings` | Comprobación 3 (una sola clave en `select('*')`) + comprobación 6 (`select('*')` de `settings` rechazado) | `configuracion_publica.select('*')` devuelve una sola clave: `whatsapp_destino`; `settings.select('*')` → `[42501] permission denied for table settings` |
+| 4 | El placeholder cumple el formato del `CHECK` de C-02 | Comprobación 4 (regex `^[0-9]{10,15}$`) | `configuracion_publica.formato` ok: `5490000000000` (13 dígitos); el script emite el aviso de placeholder en uso |
+| 5 | La vista respeta RLS (`security_invoker`) | `select c.reloptions ... where c.relname = 'configuracion_publica'` en el SQL Editor | `reloptions = ["security_invoker=true"]`; `pg_get_viewdef` = `SELECT whatsapp_destino FROM settings;` |
+| 6 | El seed es idempotente | Re-ejecutar los dos `INSERT`, el `create or replace view` y el `grant`, y volver a correr `verify:seed` | SQL Editor: `T0 updated_at = 2026-11-18 17:18:26.698547+00`; tras la re-ejecución, `total_lineas = 3`, mismo número y **mismo `updated_at`** («Success. No rows returned»). `verify:seed` vuelve a dar `16/16 OK` |
+| 7 | No se sembraron datos sin aprobación | `verify:seed` informa 0 filas en `marcas`, `perfumes`, `presentaciones`, `acordes` y `frases` | `marcas 0`, `perfumes 0`, `presentaciones 0`, `acordes 0`, `frases 0` |
+
+**Ciclo TDD:**
+
+- **RED** (antes de aplicar `0003`): `verify:seed` → 5 de 14 verificaciones fallaron: `lineas.contenido` (0 filas), tres filas ausentes y `configuracion_publica` inexistente (`PGRST205`). Las demás comprobaciones (permisos y tablas vacías) ya pasaban, así que el fallo era por dato faltante y no por credenciales. Ninguna escritura se realizó.
+- **GREEN**: tras `db push --remote`, `verify:seed` → 16/16 OK.
+- **TRIANGULATE**: orden y slugs exactos, vista de una sola columna, número con formato válido, `update`/`insert` rechazados por permisos (`42501`, no por constraint) y cinco tablas en 0.
+- **REFACTOR**: sin cambios de comportamiento; `verify:seed` siguió en verde y la suite completa (`check`, `test`, `build`, `security:anon`) quedó en verde.
+
+**Suite de cierre:** `npm run check` 0 errores/0 warnings; `npm test` 17/17 (igual que la línea base); `npm run build` estático OK; `npm run security:anon` 37/37 OK. `npm run db:types` generó `Views.configuracion_publica` con `whatsapp_destino: string | null` y `npm run check` siguió en verde.
 
 ## UI Mockups
 
