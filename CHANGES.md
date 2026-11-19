@@ -6,7 +6,7 @@
 
 **Fuente de verdad**: `docs/discovery/brief-clientes.md` (v5, 2026-11-05). Manda sobre `knowledge-base/`, `discovery/` y el sistema visual. Donde la KB se aparta del brief, este documento aplica el brief y lo registra en §8.
 
-**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas. El próximo change es C-02.
+**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. C-02 y C-03 cerrados el 2026-11-18 (esquema + RLS y dato base). El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas. El change propuesto en curso es **C-13 `login-admin`**.
 
 **Política visual**: `design-system/README.md` → `Mode: system-and-mockups`, `Revision: 4`, **aprobada (2026-11-13, by user)**. La identidad de color y tipografía fue confirmada por los clientes (D-07) y la revisión 4 fija los fondos lila (`#CC7BCA` exterior, `#F0BBEA` interior); el logo sigue siendo un placeholder. Todo change marcado `Visual? Sí` requiere un mockup HTML local, renderizado a 390×844 y 1440×900, y **aprobación explícita del usuario antes de implementar**. Los mockups enlazan `Design system revision: 4` en su `design.md`.
 
@@ -445,12 +445,12 @@ GATE 11: MVP completo + C-21 ✓
 ## FASE 3 — Panel de administración
 
 ### [C-13] `login-admin`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[ ]` en curso — propuesta `openspec/changes/c-13-login-admin/` (2026-11-19)
 - **Funcionalidad**: sin sesión `/admin/*` redirige, con credenciales válidas entra, y el registro público está cerrado.
 - **Visual?**: Sí
 - **Governance**: CRÍTICO
 - **Dependencias**: C-01, C-02
-- **Bloqueos de cliente**: D-04 (parcial) — campo y copy del login.
+- **Bloqueos de cliente**: ninguno. **D-04 resuelta provisoriamente (2026-11-19)**: cada administrador entra con su email personal; las cuentas se crean desde el dashboard de Supabase (Authentication → Users), sin cuenta compartida y sin credenciales en el repo.
 - **Dentro**:
   - `/admin/login` con `signIn` contra Supabase Auth.
   - Guard en todas las rutas `/admin/*`; sesión persistente; logout.
@@ -731,7 +731,7 @@ GATE 11: MVP completo + C-21 ✓
 |---|---|---|---|
 | **D-02** | Decants | ¿Integrados en la ficha, en sección aparte o en ambas? (brief §5, §11) | **C-09 — total** |
 | **D-03** | Ofertas | ¿Precio anterior tachado? ¿Con vencimiento o sin él? ¿Aplican a decants? (brief §5, §11) | **C-20 — total**. No bloquea C-22 |
-| **D-04** | Login del admin | ¿Usuario genérico o email personal? (brief §5, §11) | C-13 — parcial |
+| **D-04** | Login del admin | ~~¿Usuario genérico o email personal?~~ **Resuelta provisoriamente (2026-11-19):** email personal por administrador; cuentas creadas a mano desde el dashboard (brief §5, §11) | C-13 — desbloqueado |
 | **D-05** | Fotos | Origen y calidad, quién las sube **y alojamiento de imágenes** (absorbe el antiguo T-02) (brief §10, §11) | C-15 y C-16 — parcial; C-22 — contenido |
 | **D-06** | Plazos de encargo | ¿Se informan en la página y con qué texto? (brief §11) | Ninguna |
 | **D-07** | Colores y logo | **Paleta e identidad resueltas (2026-11-11):** morado `#30004B`, naranja `#FEBD59`, naranja claro `#FFDEAB`, DynaPuff + Nunito. Falta el **archivo de logo real** (hoy placeholder). | C-22 — la paleta ya no bloquea; el logo pendiente es contenido |
@@ -829,6 +829,6 @@ Sin change. No se implementan en esta fase.
 | GATES | **12** (GATE 0 a GATE 11) |
 | Changes con UI (mockup obligatorio) | **18** |
 | Bloqueados totales por cliente | C-09 (D-02), C-20 (D-03), C-21 (D-08) |
-| Primer change recomendado | **C-03 `datos-base-lineas-whatsapp`** (C-02 cerrado) |
+| Primer change recomendado | **C-13 `login-admin`** (C-02 y C-03 cerrados; GATE 1 habilita el panel) |
 
-Para arrancar: `/opsx:propose C-03-datos-base-lineas-whatsapp`
+Para arrancar: `/opsx:propose C-13-login-admin`
