@@ -1,13 +1,16 @@
 ---
 /**
- * Encabezado del área de administración. No lleva barra de anuncio ni la
- * navegación principal pública: el acceso se habilita en C-13.
+ * Encabezado del área de administración: marca, alcance y barra de sesión.
+ *
+ * La sesión (email + «Cerrar sesión») es una isla React: el email sale de la
+ * sesión real, nunca de un valor fijo en el código.
  */
 import logoUrl from '../../../design-system/assets/logo.svg?url';
+import SessionBar from './SessionBar.tsx';
 ---
 
 <header class="admin-header">
-  <div class="container admin-header__inner">
+  <div class="admin-header__inner">
     <a class="admin-header__brand" href="/" aria-label="Oloroso Pit — volver al sitio público">
       <img
         src={logoUrl}
@@ -19,7 +22,7 @@ import logoUrl from '../../../design-system/assets/logo.svg?url';
 
     <p class="admin-header__label">Administración</p>
 
-    <a class="admin-header__exit" href="/">Ver sitio público</a>
+    <SessionBar client:load />
   </div>
 </header>
 
@@ -33,7 +36,9 @@ import logoUrl from '../../../design-system/assets/logo.svg?url';
   .admin-header__inner {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-3);
+    width: min(100% - var(--space-6), var(--container-max));
+    margin-inline: auto;
     min-height: 72px;
     padding-block: var(--space-2);
   }
@@ -46,7 +51,7 @@ import logoUrl from '../../../design-system/assets/logo.svg?url';
   }
 
   .admin-header__brand img {
-    height: 40px;
+    height: 38px;
     width: auto;
   }
 
@@ -59,26 +64,8 @@ import logoUrl from '../../../design-system/assets/logo.svg?url';
     font-weight: var(--weight-bold);
     letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
+    white-space: nowrap;
     color: var(--color-accent-600);
-  }
-
-  .admin-header__exit {
-    margin-left: auto;
-    display: inline-flex;
-    align-items: center;
-    min-height: 40px;
-    padding-inline: var(--space-3);
-    border-radius: var(--radius-sm);
-    color: var(--color-accent-100);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-
-  .admin-header__exit:focus-visible {
-    outline-color: var(--color-focus-on-dark);
   }
 
   @media (max-width: 620px) {
@@ -88,7 +75,7 @@ import logoUrl from '../../../design-system/assets/logo.svg?url';
     }
 
     .admin-header__brand img {
-      height: 32px;
+      height: 30px;
     }
 
     .admin-header__label {

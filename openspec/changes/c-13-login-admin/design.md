@@ -127,6 +127,23 @@ en `USING` y en `WITH CHECK`. Se usa `alter policy`, no `drop policy` + `create`
 el nombre, el comando y el rol no cambian, y una re-ejecución accidental no deja
 la tabla sin política.
 
+**`settings` conserva su restricción de fila única.** La política actual ya
+limita la tabla a la fila `id = 1` (`0001_init.sql` declara `check (id = 1)` y
+`0002_rls.sql` lo repite en `using`/`with check`). El `WITH CHECK` nuevo **no
+reemplaza** esa condición: la conserva y le suma el predicado de sesión anónima.
+
+```sql
+alter policy settings_authenticated_update on public.settings
+  to authenticated
+  using (id = 1 and (select auth.jwt() ->> 'is_anonymous') is distinct from 'true')
+  with check (id = 1 and (select auth.jwt() ->> 'is_anonymous') is distinct from 'true');
+```
+
+Si se escribiera solo el predicado de sesión, un administrador autenticado podría
+insertar o mover la fila de `settings` a otro `id`. Por eso la verificación
+incluye un caso negativo explícito: **una sesión `authenticated` sin el claim
+anónimo sigue sin poder insertar ni actualizar una fila con `id <> 1`**.
+
 **Por qué `is distinct from 'true'` y no `(...)::boolean is false`:**
 
 - Un JWT de email/contraseña puede no traer el claim; `null::boolean is false`
@@ -175,6 +192,11 @@ transacción que termina en `ROLLBACK`):
   lanza error: hay que comprobar el efecto, no solo la ausencia de excepción).
 - Control positivo: mismos claims sin `is_anonymous` → las escrituras se
   aceptan y se revierten con el `ROLLBACK` final.
+- **Control de fila única en `settings`**: con el mismo rol `authenticated` y sin
+  el claim anónimo, intentar `insert into settings (id, …) values (2, …)` y
+  `update settings set id = 2 where id = 1`; ambos deben quedar bloqueados por la
+  política (`new row violates row-level security policy`), no por el `check` de
+  tabla. Así se prueba que el `WITH CHECK` conserva `id = 1`.
 - Sirve también como prueba ejecutable de la spec, sin habilitar el proveedor
   anónimo.
 
@@ -239,10 +261,13 @@ Dos mockups HTML locales, sin build, importando `design-system/tokens.css` y
 `design-system/brand.js`:
 
 - `mockups/login.html`: login en reposo, con error genérico, botón en estado de
-  envío y la nota de recuperación manual. A 390 px pasa a una columna.
+  envío y el aviso de recuperación manual. A 390 px pasa a una columna y el
+  formulario va primero. Las notas de seguridad viven en las anotaciones del
+  mockup, fuera de la pantalla.
 - `mockups/panel.html`: layout del panel con cabecera de sesión (email + «Cerrar
-  sesión»), navegación de secciones deshabilitada como «próximamente», tarjeta
-  de inicio y estado «verificando sesión» / «sin sesión, redirigiendo».
+  sesión»), navegación de secciones futuras anunciadas como «Próximamente» (sin
+  códigos de change), saludo «Hola» con el email de la sesión —sin inventar un
+  nombre— y estados «verificando sesión» / «sin sesión, redirigiendo».
 
 No se toca ningún token ni asset compartido: `Revision: 4` se mantiene y no se
 re-aprueba la fundación. El logo sigue rotulado como provisional. La aprobación
@@ -306,7 +331,8 @@ dashboard. Nada toca datos del catálogo.
 | 4 | Un `signUp` anónimo falla; no hay `auth.signUp` en el bundle | `verify:auth` (`disable_signup`) + `verify:build` (sin `.signUp(` en chunks) |
 | 5 | `anon` no puede insertar filas en ninguna tabla | `npm run security:anon` (37 comprobaciones de C-02) |
 | 6 | Una sesión `is_anonymous = true` no puede escribir | `security-check-anonymous-session.sql`: insert rechazado, update/delete sin efecto |
-| 7 | Mockups del login y del panel aprobados | `mockups/README.md` con `Approval: approved (fecha, by user)` |
+| 6b | `settings` mantiene la fila única para `authenticated` | Mismo script: `insert`/`update` con `id <> 1` y sin claim anónimo → violación de RLS |
+| 7 | Mockups del login y del panel aprobados | `mockups/README.md` y este §UI Mockups con `Approval: approved (2026-11-20, by user)` |
 
 ## UI Mockups
 
@@ -315,11 +341,15 @@ dashboard. Nada toca datos del catálogo.
   usuario incluye login y layout del panel.
 - **Mockups:** `openspec/changes/c-13-login-admin/mockups/` (`login.html`,
   `panel.html`, `README.md`)
-- **Approval:** pending
-- **Preview:** rendered (2026-11-19) — `mockups/previews/login-mobile-390x844.png`,
+- **Approval:** approved (2026-11-20, by user) — aprobado con cuatro ajustes ya
+  aplicados: sin viñetas explicativas en la pantalla de login (las notas técnicas
+  quedan como anotaciones del mockup), saludo «Hola» + email de la sesión sin
+  nombre inventado, secciones futuras como «Próximamente» sin códigos de change,
+  y capturas re-renderizadas.
+- **Preview:** rendered (2026-11-20) — `mockups/previews/login-mobile-390x844.png`,
   `login-desktop-1440x900.png`, `panel-mobile-390x844.png`,
   `panel-desktop-1440x900.png`
-- **Visual verify:** pending (se completa en apply contra los mockups aprobados)
+- **Visual verify:** passed (2026-11-20) — login (390×844 y 1440×900, en reposo y con error genérico) y panel (390×844 y 1440×900, con una sesión simulada en el navegador) comparados contra los mockups aprobados; capturas en `mockups/verify/`. No hay diferencias de pantalla: las secciones de anotaciones y estados del mockup no forman parte de la interfaz, y el pie del panel se ancla al viewport porque el artefacto real no incluye esas secciones. El ciclo funcional login → recarga → logout con una cuenta real queda pendiente de la cuenta que se crea en el dashboard (§Primer administrador del `README.md`).
 
 ## Open Questions
 

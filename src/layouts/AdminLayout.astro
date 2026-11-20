@@ -2,13 +2,19 @@
 /**
  * Layout del área de administración: encabezado y pie propios, sin barra de
  * anuncio ni navegación principal pública. Comparte los tokens visuales del
- * sitio. El guard de sesión llega en C-13.
+ * sitio.
+ *
+ * El guard (`AdminGuard`, isla React) es UX, no seguridad: el contenido nace
+ * con `hidden` y solo se revela cuando el token se valida contra el servidor.
+ * La autoridad de los datos es RLS en la base.
  */
 import brandScript from '../../design-system/brand.js?url';
 import logoUrl from '../../design-system/assets/logo.svg?url';
 import AdminFooter from '../components/admin/AdminFooter.astro';
+import AdminGuard from '../components/admin/AdminGuard.tsx';
 import AdminHeader from '../components/admin/AdminHeader.astro';
 import '../styles/global.css';
+import '../styles/admin.css';
 
 interface Props {
   title?: string;
@@ -30,7 +36,11 @@ const { title = 'Administración — Oloroso Pit' } = Astro.props;
   <body class="admin-body">
     <AdminHeader />
 
-    <main id="main" class="admin-main">
+    <div class="admin-guard-slot">
+      <AdminGuard client:load />
+    </div>
+
+    <main id="main" class="admin-main" data-admin-content hidden>
       <slot />
     </main>
 
@@ -47,8 +57,15 @@ const { title = 'Administración — Oloroso Pit' } = Astro.props;
     background: var(--color-paper);
   }
 
+  .admin-guard-slot:empty {
+    display: none;
+  }
+
   .admin-main {
     flex: 1;
-    padding-block: clamp(var(--space-6), 6vw, var(--space-8));
+  }
+
+  .admin-main[hidden] {
+    display: none;
   }
 </style>

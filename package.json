@@ -13,6 +13,7 @@
     "security:anon": "node --env-file=.env scripts/security-check-anon.mjs",
     "verify:seed": "node --env-file=.env scripts/verify-seed.mjs",
     "verify:build": "node scripts/verify-build.mjs",
+    "verify:auth": "node --env-file=.env scripts/verify-auth.mjs",
     "verify:shell": "node scripts/verify-shell-browser.mjs"
   },
   "dependencies": {

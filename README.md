@@ -31,9 +31,11 @@ Si falta una de las variables, el arranque falla nombrando la variable faltante.
 
 El esquema y la política de acceso viven versionados en `supabase/migrations/`:
 `0001_init.sql` crea el modelo (dos enums, nueve tablas, constraints, índices y
-triggers), `0002_rls.sql` activa RLS, las políticas y los grants, y
+triggers), `0002_rls.sql` activa RLS, las políticas y los grants,
 `0003_seed.sql` carga el dato base (las tres líneas y el número provisional de
-WhatsApp) y crea la vista pública `configuracion_publica`.
+WhatsApp) y crea la vista pública `configuracion_publica`, y
+`0004_endurecer_sesiones_anonimas.sql` exige que el JWT no declare
+`is_anonymous: true` en las nueve políticas de escritura (C-13).
 
 Este proyecto trabaja **solo contra Supabase Cloud (plan Free)**: no hay
 Supabase local, no hay Docker y no se usan `supabase start`, `supabase db reset`
@@ -81,12 +83,17 @@ npx supabase db push --remote
 ```
 
 El `--dry-run` lista las migraciones pendientes en orden; en un proyecto vacío
-son `0001_init.sql`, `0002_rls.sql` y `0003_seed.sql`, y nada más. El segundo
-comando las aplica: `0001` es puramente aditiva, `0002` depende de ella y
-`0003` siembra datos sobre el esquema ya asegurado. Si `0001` falla no se
-registra nada en el historial y se corrige el archivo; si falla `0002` o `0003`,
-solo se reintenta esa migración (el seed es re-ejecutable: no duplica filas ni
-pisa el número vigente).
+son `0001_init.sql`, `0002_rls.sql`, `0003_seed.sql` y
+`0004_endurecer_sesiones_anonimas.sql`, y nada más. El segundo comando las
+aplica: `0001` es puramente aditiva, `0002` depende de ella, `0003` siembra datos
+sobre el esquema ya asegurado y `0004` solo altera políticas (`alter policy`, sin
+`drop`). Si `0001` falla no se registra nada en el historial y se corrige el
+archivo; si falla otra, solo se reintenta esa migración (el seed es
+re-ejecutable: no duplica filas ni pisa el número vigente).
+
+**`0004` no se aplica sin confirmación.** Corré siempre el `--dry-run` primero
+y, si el proyecto ya tiene datos o administradores, confirmá el push real con la
+persona responsable: endurece las políticas de escritura del catálogo.
 
 ### 4. Confirmar el estado
 
@@ -94,7 +101,7 @@ pisa el número vigente).
 npx supabase migration list --remote
 ```
 
-`0001`, `0002` y `0003` figuran como aplicadas en las dos columnas.
+`0001`, `0002`, `0003` y `0004` figuran como aplicadas en las dos columnas.
 
 ### 5. Generar los tipos
 
@@ -136,7 +143,8 @@ permanente del catálogo cargado.
 
 Para evitar el CLI, abrí el SQL Editor del dashboard y pegá el contenido
 completo de `supabase/migrations/0001_init.sql`, ejecutá, y después repetí con
-`0002_rls.sql` y `0003_seed.sql`. El orden es obligatorio.
+`0002_rls.sql`, `0003_seed.sql` y `0004_endurecer_sesiones_anonimas.sql`. El
+orden es obligatorio.
 
 El SQL Editor **no registra historial de migraciones**, así que si más adelante
 usás el CLI tenés que marcar las versiones a mano antes de cualquier
@@ -146,6 +154,7 @@ usás el CLI tenés que marcar las versiones a mano antes de cualquier
 npx supabase migration repair --status applied 0001 --remote
 npx supabase migration repair --status applied 0002 --remote
 npx supabase migration repair --status applied 0003 --remote
+npx supabase migration repair --status applied 0004 --remote
 ```
 
 Elegí un camino y sostenelo: mezclar el SQL Editor con `db push` sin reparar el
@@ -195,6 +204,33 @@ password— usala igual: solo en la variable de esta sesión, nunca en un archiv
 —con su `begin` … `rollback`— en el SQL Editor y ejecutalo de una sola vez. El
 editor lo corre en una sesión, muestra los `ok …` y deja la base como estaba.
 
+**Sesión anónima (`psql`).** C-13 suma
+`scripts/security-check-anonymous-session.sql`, que simula el JWT de una sesión
+anónima (`"is_anonymous": true`) sin activar el proveedor: una sola transacción
+con `ROLLBACK` que exige insert rechazado por RLS y `update`/`delete` sin efecto
+en las nueve tablas.
+
+```powershell
+psql $env:SUPABASE_DB_URL -v ON_ERROR_STOP=1 -f scripts/security-check-anonymous-session.sql
+```
+
+Requiere `0004_endurecer_sesiones_anonimas.sql` aplicada. No se conforma con la
+ausencia de excepción: compara filas y valores, porque en RLS un `update`
+denegado no lanza error. También prueba el control positivo (`authenticated` sin
+el claim anónimo sí escribe) y el control de fila única: un administrador
+autenticado sigue sin poder insertar ni mover `settings` a otro `id`.
+
+**Registro público cerrado (Node).** `npm run verify:auth` consulta
+`/auth/v1/settings` con la clave anónima y exige `disable_signup: true`:
+
+```powershell
+npm run verify:auth
+```
+
+No crea usuarios, no intenta registrarse y aborta si la clave configurada es
+`service_role`. Si el proveedor no expone el estado de sesiones anónimas, lo
+informa como no verificable y remite al checklist de §Primer administrador.
+
 ### Secretos
 
 - La clave `service_role` **no se usa en este proyecto**: la verificación
@@ -206,6 +242,29 @@ editor lo corre en una sesión, muestra los `ok …` y deja la base como estaba.
   variables `PUBLIC_*`.
 - `supabase/.temp/` —donde el CLI guarda el vínculo y el project ref— también
   está ignorado por git.
+
+## Primer administrador
+
+Las cuentas del panel se crean **a mano en el dashboard**; no hay registro ni
+alta desde la interfaz (C-13).
+
+1. **Authentication → Users → Add user**: email personal del dueño (D-04) y una
+   contraseña larga y única.
+2. Marcá la cuenta como confirmada para que pueda entrar sin correo de
+   confirmación.
+3. Repetí por cada dueño. No hay usuario genérico ni cuenta compartida.
+4. Verificá que **Authentication → Providers** tenga apagado «Allow new users to
+   sign up» (lo controla `npm run verify:auth`) y también «Allow anonymous
+   sign-ins».
+5. Entrá por `/admin/login` y comprobá el ciclo completo: login → recarga (la
+   sesión persiste) → «Cerrar sesión» → `/admin` redirige al login.
+
+Si hay que resetear una contraseña, se hace desde el mismo dashboard
+(Authentication → Users → el usuario → reset). La recuperación autogestionada
+está fuera del MVP.
+
+Ningún email, contraseña ni clave de servicio se versiona: el `.env` solo lleva
+`PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_ANON_KEY`.
 
 ## Scripts
 
@@ -220,6 +279,7 @@ editor lo corre en una sesión, muestra los `ok …` y deja la base como estaba.
 | `npm run security:anon` | Verifica que la clave anónima no pueda escribir (no escribe datos) |
 | `npm run verify:seed` | Verifica el dato base de C-03 y la vista pública (solo estado inicial; no escribe datos) |
 | `npm run verify:build` | Verifica el artefacto de `dist/` (fuentes locales, tokens, claves) |
+| `npm run verify:auth` | Verifica que el registro público esté cerrado (solo lectura, no crea usuarios) |
 | `npm run verify:shell` | Verifica el shell en Chromium (menú móvil, foco, movimiento reducido) |
 
 ## Estructura
@@ -246,7 +306,8 @@ tests/                  tests unitarios
 - Solo variables `PUBLIC_*` en el navegador. La clave de servicio nunca entra al
   bundle.
 - Toda tabla de `public` tiene RLS activo: `anon` solo lee y escribir requiere
-  sesión autenticada (ver `supabase/migrations/0002_rls.sql`).
+  una sesión `authenticated` que no declare `is_anonymous: true` (ver
+  `supabase/migrations/0002_rls.sql` y `0004_endurecer_sesiones_anonimas.sql`).
 - TypeScript estricto, sin `any`.
 
 El detalle completo está en [`AGENTS.md`](AGENTS.md).

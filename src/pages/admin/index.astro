@@ -1,34 +1,159 @@
 ---
+/**
+ * Inicio del panel (`/admin`). En C-13 solo valida el acceso: las secciones
+ * del catálogo llegan en los changes siguientes y se anuncian como
+ * «Próximamente», sin enlaces activos.
+ *
+ * El email de la primera tarjeta lo completa el guard con la sesión real
+ * (`[data-session-email]`); no hay nombre inventado ni dato fijo en el código.
+ */
 import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const upcoming = [
+  {
+    title: 'Perfumes y presentaciones',
+    body: 'Alta, precio, stock e imágenes del catálogo.',
+  },
+  {
+    title: 'Marcas, acordes y frases',
+    body: 'Taxonomías editables sin tocar el código.',
+  },
+  {
+    title: 'Número de WhatsApp',
+    body: 'El destino de todos los pedidos, visible y confirmado antes de guardar.',
+  },
+];
 ---
 
-<AdminLayout title="Administración — Oloroso Pit">
-  <div class="container admin-home">
-    <p class="eyebrow">Provisional</p>
-    <h1>Panel de administración</h1>
-    <p class="admin-home__lead">
-      El acceso con usuario y contraseña se habilita en C-13. Por ahora esta
-      ruta es un placeholder: no muestra datos ni permite editar nada.
-    </p>
-    <p class="admin-home__hint">
-      El catálogo, los precios y el número de WhatsApp se cargan desde el panel
-      en los changes siguientes.
-    </p>
+<AdminLayout title="Panel — Oloroso Pit">
+  <div class="admin-layout">
+    <nav class="admin-nav" aria-label="Secciones del panel">
+      <p class="admin-nav__title">Secciones</p>
+      <a href="/admin" aria-current="page">Inicio</a>
+      <span>Perfumes <span class="admin-soon">Próximamente</span></span>
+      <span>Taxonomías <span class="admin-soon">Próximamente</span></span>
+      <span>Ofertas <span class="admin-soon">Próximamente</span></span>
+      <span>WhatsApp <span class="admin-soon">Próximamente</span></span>
+    </nav>
+
+    <div class="admin-content">
+      <section class="admin-hello" aria-labelledby="hello-title">
+        <p class="admin-eyebrow">Sesión iniciada</p>
+        <h1 id="hello-title">Hola</h1>
+        <p class="admin-hello__email" data-session-email>—</p>
+        <p class="admin-hello__lead">
+          Este es el inicio del panel. Las secciones de perfumes, taxonomías y
+          WhatsApp se habilitan próximamente; por ahora solo se valida el
+          acceso.
+        </p>
+      </section>
+
+      <ul class="admin-grid">
+        {
+          upcoming.map((item) => (
+            <li class="admin-tile">
+              <h2>{item.title}</h2>
+              <p>{item.body}</p>
+              <span class="admin-soon">Próximamente</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </AdminLayout>
 
 <style>
-  .admin-home {
+  .admin-layout {
     display: grid;
-    gap: var(--space-3);
-    max-width: 60ch;
-    padding: var(--space-6);
-    border: 2px solid var(--color-line-strong);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-5);
+    width: min(100% - var(--space-6), var(--container-max));
+    margin-inline: auto;
+    padding-block: var(--space-5) var(--space-7);
   }
 
-  .eyebrow {
+  .admin-nav {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .admin-nav__title {
+    margin: 0 0 var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+
+  .admin-nav a,
+  .admin-nav span {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px var(--space-2);
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+
+  .admin-nav a[aria-current="page"] {
+    background: var(--color-primary-700);
+    color: var(--color-accent-600);
+  }
+
+  .admin-nav span {
+    color: var(--color-ink-muted);
+  }
+
+  .admin-soon {
+    padding: 2px 6px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    color: var(--color-ink-muted);
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .admin-tile .admin-soon {
+    justify-self: start;
+    margin-top: var(--space-1);
+    padding: 2px 8px;
+    border: 0;
+    background: var(--color-primary-050);
+    color: var(--color-primary-700);
+    letter-spacing: var(--tracking-caps);
+  }
+
+  .admin-content {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .admin-hello {
+    padding: clamp(var(--space-4), 4vw, var(--space-6));
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary-700);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .admin-eyebrow {
     margin: 0;
     color: var(--color-ink-soft);
     font-size: var(--text-2xs);
@@ -37,28 +162,68 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     text-transform: uppercase;
   }
 
-  .admin-home h1 {
-    margin: 0;
+  .admin-hello h1 {
+    margin: var(--space-1) 0 0;
     color: var(--color-primary-700);
     font-family: var(--font-display);
     font-size: clamp(var(--text-2xl), 1.4rem + 1.6vw, var(--text-3xl));
     font-weight: var(--weight-semibold);
     line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
   }
 
-  .admin-home__lead {
-    margin: 0;
+  .admin-hello__email {
+    margin: var(--space-1) 0 0;
+    color: var(--color-primary-700);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    overflow-wrap: anywhere;
+  }
+
+  .admin-hello__lead {
+    margin: var(--space-2) 0 0;
+    max-width: 62ch;
     color: var(--color-ink-soft);
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
   }
 
-  .admin-home__hint {
+  .admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-3);
     margin: 0;
-    padding-top: var(--space-3);
-    border-top: 2px solid var(--color-line);
-    color: var(--color-ink-muted);
+    padding: 0;
+    list-style: none;
+  }
+
+  .admin-tile {
+    display: grid;
+    gap: 6px;
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  .admin-tile h2 {
+    margin: 0;
+    color: var(--color-ink);
     font-size: var(--text-sm);
-    line-height: var(--leading-snug);
+    font-weight: var(--weight-bold);
+  }
+
+  .admin-tile p {
+    margin: 0;
+    color: var(--color-ink-muted);
+    font-size: var(--text-xs);
+    line-height: var(--leading-relaxed);
+  }
+
+  @media (max-width: 900px) {
+    .admin-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+    }
   }
 </style>

@@ -135,6 +135,9 @@ check('el shell público cumple su contrato', () => {
 
 check('el sitio público no expone el área de administración', () => {
   const offenders = readDistHtml()
+    // Las páginas del propio panel sí enlazan a /admin: el contrato aplica a
+    // las páginas públicas, que son las únicas indexables.
+    .filter((entry) => !relative(entry.file).replace(/^dist\//, '').startsWith('admin/'))
     .filter((entry) => /href=["']\/admin/.test(entry.content))
     .map((entry) => relative(entry.file));
 
@@ -143,6 +146,35 @@ check('el sitio público no expone el área de administración', () => {
   }
 
   return 'sin enlaces públicos a /admin';
+});
+
+check('el código propio no abre registros de usuarios', () => {
+  const banned = /signUp|signInAnonymously/;
+  const offenders = collectSourceFiles(root).filter((file) => banned.test(readFileSync(file, 'utf8')));
+
+  if (offenders.length > 0) {
+    throw new Error(
+      `Llamadas de registro en: ${offenders.map(relative).join(', ')}. ` +
+        'Las cuentas de administración se crean en el dashboard (README.md §Primer administrador).',
+    );
+  }
+
+  return `${collectSourceFiles(root).length} archivos de src revisados`;
+});
+
+check('el bundle de las islas no invoca registros ni sesiones anónimas', () => {
+  // Patrón de LLAMADA: `supabase-js` trae el método `signUp` en su clase y no
+  // se puede eliminar sin reescribir el cliente. Lo que se exige es que ningún
+  // código propio lo invoque (ver design.md D4, límite documentado).
+  const banned = /\.signUp\(|\.signInAnonymously\(/;
+  const chunks = walkFiles(path.join(dist, '_astro')).filter((file) => file.endsWith('.js'));
+  const offenders = chunks.filter((file) => banned.test(readFileSync(file, 'utf8')));
+
+  if (offenders.length > 0) {
+    throw new Error(`Llamadas de registro en: ${offenders.map(relative).join(', ')}`);
+  }
+
+  return `${chunks.length} chunks revisados`;
 });
 
 check('no hay checkout ni pasarela de pagos', () => {

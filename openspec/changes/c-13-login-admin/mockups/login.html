@@ -219,14 +219,40 @@
       line-height: var(--leading-relaxed);
     }
 
-    .note {
+    .annotations {
+      background: var(--color-primary-050);
+      border-top: 2px dashed var(--color-primary-700);
+    }
+
+    .annotations__inner {
+      width: min(100% - var(--space-6), 1240px);
+      margin-inline: auto;
+      padding-block: var(--space-5);
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .annotations h2 {
       margin: 0;
-      padding-block: var(--space-4);
-      border-top: 2px solid var(--color-primary-700);
+      color: var(--color-ink-soft);
+      font-size: var(--text-2xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-caps);
+      text-transform: uppercase;
+    }
+
+    .annotations ul {
+      display: grid;
+      gap: var(--space-2);
+      margin: 0;
+      padding-left: 1.1rem;
+      max-width: 90ch;
       color: var(--color-ink-soft);
       font-size: var(--text-xs);
       line-height: var(--leading-relaxed);
     }
+
+    .annotations li::marker { color: var(--color-primary-700); }
 
     .states {
       background: var(--color-paper);
@@ -326,11 +352,6 @@
           pedidos. Los cambios se ven en el catálogo sin volver a publicar el
           sitio.
         </p>
-        <ul>
-          <li>Cada dueño entra con su email personal. No hay cuenta compartida.</li>
-          <li>El error de acceso es genérico: no revela si el correo existe.</li>
-          <li>Cerrar sesión no borra nada del catálogo.</li>
-        </ul>
       </div>
 
       <div class="card" role="region" aria-labelledby="login-title">
@@ -385,12 +406,19 @@
       </div>
     </main>
 
-    <p class="note">
-      <strong>Nota de seguridad:</strong> este sitio es estático. El formulario
-      solo inicia sesión; los datos del panel están protegidos por las reglas de
-      acceso de la base, no por ocultar esta pantalla.
-    </p>
   </div>
+
+  <section class="annotations" aria-labelledby="annotations-title">
+    <div class="annotations__inner">
+      <h2 id="annotations-title">Anotaciones del mockup (no forman parte de la pantalla)</h2>
+      <ul>
+        <li>Cada dueño entra con su email personal. No hay cuenta compartida ni credenciales en el código.</li>
+        <li>El error de acceso es genérico: no revela si el correo existe.</li>
+        <li>Este sitio es estático: el formulario solo inicia sesión; los datos del panel están protegidos por las reglas de acceso de la base, no por ocultar la pantalla.</li>
+        <li>El reseteo de contraseña se hace desde la consola de Supabase; no hay recuperación automática en esta versión.</li>
+      </ul>
+    </div>
+  </section>
 
   <section class="states" aria-labelledby="states-title">
     <div class="states__inner">

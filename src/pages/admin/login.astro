@@ -1,0 +1,66 @@
+---
+/**
+ * Acceso al panel (`/admin/login`).
+ *
+ * El formulario es una isla React (`client:load`): resolver la sesión y
+ * redirigir es la primera interacción de la pantalla. Las notas técnicas del
+ * mockup no se muestran acá: viven en `mockups/login.html`.
+ */
+import LoginForm from '../../components/admin/LoginForm.tsx';
+import brandScript from '../../../design-system/brand.js?url';
+import logoUrl from '../../../design-system/assets/logo.svg?url';
+import '../../styles/global.css';
+import '../../styles/admin.css';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entrar al panel — Oloroso Pit</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href={logoUrl} />
+  </head>
+  <body class="login-page">
+    <header class="login-topbar">
+      <a href="/" aria-label="Oloroso Pit — volver al sitio público">
+        <img
+          src={logoUrl}
+          alt="Oloroso Pit. Marca provisional."
+          width="160"
+          height="44"
+        />
+      </a>
+    </header>
+
+    <main id="main" class="login-stage">
+      <div class="login-aside">
+        <p class="login-eyebrow">Panel de administración</p>
+        <h1>El catálogo se edita acá, no en la planilla.</h1>
+        <p>
+          Precios, presentaciones, stock, fotos y el WhatsApp que recibe los
+          pedidos. Los cambios se ven en el catálogo sin volver a publicar el
+          sitio.
+        </p>
+      </div>
+
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-mark" aria-hidden="true">OP</div>
+        <h2 id="login-title">Entrar al panel</h2>
+        <p class="login-sub">
+          Acceso solo para los dueños de <span data-brand-name>Oloroso Pit</span>.
+        </p>
+
+        <LoginForm client:load />
+
+        <p class="login-foot">
+          ¿Olvidaste la contraseña? En esta versión el reseteo se hace desde la
+          consola de Supabase. No hay recuperación automática.
+        </p>
+      </section>
+    </main>
+
+    <script is:inline src={brandScript}></script>
+  </body>
+</html>

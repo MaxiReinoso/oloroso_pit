@@ -1,14 +1,14 @@
 # Mockups — C-13 Login del administrador
 
 **Design system revision:** 4 (aprobada 2026-11-13)
-**Approval:** pending
+**Approval:** approved (2026-11-20, by user)
 
 ## Pantallas
 
 | Archivo | Qué muestra | Estados incluidos |
 |---|---|---|
-| `login.html` | `/admin/login`: formulario de correo y contraseña, contexto del panel y nota de reseteo manual. | Error genérico, envío en curso, sesión ya iniciada. A 390 px el formulario va primero y el texto de contexto después. |
-| `panel.html` | Layout del panel (`/admin`): cabecera con marca y sesión, navegación de secciones, tarjeta de inicio y aviso de permisos. | Guard verificando, sin sesión (redirige al login) y error de red con reintento. Navegación apilada en móvil. |
+| `login.html` | `/admin/login`: formulario de correo y contraseña y contexto del panel. Las notas técnicas quedan como anotaciones del mockup, fuera de la pantalla. | Error genérico, envío en curso, sesión ya iniciada. A 390 px el formulario va primero y el texto de contexto después. |
+| `panel.html` | Layout del panel (`/admin`): cabecera con marca y sesión, navegación de secciones, saludo con el email de la sesión y tarjetas de secciones futuras. | Guard verificando, sin sesión (redirige al login) y error de red con reintento. Navegación apilada en móvil. |
 
 ## Fuentes
 
@@ -28,7 +28,12 @@
   revisión 4.
 - El panel usa la misma identidad con menos decoración: cabecera morada, tarjetas
   blancas, sombras duras y navegación mínima. Las secciones futuras se anuncian
-  como «Pronto», sin botones que prometan acciones inexistentes.
+  como «Próximamente», sin códigos de change ni botones que prometan acciones
+  inexistentes.
+- El saludo del panel no inventa un nombre: dice «Hola» y debajo muestra el email
+  de la sesión real.
+- Las notas técnicas de ambos mockups viven en un bloque de anotaciones fuera de
+  la pantalla; no aparecen como texto de la interfaz.
 - El contenido del panel queda oculto mientras el guard verifica la sesión; el
   estado se representa en `panel.html` (bloque «Estados del guard»).
 - El logo se mantiene rotulado como provisional (`MARCA PROVISIONAL ·
@@ -73,7 +78,18 @@ npx playwright screenshot --viewport-size "1440,900" --full-page "$base/panel.ht
 
 ## Aprobación
 
-`Approval: pending`. La implementación de la UI no empieza hasta que el usuario
-apruebe esta revisión y se registre `Approval: approved (fecha, by user)` acá y
-en `design.md` §UI Mockups. Un pedido de cambios vuelve a `pending` y no cambia
-la revisión del design system (no se tocan tokens ni assets compartidos).
+`Approval: approved (2026-11-20, by user)` — registrado también en `design.md`
+§UI Mockups.
+
+El usuario aprobó esta revisión con cuatro ajustes, ya aplicados y re-renderizados:
+
+1. Login: se quitaron de la pantalla las viñetas que explicaban el acceso (email
+   personal, error genérico, cerrar sesión). Las notas técnicas quedaron como
+   anotaciones del mockup.
+2. Panel: el saludo dice «Hola» y muestra el email de la sesión; no se inventó un
+   nombre.
+3. Panel: las secciones futuras dicen «Próximamente», sin códigos de change.
+4. Capturas de `login.html` y `panel.html` re-renderizadas en ambos viewports.
+
+Un pedido de cambios vuelve a `pending` y no cambia la revisión del design system
+(no se tocan tokens ni assets compartidos).
