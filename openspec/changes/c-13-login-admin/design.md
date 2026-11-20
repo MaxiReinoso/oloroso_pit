@@ -323,16 +323,16 @@ dashboard. Nada toca datos del catálogo.
 
 ## Plan de verificación
 
-| # | Criterio (`CHANGES.md` §C-13) | Cómo se verifica |
-|---|---|---|
-| 1 | Sin sesión, cualquier `/admin/*` redirige a `/admin/login` | Navegador: acceso directo a `/admin` en incógnito; captura del estado |
-| 2 | Credenciales inválidas muestran un error genérico | Test unitario + prueba manual con contraseña incorrecta |
-| 3 | Login válido redirige a `/admin`; recargar mantiene la sesión; logout la cierra | Prueba manual con la cuenta creada en el dashboard |
-| 4 | Un `signUp` anónimo falla; no hay `auth.signUp` en el bundle | `verify:auth` (`disable_signup`) + `verify:build` (sin `.signUp(` en chunks) |
-| 5 | `anon` no puede insertar filas en ninguna tabla | `npm run security:anon` (37 comprobaciones de C-02) |
-| 6 | Una sesión `is_anonymous = true` no puede escribir | `security-check-anonymous-session.sql`: insert rechazado, update/delete sin efecto |
-| 6b | `settings` mantiene la fila única para `authenticated` | Mismo script: `insert`/`update` con `id <> 1` y sin claim anónimo → violación de RLS |
-| 7 | Mockups del login y del panel aprobados | `mockups/README.md` y este §UI Mockups con `Approval: approved (2026-11-20, by user)` |
+| # | Criterio (`CHANGES.md` §C-13) | Cómo se verifica | Evidencia (2026-11-20) |
+|---|---|---|---|
+| 1 | Sin sesión, cualquier `/admin/*` redirige a `/admin/login` | Navegador: acceso directo a `/admin` en incógnito; captura del estado | ✅ Verificado en Chromium (incógnito): `/admin` redirige a `/admin/login?next=/admin`; panel no visible. |
+| 2 | Credenciales inválidas muestran un error genérico | Test unitario + prueba manual con contraseña incorrecta | ✅ 42/42 tests en verde; prueba manual con contraseña incorrecta → error genérico, sin redirección, consola limpia. |
+| 3 | Login válido redirige a `/admin`; recargar mantiene la sesión; logout la cierra | Prueba manual con la cuenta creada en el dashboard | ✅ Cuenta admin real creada en el dashboard, `npm run dev` local: login válido → `/admin`; F5 mantiene sesión; «Cerrar sesión» vuelve al login; `/admin` en incógnito redirige. |
+| 4 | Un `signUp` anónimo falla; no hay `auth.signUp` en el bundle | `verify:auth` (`disable_signup`) + `verify:build` (sin `.signUp(` en chunks) | ✅ `verify:auth` 4/4; `verify:build` 10/10 (24 archivos `src/` y 9 chunks revisados). |
+| 5 | `anon` no puede insertar filas en ninguna tabla | `npm run security:anon` (37 comprobaciones de C-02) | ✅ `security:anon` 37/37 OK. |
+| 6 | Una sesión `is_anonymous = true` no puede escribir | `security-check-anonymous-session.sql`: insert rechazado, update/delete sin efecto | ✅ Ejecutado en SQL Editor del proyecto real: «Success. No rows returned», sin errores. |
+| 6b | `settings` mantiene la fila única para `authenticated` | Mismo script: `insert`/`update` con `id <> 1` y sin claim anónimo → violación de RLS | ✅ Cubierto por el mismo script; control positivo aceptado y revertido por ROLLBACK. |
+| 7 | Mockups del login y del panel aprobados | `mockups/README.md` y este §UI Mockups con `Approval: approved (2026-11-20, by user)` | ✅ `Approval: approved (2026-11-20, by user)` registrado en `mockups/README.md` y `design.md`. |
 
 ## UI Mockups
 
@@ -349,7 +349,7 @@ dashboard. Nada toca datos del catálogo.
 - **Preview:** rendered (2026-11-20) — `mockups/previews/login-mobile-390x844.png`,
   `login-desktop-1440x900.png`, `panel-mobile-390x844.png`,
   `panel-desktop-1440x900.png`
-- **Visual verify:** passed (2026-11-20) — login (390×844 y 1440×900, en reposo y con error genérico) y panel (390×844 y 1440×900, con una sesión simulada en el navegador) comparados contra los mockups aprobados; capturas en `mockups/verify/`. No hay diferencias de pantalla: las secciones de anotaciones y estados del mockup no forman parte de la interfaz, y el pie del panel se ancla al viewport porque el artefacto real no incluye esas secciones. El ciclo funcional login → recarga → logout con una cuenta real queda pendiente de la cuenta que se crea en el dashboard (§Primer administrador del `README.md`).
+- **Visual verify:** passed (2026-11-20) — login (390×844 y 1440×900, en reposo y con error genérico) y panel (390×844 y 1440×900, con una sesión simulada en el navegador) comparados contra los mockups aprobados; capturas en `mockups/verify/`. No hay diferencias de pantalla: las secciones de anotaciones y estados del mockup no forman parte de la interfaz, y el pie del panel se ancla al viewport porque el artefacto real no incluye esas secciones. Ciclo funcional verificado (2026-11-20) con cuenta admin real creada en el dashboard, con `npm run dev` local: contraseña incorrecta → error genérico sin redirección; login válido → panel; F5 mantiene la sesión; «Cerrar sesión» vuelve al login; `/admin` en incógnito redirige al login sin mostrar el panel.
 
 ## Open Questions
 

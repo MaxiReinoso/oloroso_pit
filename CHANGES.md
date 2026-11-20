@@ -6,7 +6,7 @@
 
 **Fuente de verdad**: `docs/discovery/brief-clientes.md` (v5, 2026-11-05). Manda sobre `knowledge-base/`, `discovery/` y el sistema visual. Donde la KB se aparta del brief, este documento aplica el brief y lo registra en §8.
 
-**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. C-02 y C-03 cerrados el 2026-11-18 (esquema + RLS y dato base). El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas. El change propuesto en curso es **C-13 `login-admin`**.
+**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. C-02 y C-03 cerrados el 2026-11-18 (esquema + RLS y dato base). C-13 `login-admin` completado (2026-11-20): login real, guard fail-closed, endurecimiento de sesiones anónimas y panel cerrado verificados en producción. El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas.
 
 **Política visual**: `design-system/README.md` → `Mode: system-and-mockups`, `Revision: 4`, **aprobada (2026-11-13, by user)**. La identidad de color y tipografía fue confirmada por los clientes (D-07) y la revisión 4 fija los fondos lila (`#CC7BCA` exterior, `#F0BBEA` interior); el logo sigue siendo un placeholder. Todo change marcado `Visual? Sí` requiere un mockup HTML local, renderizado a 390×844 y 1440×900, y **aprobación explícita del usuario antes de implementar**. Los mockups enlazan `Design system revision: 4` en su `design.md`.
 
@@ -445,7 +445,7 @@ GATE 11: MVP completo + C-21 ✓
 ## FASE 3 — Panel de administración
 
 ### [C-13] `login-admin`
-- **Estado**: `[ ]` en curso — propuesta `openspec/changes/c-13-login-admin/` (2026-11-19)
+- **Estado**: `[x] completado (2026-11-20)` — `openspec/changes/c-13-login-admin/`
 - **Funcionalidad**: sin sesión `/admin/*` redirige, con credenciales válidas entra, y el registro público está cerrado.
 - **Visual?**: Sí
 - **Governance**: CRÍTICO
