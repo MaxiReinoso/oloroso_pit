@@ -6,7 +6,7 @@
 
 **Fuente de verdad**: `docs/discovery/brief-clientes.md` (v5, 2026-11-05). Manda sobre `knowledge-base/`, `discovery/` y el sistema visual. Donde la KB se aparta del brief, este documento aplica el brief y lo registra en §8.
 
-**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. C-02 y C-03 cerrados el 2026-11-18 (esquema + RLS y dato base). C-13 `login-admin` completado (2026-11-20): login real, guard fail-closed, endurecimiento de sesiones anónimas y panel cerrado verificados en producción. El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas.
+**Estado del proyecto**: C-01 `fundacion-proyecto` cerrado y archivado (2026-11-17): el shell estático compila, levanta con Supabase y consume los tokens visuales. C-02 y C-03 cerrados el 2026-11-18 (esquema + RLS y dato base). C-13 `login-admin` completado (2026-11-20): login real, guard fail-closed, endurecimiento de sesiones anónimas y panel cerrado verificados contra el proyecto real de Supabase en local. El resto de los criterios de aceptación de este documento son **criterios a implementar**, no verificaciones hechas.
 
 **Política visual**: `design-system/README.md` → `Mode: system-and-mockups`, `Revision: 4`, **aprobada (2026-11-13, by user)**. La identidad de color y tipografía fue confirmada por los clientes (D-07) y la revisión 4 fija los fondos lila (`#CC7BCA` exterior, `#F0BBEA` interior); el logo sigue siendo un placeholder. Todo change marcado `Visual? Sí` requiere un mockup HTML local, renderizado a 390×844 y 1440×900, y **aprobación explícita del usuario antes de implementar**. Los mockups enlazan `Design system revision: 4` en su `design.md`.
 
@@ -445,7 +445,7 @@ GATE 11: MVP completo + C-21 ✓
 ## FASE 3 — Panel de administración
 
 ### [C-13] `login-admin`
-- **Estado**: `[x] completado (2026-11-20)` — `openspec/changes/c-13-login-admin/`
+- **Estado**: `[x] completado (2026-11-20)` — change archivado en `openspec/changes/archive/2026-11-20-c-13-login-admin/`
 - **Funcionalidad**: sin sesión `/admin/*` redirige, con credenciales válidas entra, y el registro público está cerrado.
 - **Visual?**: Sí
 - **Governance**: CRÍTICO
@@ -533,6 +533,7 @@ GATE 11: MVP completo + C-21 ✓
 - **Governance**: ALTO
 - **Dependencias**: C-15
 - **Bloqueos de cliente**: D-05 (parcial) — reemplazo de imagen.
+- **Panel**: el guard, la cabecera con sesión y el layout de `/admin/*` ya existen desde C-13; se reutilizan, no se reimplementan.
 - **Dentro**:
   - Editar precio y stock por presentación.
   - Reemplazar la imagen del perfume.
@@ -558,6 +559,7 @@ GATE 11: MVP completo + C-21 ✓
 - **Governance**: MEDIO
 - **Dependencias**: C-15
 - **Bloqueos de cliente**: ninguno.
+- **Panel**: el guard, la cabecera con sesión y el layout de `/admin/*` ya existen desde C-13; se reutilizan, no se reimplementan.
 - **Dentro**:
   - Editar género, acordes (varios) y hasta 3 frases de un perfume.
   - Bloqueo de la cuarta frase con mensaje claro, respaldado por el trigger de C-02.
@@ -606,6 +608,7 @@ GATE 11: MVP completo + C-21 ✓
 - **Governance**: CRÍTICO
 - **Dependencias**: C-12, C-13
 - **Bloqueos de cliente**: ninguno.
+- **Panel**: el guard, la cabecera con sesión y el layout de `/admin/*` ya existen desde C-13; se reutilizan, no se reimplementan.
 - **Dentro**:
   - `/admin/configuracion` con el número actual visible y destacado.
   - Validación de solo dígitos con código de país.
@@ -823,12 +826,12 @@ Sin change. No se implementan en esta fase.
 | Métrica | Valor |
 |---|---|
 | Changes | **22** |
-| Changes completados | **3 / 22** (C-01 archivado el 2026-11-17; C-02 el 2026-11-18; C-03 el 2026-11-18) |
+| Changes completados | **4 / 22** (C-01 archivado el 2026-11-17; C-02 el 2026-11-18; C-03 el 2026-11-18; C-13 el 2026-11-20) |
 | Fases | 6 (Fundación, Catálogo, Pedido, Panel, Ofertas, Datos y producción) |
 | Camino crítico | **9** (`C-01 → C-02 → C-03 → C-04 → C-08 → C-11 → C-12 → C-21 → C-22`) |
 | GATES | **12** (GATE 0 a GATE 11) |
 | Changes con UI (mockup obligatorio) | **18** |
 | Bloqueados totales por cliente | C-09 (D-02), C-20 (D-03), C-21 (D-08) |
-| Primer change recomendado | **C-13 `login-admin`** (C-02 y C-03 cerrados; GATE 1 habilita el panel) |
+| Primer change recomendado | **C-14 `admin-taxonomias`** (C-13 completado el 2026-11-20; el panel ya tiene login, guard y layout) |
 
-Para arrancar: `/opsx:propose C-13-login-admin`
+Para arrancar: `/opsx:propose C-14-admin-taxonomias`
